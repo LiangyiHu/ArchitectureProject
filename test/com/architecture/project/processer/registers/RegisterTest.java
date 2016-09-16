@@ -1,8 +1,8 @@
 package com.architecture.project.processer.registers;
 
 import com.architecture.project.instruction.Instruction;
-import com.architecture.project.instruction.MainInstruction;
-import org.junit.Test;
+        import com.architecture.project.instruction.MainInstruction;
+        import org.junit.Test;
 
 /**
  * @author taoranxue on 9/15/16 4:26 PM.

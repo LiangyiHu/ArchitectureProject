@@ -9,7 +9,7 @@ import com.architecture.project.utils.ProjectUtils;
  */
 public class MainInstruction {
     private static final int OP_NUMBER = 6;
-    private static final int[] LR_INSTRUCTION = {1, 2, 3, 41, 42};
+    private static final int[] LR_INSTRUCTION = {01, 02, 03};
     private Instruction instruction;
 
     public MainInstruction(Instruction instruction) {
@@ -29,11 +29,13 @@ public class MainInstruction {
             int address = instruction.subInstruction(11, 16).parseInt();
             System.out.println("ins: " + Integer.toBinaryString(instruction.getData()));
             System.out.println("ix_num: " + ix_num);
+            System.out.println("ix_data: " + (int)ix_data);
             System.out.println("address: " + address);
+            char data;
+            int effectiveAddress;
 
             switch (operatorCode) {
-                case 1:
-                    char data = 0;
+                case 01:
                     if (I == 0) {
                         if (ix_num == 0) {
                             data = MainMemory.fetch(address);
@@ -48,19 +50,64 @@ public class MainInstruction {
                         }
                     }
                     //load to Register
-                    System.out.println(data);
+                    System.out.println("the data to be loaded is: "+(int)data);
+                    Registers.generalProposeRegisters.storeByRegister(data, r_num);
+                break;
+                case 02:
+                    if (I == 0) {
+                        if (ix_num == 0) {
+                            effectiveAddress=address;
+                        } else {
+                            effectiveAddress=address+ix_data;
+                        }
+                    } else {
+                        if (ix_num == 0) {
+                            effectiveAddress=MainMemory.fetch(address);
+                        } else {
+                            effectiveAddress=MainMemory.fetch(ix_data+address);
+                        }
+                    }
+                    //Save to memory
+                    MainMemory.store(r_data, effectiveAddress);
+                    System.out.println("value: "+r_data+"has been stored to memory location: "+effectiveAddress);
+                    break;
+                case 03:
+                    if (I == 0) {
+                        if (ix_num == 0) {
+                            data = (char)address;
+                        } else {
+                            data = (char)(address + ix_data);
+                        }
+                    } else {
+                        if (ix_num == 0) {
+                            data = MainMemory.fetch(address);
+                        } else {
+                            data = MainMemory.fetch(address + ix_data);
+                        }
+                    }
+                    //load to Register
+                    System.out.println("the data to be loaded is: "+(int)data);
                     Registers.generalProposeRegisters.storeByRegister(data, r_num);
                     break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 41:
-                    break;
-                case 42:
-                    break;
-
-
+            }
+        }
+        if (operatorCode==041){
+            int ix_num = instruction.subInstruction(6, 8).parseInt();
+            int address = instruction.subInstruction(8, 16).parseInt();
+            char data=MainMemory.fetch(address);
+            Registers.indexRegisters.storeByRegister(data,ix_num);
+        }
+        if (operatorCode==042){
+            int ix_num = instruction.subInstruction(6, 8).parseInt();
+            char ix_data = Registers.indexRegisters.fetchByRegister(ix_num);
+            int I = instruction.subInstruction(8, 9).parseInt();
+            int address = instruction.subInstruction(9, 16).parseInt();
+            //char data=MainMemory.fetch(address);
+            if(I==0){
+                MainMemory.store(ix_data, address);
+            }
+            else {
+                MainMemory.store(ix_data, MainMemory.fetch(address));
             }
         }
     }

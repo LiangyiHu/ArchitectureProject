@@ -8,7 +8,9 @@ import java.util.List;
  */
 public class GeneralProposeRegisters extends AbstractRegisters {
     private static final int GPR_NUM = 4;
-    public GeneralProposeRegisters() {
-        registers = new ArrayList<>(GPR_NUM);
+
+    @Override
+    public int length() {
+        return GPR_NUM;
     }
 }

@@ -21,6 +21,7 @@ public class Instruction extends Register {
     }
 
     public Instruction subInstruction(int beginIndex, int endIndex) {
+        Instruction ins = new Instruction(this.data);
         if (beginIndex < 0) {
             throw new InstructionIndexOutOfBoundsException(beginIndex);
         }
@@ -32,9 +33,9 @@ public class Instruction extends Register {
             throw new InstructionIndexOutOfBoundsException(subLen);
         }
 
-        this.data = (char)(data << (beginIndex));
-        this.data = (char)(data >> (beginIndex + WORD_LENGTH - endIndex));
+        ins.data = (char) (ins.data << (beginIndex));
+        ins.data = (char) (ins.data >> (beginIndex + WORD_LENGTH - endIndex));
 
-        return this;
+        return ins;
     }
 }

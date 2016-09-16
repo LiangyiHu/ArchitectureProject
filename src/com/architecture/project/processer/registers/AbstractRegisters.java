@@ -13,13 +13,17 @@ public abstract class AbstractRegisters {
     protected List<Register> registers;
 
     public AbstractRegisters() {
-        registers = new ArrayList<>(DEFAULT_NUM);
+        registers = new ArrayList<>(length());
+        for (int i = 0; i < length(); ++ i) {
+            registers.add(new Register());
+        }
     }
 
-
+    public int length() {
+        return DEFAULT_NUM;
+    }
 
     public char fetchByRegister(int ix) {
-        System.out.println(registers.size());
         if (ix >= registers.size() || ix < 0) {
             throw new RegistersIndexOutOfBoundsException(ix);
         }

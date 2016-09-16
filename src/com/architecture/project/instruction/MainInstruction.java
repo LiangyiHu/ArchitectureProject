@@ -27,6 +27,9 @@ public class MainInstruction {
 
             int I = instruction.subInstruction(10, 11).parseInt();
             int address = instruction.subInstruction(11, 16).parseInt();
+            System.out.println("ins: " + Integer.toBinaryString(instruction.getData()));
+            System.out.println("ix_num: " + ix_num);
+            System.out.println("address: " + address);
 
             switch (operatorCode) {
                 case 1:
@@ -45,6 +48,7 @@ public class MainInstruction {
                         }
                     }
                     //load to Register
+                    System.out.println(data);
                     Registers.generalProposeRegisters.storeByRegister(data, r_num);
                     break;
                 case 2:

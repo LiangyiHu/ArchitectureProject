@@ -1,5 +1,7 @@
 package com.architecture.project.instruction;
 
+import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processer.registers.Registers;
 import com.architecture.project.utils.ProjectUtils;
 
 /**
@@ -18,24 +20,32 @@ public class MainInstruction {
         int operatorCode = getOperatorCode();
         if (ProjectUtils.inArrays(operatorCode, LR_INSTRUCTION)) {
             int r_num = instruction.subInstruction(6, 8).parseInt();
+            char r_data = Registers.generalProposeRegisters.fetchByRegister(r_num);
+
             int ix_num = instruction.subInstruction(8, 10).parseInt();
+            char ix_data = Registers.indexRegisters.fetchByRegister(ix_num);
+
             int I = instruction.subInstruction(10, 11).parseInt();
             int address = instruction.subInstruction(11, 16).parseInt();
+
             switch (operatorCode) {
                 case 1:
+                    char data = 0;
                     if (I == 0) {
                         if (ix_num == 0) {
-
+                            data = MainMemory.fetch(address);
                         } else {
-
+                            data = MainMemory.fetch(address + ix_data);
                         }
                     } else {
                         if (ix_num == 0) {
-
+                            data = MainMemory.fetch(MainMemory.fetch(address));
                         } else {
-
+                            data = MainMemory.fetch(MainMemory.fetch(address + ix_data));
                         }
                     }
+                    //load to Register
+                    Registers.generalProposeRegisters.storeByRegister(data, r_num);
                     break;
                 case 2:
                     break;

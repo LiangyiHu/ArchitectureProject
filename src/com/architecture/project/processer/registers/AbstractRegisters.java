@@ -16,10 +16,20 @@ public abstract class AbstractRegisters {
         registers = new ArrayList<>(DEFAULT_NUM);
     }
 
+
+
     public char fetchByRegister(int ix) {
+        System.out.println(registers.size());
         if (ix >= registers.size() || ix < 0) {
             throw new RegistersIndexOutOfBoundsException(ix);
         }
         return registers.get(ix).getData();
+    }
+
+    public void storeByRegister(char data, int ix) {
+        if (ix >= registers.size() || ix < 0) {
+            throw new RegistersIndexOutOfBoundsException(ix);
+        }
+        registers.get(ix).setData(data);
     }
 }

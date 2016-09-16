@@ -117,7 +117,6 @@ public class Register {
         }
 
         this.data = (char)(data << (beginIndex));
-        System.out.println(Integer.toBinaryString(data));
         this.data = (char)(data >> (beginIndex + WORD_LENGTH - endIndex));
 
         return this;

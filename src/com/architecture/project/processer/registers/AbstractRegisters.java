@@ -1,5 +1,7 @@
 package com.architecture.project.processer.registers;
 
+import com.architecture.project.exception.RegistersIndexOutOfBoundsException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,5 +14,12 @@ public abstract class AbstractRegisters {
 
     public AbstractRegisters() {
         registers = new ArrayList<>(DEFAULT_NUM);
+    }
+
+    public char fetchByRegister(int ix) {
+        if (ix >= registers.size() || ix < 0) {
+            throw new RegistersIndexOutOfBoundsException(ix);
+        }
+        return registers.get(ix).getData();
     }
 }

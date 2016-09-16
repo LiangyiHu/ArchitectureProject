@@ -8,8 +8,11 @@ import java.util.List;
  */
 public class MainMemory {
     private static final int MEMORY_CAPACITY = 2048;
-    public MainMemory() {
-        List<Short> data = new ArrayList<>(MEMORY_CAPACITY);
+    static private List<Character> data = new ArrayList<>(MEMORY_CAPACITY);
+
+    public static char fetch(char address) {
+        return data.get(address);
     }
+
 
 }

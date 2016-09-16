@@ -8,10 +8,14 @@ import com.architecture.project.exception.RegisterIndexOutOfBoundsException;
  * @author taoranxue on 9/14/16 11:28 PM.
  */
 public class Register {
-    private static final int WORD_LENGTH = 16;
-    private Character data;
+    protected static final int WORD_LENGTH = 16;
+    protected Character data;
     private int length;
 
+    public Register(String s) {
+        char data = (char) Integer.parseInt(s);
+        this.data = data;
+    }
     public Register() {
         this.data = 0;
     }
@@ -37,6 +41,13 @@ public class Register {
     }
 
     /**
+     * get Integer data
+     * @return int
+     */
+    public int parseInt() {
+        return (int)data;
+    }
+    /**
      * to binary string
      *
      * @return binary String
@@ -50,8 +61,6 @@ public class Register {
                 s += "0";
             }
             return s += _s;
-        } else if (_s.length() > WORD_LENGTH) {
-            return _s.substring(16, _s.length());
         }
         return _s;
     }
@@ -95,7 +104,7 @@ public class Register {
         }
     }
 
-    public Register subRegister(int beginIndex, int endIndex) {
+    protected Register subRegister(int beginIndex, int endIndex) {
         if (beginIndex < 0) {
             throw new RegisterIndexOutOfBoundsException(beginIndex);
         }

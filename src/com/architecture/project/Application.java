@@ -1,6 +1,12 @@
 package com.architecture.project;
 
 import com.architecture.project.gui.img.Led;
+import com.architecture.project.instruction.Instruction;
+import com.architecture.project.instruction.Instructions;
+import com.architecture.project.instruction.InstructionsFactory;
+import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processer.registers.Register;
+import com.architecture.project.processer.registers.Registers;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -32,15 +38,35 @@ public class Application extends JFrame {
     private JButton runButton;
     private JCheckBox stepCheckBox;
 
+    private void refresh() {
+
+        Instruction instruction = new Instruction((char)(0b0000011100100110));
+        InstructionsFactory instructionsFactory = new InstructionsFactory(instruction);
+        Registers.indexRegisters.storeByRegister((char)10,3);
+        MainMemory.store((char)2, 6);
+        MainMemory.store((char)22, 2);
+        MainMemory.store((char)5000, 12);
+        MainMemory.store((char)12, 16);
+        Instructions instructions = instructionsFactory.getInstructions();
+        instructions.execute();
+        //refresh 4 GPR
+        GPR0.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(0));
+        GPR1.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(1));
+        GPR2.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(2));
+        GPR3.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(3));
+        //refresh 3 IXR
+        IXR0.setIcon(Registers.indexRegisters.fetchImageIconByRegister(1));
+        IXR1.setIcon(Registers.indexRegisters.fetchImageIconByRegister(2));
+        IXR2.setIcon(Registers.indexRegisters.fetchImageIconByRegister(3));
+        //refresh PC
+        PC.setIcon(Registers.programCounter.fetchImageIconByRegister(0));
+    }
+
     public Application() {
         setContentPane(panel1);
 
         Image combined = Led.parseImage(11);
-
-        GPR0.setIcon(new ImageIcon(combined));
-        GPR1.setIcon(new ImageIcon(combined));
-        GPR2.setIcon(new ImageIcon(combined));
-        GPR3.setIcon(new ImageIcon(combined));
+        refresh();
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

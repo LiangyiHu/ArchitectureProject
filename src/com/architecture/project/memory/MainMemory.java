@@ -36,15 +36,15 @@ public class MainMemory {
     }
 
     public static void printMemory(int beginIndex, int endIndex) {
-        if (beginIndex < 0 || endIndex > MEMORY_CAPACITY*2 || beginIndex > endIndex) {
+        if (beginIndex < 0 || endIndex > MEMORY_CAPACITY * 2 || beginIndex > endIndex) {
             throw new MemoryAddressingOutOfBoundsException(beginIndex);
         }
         for (int i = beginIndex; i <= endIndex; i += 2) {
-            char value=MainMemory.fetch(i);
+            char value = MainMemory.fetch(i);
             String b = String.format("%16s", Integer.toBinaryString(value)).replace(' ', '0');
-            String h = String.format("%04x", (int)value);
-            String d = String.format("%05d", (int)value);
-            System.out.println("Address: "+String.format("%04x",i)+"  BValue: "+b+"  HValue: "+h+"  DValue:"+d);
+            String h = String.format("%04x", (int) value);
+            String d = String.format("%05d", (int) value);
+            System.out.println("Address: " + String.format("%04x", i) + "  BValue: " + b + "  HValue: " + h + "  DValue:" + d);
         }
     }
 }

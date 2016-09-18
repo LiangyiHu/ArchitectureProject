@@ -47,7 +47,7 @@ public class LoadStoreInstructions extends Instructions {
             RData = Registers.generalProposeRegisters.fetchByRegister(R);
 
             IX = instruction.subInstruction(8, 10).parseInt();
-            IXData = Registers.indexRegisters.fetchByRegister(IX);
+            IXData = IX > 0 ? Registers.indexRegisters.fetchByRegister(IX) : 0;
 
             I = instruction.subInstruction(10, 11).parseInt();
             Address = instruction.subInstruction(11, 16).parseInt();
@@ -59,7 +59,7 @@ public class LoadStoreInstructions extends Instructions {
 
         } else if (ProjectUtils.inArrays(getOperatorCode(), STX_INSTRUCTION)) {
             IX = instruction.subInstruction(6, 8).parseInt();
-            IXData = Registers.indexRegisters.fetchByRegister(IX);
+            IXData = IX > 0 ? Registers.indexRegisters.fetchByRegister(IX) : 0;
             I = instruction.subInstruction(8, 9).parseInt();
             Address = instruction.subInstruction(9, 16).parseInt();
         } else {
@@ -70,7 +70,6 @@ public class LoadStoreInstructions extends Instructions {
 
     @Override
     public void execute() {
-
         String operateCode = INSTRUCTION_MAP.get(getOperatorCode());
         if (operateCode == null || operateCode.equals("")) {
             throw new WrongInstructionException();
@@ -82,7 +81,6 @@ public class LoadStoreInstructions extends Instructions {
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
-
     }
 
     private void executeLDR() {

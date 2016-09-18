@@ -9,16 +9,17 @@ import org.junit.Test;
  */
 public class MainInstructionTest {
 
-    private Instruction instruction = new Instruction((char)(0b0000011111100110));
-    private InstructionsFactory mainInstruction = new InstructionsFactory(instruction);
+    private Instruction instruction = new Instruction((char)(0b0000011100100110));
+    private InstructionsFactory instructionsFactory = new InstructionsFactory(instruction);
     @Test
     public void testAll() {
         Registers.indexRegisters.storeByRegister((char)10,3);
-        //System.out.println(MainMemory.getData().size());
         MainMemory.store((char)2, 6);
+        MainMemory.store((char)22, 2);
         MainMemory.store((char)5000, 12);
         MainMemory.store((char)12, 16);
-        mainInstruction.execute();
+        Instructions instructions = instructionsFactory.getInstructions();
+        instructions.execute();
         System.out.println("the fourth GPR value is: "+(int)Registers.generalProposeRegisters.fetchByRegister(3));
         System.out.println("the third IX value is: "+(int)Registers.indexRegisters.fetchByRegister(3));
         MainMemory.printMemory(0,20);

@@ -15,7 +15,7 @@ public class RegisterTest {
     public void testAll() {
         System.out.println(register.toString());
         register.getBitByIndex(1);
-        System.out.println(Integer.toBinaryString(mainInstruction.getOperatorCode()));
+//        System.out.println(Integer.toBinaryString(mainInstruction.getOperatorCode()));
 
     }
 }

@@ -5,7 +5,6 @@ import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processer.registers.Registers;
 import com.architecture.project.utils.ProjectUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -28,6 +27,10 @@ public class LoadStoreInstructions extends Instructions {
 
     private int RData = -1;
     private int IXData = -1;
+
+    private LoadStoreInstructions() {
+
+    }
 
     public LoadStoreInstructions(Instruction instruction) {
         // Operation Code
@@ -67,17 +70,19 @@ public class LoadStoreInstructions extends Instructions {
 
     @Override
     public void execute() {
+
         String operateCode = INSTRUCTION_MAP.get(getOperatorCode());
         if (operateCode == null || operateCode.equals("")) {
             throw new WrongInstructionException();
         }
         String methodName = "execute" + operateCode;
         try {
-            Method executeMethod = getClass().getMethod(methodName);
-            executeMethod.invoke(getClass());
+            Method executeMethod = getClass().getDeclaredMethod(methodName);
+            executeMethod.invoke(this);
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }
+
     }
 
     private void executeLDR() {

@@ -1,12 +1,10 @@
 package com.architecture.project.gui.img;
 
-import com.architecture.project.processer.registers.AbstractRegisters;
 import com.architecture.project.processer.registers.Register;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * @author taoranxue on 9/17/16 8:04 PM.

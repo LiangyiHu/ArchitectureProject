@@ -7,6 +7,7 @@ import com.architecture.project.processer.registers.Register;
  * @author taoranxue on 9/15/16 3:45 PM.
  */
 public class Instruction extends Register {
+    private static final int OP_NUMBER = 6;
 
     public Instruction() {
         this.data = 0;
@@ -18,6 +19,10 @@ public class Instruction extends Register {
 
     public Instruction(char c) {
         super(c);
+    }
+
+    public int getOperatorCode() {
+        return subInstruction(0, OP_NUMBER).parseInt();
     }
 
     public Instruction subInstruction(int beginIndex, int endIndex) {

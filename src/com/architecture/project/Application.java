@@ -29,6 +29,8 @@ public class Application extends JFrame {
     private JButton bMBR;
     private JButton bMSR;
     private JButton bMFR;
+    private JButton runButton;
+    private JCheckBox stepCheckBox;
 
     public Application() {
         setContentPane(panel1);

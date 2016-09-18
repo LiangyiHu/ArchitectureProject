@@ -1,7 +1,7 @@
 package com.architecture.project.processer.registers;
 
 import com.architecture.project.instruction.Instruction;
-        import com.architecture.project.instruction.MainInstruction;
+        import com.architecture.project.instruction.InstructionsFactory;
         import org.junit.Test;
 
 /**
@@ -10,7 +10,7 @@ import com.architecture.project.instruction.Instruction;
 public class RegisterTest {
     private Register register = new Register((char)(0b1111000011001100));
     private Instruction instruction = new Instruction((char)(0b1111000011001100));
-    private MainInstruction mainInstruction = new MainInstruction(instruction);
+    private InstructionsFactory mainInstruction = new InstructionsFactory(instruction);
     @Test
     public void testAll() {
         System.out.println(register.toString());

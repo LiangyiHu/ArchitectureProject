@@ -10,7 +10,7 @@ import org.junit.Test;
 public class MainInstructionTest {
 
     private Instruction instruction = new Instruction((char)(0b0000011111100110));
-    private MainInstruction mainInstruction = new MainInstruction(instruction);
+    private InstructionsFactory mainInstruction = new InstructionsFactory(instruction);
     @Test
     public void testAll() {
         Registers.indexRegisters.storeByRegister((char)10,3);

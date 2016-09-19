@@ -92,7 +92,7 @@ public class Application extends JFrame {
     public Application() {
         setContentPane(mainPanel);
         refresh();
-        setSize(1500, 450);
+        setSize(1215, 450);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -110,6 +110,10 @@ public class Application extends JFrame {
             executor.load();
             refresh();
 //            memoryStatusTable.
+        });
+
+        setPCbutton.addActionListener(e -> {
+            Registers.programCounter.setOne((char) Integer.parseInt(textFieldPC.getText(), 16));
         });
 
 

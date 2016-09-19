@@ -13,4 +13,5 @@ public class Registers {
     public static MemoryBufferRegister memoryBufferRegister = new MemoryBufferRegister();
     public static MachineStatusRegister machineStatusRegister = new MachineStatusRegister();
     public static MachineFaultRegister machineFaultRegister = new MachineFaultRegister();
+    public static ConditionCodeRegister conditionCodeRegister = new ConditionCodeRegister();
 }

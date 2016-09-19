@@ -5,20 +5,18 @@ import com.architecture.project.instruction.Instruction;
 import com.architecture.project.instruction.Instructions;
 import com.architecture.project.instruction.InstructionsFactory;
 import com.architecture.project.memory.MainMemory;
-import com.architecture.project.processer.registers.Register;
 import com.architecture.project.processer.registers.Registers;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 /**
  * @author taoranxue on 9/15/16 12:23 AM.
  */
 public class Application extends JFrame {
-    private JPanel panel1;
+    private JPanel mainPanel;
+    //define register dashboard panel
+    private JPanel registerDashboard;
     private JLabel GPR0;
     private JLabel GPR1;
     private JLabel GPR2;
@@ -27,19 +25,38 @@ public class Application extends JFrame {
     private JLabel IXR1;
     private JLabel IXR2;
     private JLabel PC;
-    private JTextField MAR;
-    private JTextField MBR;
-    private JTextField MSR;
-    private JTextField MFR;
-    private JButton bMAR;
-    private JButton bMBR;
-    private JButton bMSR;
-    private JButton bMFR;
+    private JLabel IR;
+    private JLabel MSR;
+    private JLabel MFR;
+    private JLabel CC;
+    //define MAR MBR, setPC panel
+    private JPanel operatingPanel;
+    private JTextField textFieldMAR;
+    private JTextField textFieldMBR;
+    private JTextField textFieldPC;
+    private JButton setMARbutton;
+    private JButton setMBRbutton;
+    private JButton setPCbutton;
+    //run and step panel
     private JButton runButton;
     private JCheckBox stepCheckBox;
+    //program loader and editor panel
+    private JPanel inputProgramPanel;
+    private JButton loadProgramButton;
+    private JTextField loadAddressInput;
+    private JTextArea textProgramInput;
+    //Memory table panel
+    private JPanel memoryStatusPanel;
+    private JTextField textMemoryStartField;
+    private JTable memoryStatusTable;
+    private JButton updateMemoryRangeButton;
+    //trivial
+    private JPanel authorPanel;
+    private JButton powerButton;
+    private JLabel powerLabel;
+
 
     private void refresh() {
-
         Instruction instruction = new Instruction((char)(0b0000011100100110));
         InstructionsFactory instructionsFactory = new InstructionsFactory(instruction);
         Registers.indexRegisters.storeByRegister((char)10,3);
@@ -60,14 +77,21 @@ public class Application extends JFrame {
         IXR2.setIcon(Registers.indexRegisters.fetchImageIconByRegister(3));
         //refresh PC
         PC.setIcon(Registers.programCounter.fetchImageIconByRegister(0));
+        IR.setIcon(Registers.instructionRegister.fetchImageIconByRegister(0));
+        MSR.setIcon(Registers.machineStatusRegister.fetchImageIconByRegister(0));
+        MFR.setIcon(Registers.machineFaultRegister.fetchImageIconByRegister(0));
+        CC.setIcon(Registers.conditionCodeRegister.fetchImageIconByRegister(0));
     }
 
     public Application() {
-        setContentPane(panel1);
+        setContentPane(mainPanel);
 
         Image combined = Led.parseImage(11);
         refresh();
-        pack();
+        setSize(1000, 450);
+        setResizable(false);
+        setLocationRelativeTo(null);
+//        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }

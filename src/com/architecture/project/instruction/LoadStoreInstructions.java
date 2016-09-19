@@ -78,6 +78,7 @@ public class LoadStoreInstructions extends Instructions {
         try {
             Method executeMethod = getClass().getDeclaredMethod(methodName);
             executeMethod.invoke(this);
+            Registers.programCounter.addPC();
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }

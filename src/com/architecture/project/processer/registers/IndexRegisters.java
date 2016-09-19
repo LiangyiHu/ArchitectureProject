@@ -11,10 +11,7 @@ public class IndexRegisters extends AbstractRegisters {
 
     @Override
     public boolean indexLegal(int ix) {
-        if (ix >= registers.size() || ix < 1) {
-            return false;
-        }
-        return true;
+        return !(ix >= registers.size() || ix < 1);
     }
 
     @Override

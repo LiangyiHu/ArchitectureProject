@@ -27,6 +27,13 @@ public class MainMemory {
         data.get(address / 2).setData(dt);
     }
 
+    public static void store(List<Character> dataList, int startAddress) {
+        for (Character data : dataList) {
+            store(data, startAddress);
+            startAddress += 2;
+        }
+    }
+
     public static List<MemorySegment> getData() {
         return data;
     }

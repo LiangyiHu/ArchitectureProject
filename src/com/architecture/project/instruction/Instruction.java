@@ -17,6 +17,10 @@ public class Instruction extends Register {
         super(s);
     }
 
+    public Instruction(String s, int base) {
+        super(s, base);
+    }
+
     public Instruction(char c) {
         super(c);
     }

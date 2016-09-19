@@ -16,7 +16,7 @@ public abstract class AbstractRegisters {
 
     public AbstractRegisters() {
         registers = new ArrayList<>(length());
-        for (int i = 0; i < length(); ++ i) {
+        for (int i = 0; i < length(); ++i) {
             registers.add(new Register());
         }
     }
@@ -26,10 +26,7 @@ public abstract class AbstractRegisters {
     }
 
     public boolean indexLegal(int ix) {
-        if (ix >= registers.size() || ix < 0) {
-            return false;
-        }
-        return true;
+        return !(ix >= registers.size() || ix < 0);
     }
 
     public char fetchByRegister(int ix) {
@@ -37,6 +34,11 @@ public abstract class AbstractRegisters {
             throw new RegistersIndexOutOfBoundsException(ix);
         }
         return registers.get(ix).getData();
+    }
+
+    public String fetchHexByRegister(int ix) {
+        char data = this.fetchByRegister(ix);
+        return String.format("0x%04X", (int) data);
     }
 
     public ImageIcon fetchImageIconByRegister(int ix) {
@@ -49,5 +51,13 @@ public abstract class AbstractRegisters {
             throw new RegistersIndexOutOfBoundsException(ix);
         }
         registers.get(ix).setData(data);
+    }
+
+    public void setOne(char data) {
+        storeByRegister(data, 0);
+    }
+
+    public char getOne() {
+        return fetchByRegister(0);
     }
 }

@@ -13,9 +13,13 @@ public class Register {
     private int length;
 
     public Register(String s) {
-        char data = (char) Integer.parseInt(s);
-        this.data = data;
+        this(s, 10);
     }
+
+    public Register(String s, int base) {
+        this.data = (char) Integer.parseInt(s, base);
+    }
+
     public Register() {
         this.data = 0;
     }

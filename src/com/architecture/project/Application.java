@@ -1,19 +1,17 @@
 package com.architecture.project;
 
-import com.architecture.project.gui.img.Led;
-import com.architecture.project.instruction.Instruction;
-import com.architecture.project.instruction.Instructions;
-import com.architecture.project.instruction.InstructionsFactory;
-import com.architecture.project.memory.MainMemory;
+import com.architecture.project.gui.MemoryModel;
 import com.architecture.project.processer.registers.Registers;
+import com.architecture.project.run.Executor;
+import com.architecture.project.run.TextExecutor;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author taoranxue on 9/15/16 12:23 AM.
  */
 public class Application extends JFrame {
+
     private JPanel mainPanel;
     //define register dashboard panel
     private JPanel registerDashboard;
@@ -48,24 +46,20 @@ public class Application extends JFrame {
     //Memory table panel
     private JPanel memoryStatusPanel;
     private JTextField textMemoryStartField;
-    private JTable memoryStatusTable;
     private JButton updateMemoryRangeButton;
     //trivial
     private JPanel authorPanel;
     private JButton powerButton;
     private JLabel powerLabel;
+    private JTable table1;
 
 
     private void refresh() {
-        Instruction instruction = new Instruction((char)(0b0000011100100110));
-        InstructionsFactory instructionsFactory = new InstructionsFactory(instruction);
-        Registers.indexRegisters.storeByRegister((char)10,3);
-        MainMemory.store((char)2, 6);
-        MainMemory.store((char)22, 2);
-        MainMemory.store((char)5000, 12);
-        MainMemory.store((char)12, 16);
-        Instructions instructions = instructionsFactory.getInstructions();
-        instructions.execute();
+        MemoryModel memoryModel = new MemoryModel(0, 200);
+        table1.setModel(memoryModel);
+        table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table1.getColumnModel().getColumn(2).setPreferredWidth(150);
+
         //refresh 4 GPR
         GPR0.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(0));
         GPR0.setText(Registers.generalProposeRegisters.fetchHexByRegister(0));
@@ -97,15 +91,28 @@ public class Application extends JFrame {
 
     public Application() {
         setContentPane(mainPanel);
-
-        Image combined = Led.parseImage(11);
         refresh();
-        setSize(1000, 450);
-        //setResizable(false);
+        setSize(1500, 450);
         setLocationRelativeTo(null);
-//        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        runButton.addActionListener(e -> {
+            boolean step = false;
+            if (stepCheckBox.isSelected()) step = true;
+            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText(), step);
+            executor.start();
+        });
+
+        loadProgramButton.addActionListener(e -> {
+            boolean step = false;
+            if (stepCheckBox.isSelected()) step = true;
+            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText(), step);
+            executor.load();
+            refresh();
+//            memoryStatusTable.
+        });
+
+
     }
 
     public static void main(String args[]) {

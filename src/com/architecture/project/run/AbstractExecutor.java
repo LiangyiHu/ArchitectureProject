@@ -39,7 +39,7 @@ public abstract class AbstractExecutor {
         Registers.instructionRegister.setOne(instruction);
         if (instruction == 0) return;
         new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
-        start();
+        if (!isStep()) start();
     }
 
 

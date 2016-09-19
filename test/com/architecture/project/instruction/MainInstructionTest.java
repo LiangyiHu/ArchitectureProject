@@ -22,7 +22,7 @@ public class MainInstructionTest {
         instructions.execute();
         System.out.println("the fourth GPR value is: "+(int)Registers.generalProposeRegisters.fetchByRegister(3));
         System.out.println("the third IX value is: "+(int)Registers.indexRegisters.fetchByRegister(3));
-        MainMemory.printMemory(0,20);
+//        MainMemory.printMemory(0,20);
     }
 
 }

@@ -42,16 +42,19 @@ public class MainMemory {
         MainMemory.data = data;
     }
 
-    public static void printMemory(int beginIndex, int endIndex) {
+    public static List<String[]> getMemoryData(int beginIndex, int endIndex) {
         if (beginIndex < 0 || endIndex > MEMORY_CAPACITY * 2 || beginIndex > endIndex) {
             throw new MemoryAddressingOutOfBoundsException(beginIndex);
         }
-        for (int i = beginIndex; i <= endIndex; i += 2) {
+        List<String[]> rtn = new ArrayList<>();
+        for (int i = beginIndex, j = 0; i <= endIndex; i += 2, ++ j) {
             char value = MainMemory.fetch(i);
-            String b = String.format("%16s", Integer.toBinaryString(value)).replace(' ', '0');
-            String h = String.format("%04x", (int) value);
-            String d = String.format("%05d", (int) value);
-            System.out.println("Address: " + String.format("%04x", i) + "  BValue: " + b + "  HValue: " + h + "  DValue:" + d);
+            String[] tmp = new String[3];
+            tmp[0] = String.format("0x%04x", i);
+            tmp[1] = String.format("0x%04x", (int) value);
+            tmp[2] = String.format("%16s", Integer.toBinaryString(value)).replace(' ', '0');
+            rtn.add(tmp);
         }
+        return rtn;
     }
 }

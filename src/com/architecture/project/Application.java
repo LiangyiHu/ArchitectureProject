@@ -101,6 +101,7 @@ public class Application extends JFrame {
             if (stepCheckBox.isSelected()) step = true;
             Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText(), step);
             executor.start();
+            refresh();
         });
 
         loadProgramButton.addActionListener(e -> {
@@ -114,6 +115,7 @@ public class Application extends JFrame {
 
         setPCbutton.addActionListener(e -> {
             Registers.programCounter.setOne((char) Integer.parseInt(textFieldPC.getText(), 16));
+            refresh();
         });
 
 

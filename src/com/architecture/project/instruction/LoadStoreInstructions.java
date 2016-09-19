@@ -75,6 +75,7 @@ public class LoadStoreInstructions extends Instructions {
             throw new WrongInstructionException();
         }
         String methodName = "execute" + operateCode;
+        System.out.println(methodName);
         try {
             Method executeMethod = getClass().getDeclaredMethod(methodName);
             executeMethod.invoke(this);
@@ -142,8 +143,9 @@ public class LoadStoreInstructions extends Instructions {
     }
 
     private void executeLDX() {
+        System.out.println(Address + " " + IX);
         char data = MainMemory.fetch(Address);
-        Registers.indexRegisters.storeByRegister(data, R);
+        Registers.indexRegisters.storeByRegister(data, IX);
     }
 
     private void executeSTX() {

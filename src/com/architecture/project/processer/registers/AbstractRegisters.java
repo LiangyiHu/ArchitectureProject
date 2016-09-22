@@ -14,6 +14,12 @@ public abstract class AbstractRegisters {
     private static final int DEFAULT_NUM = 1;
     protected List<Register> registers;
 
+    public void reset() {
+        for (int i = 0; i < length(); ++i) {
+            registers.get(i).setData((char) 0);
+        }
+    }
+
     public AbstractRegisters() {
         registers = new ArrayList<>(length());
         for (int i = 0; i < length(); ++i) {
@@ -59,5 +65,10 @@ public abstract class AbstractRegisters {
 
     public char getOne() {
         return fetchByRegister(0);
+    }
+
+    public String getHexByOne() {
+        char data = this.getOne();
+        return String.format("0x%04X", (int) data);
     }
 }

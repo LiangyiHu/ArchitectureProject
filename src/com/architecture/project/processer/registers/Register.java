@@ -10,7 +10,6 @@ import com.architecture.project.exception.RegisterIndexOutOfBoundsException;
 public class Register {
     protected static final int WORD_LENGTH = 16;
     protected Character data;
-    private int length;
 
     public Register(String s) {
         this(s, 10);
@@ -36,13 +35,6 @@ public class Register {
         this.data = data;
     }
 
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
 
     /**
      * get Integer data

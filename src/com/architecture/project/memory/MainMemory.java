@@ -9,7 +9,10 @@ import java.util.List;
 /**
  * @author taoranxue on 9/14/16 10:56 PM.
  */
-public class MainMemory {
+public final class MainMemory {
+    private MainMemory() {
+
+    }
     private static final int MEMORY_CAPACITY = 2048;
     static private List<MemorySegment> data = new ArrayList<>(MEMORY_CAPACITY);
 
@@ -31,6 +34,12 @@ public class MainMemory {
         for (Character data : dataList) {
             store(data, startAddress);
             startAddress += 2;
+        }
+    }
+
+    public static void resetAll() {
+        for (int i = 0; i < MEMORY_CAPACITY; ++i) {
+            data.get(i).setData((char) 0);
         }
     }
 

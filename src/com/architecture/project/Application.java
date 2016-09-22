@@ -1,6 +1,7 @@
 package com.architecture.project;
 
 import com.architecture.project.gui.MemoryModel;
+import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processer.registers.Registers;
 import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
@@ -11,6 +12,7 @@ import javax.swing.*;
  * @author taoranxue on 9/15/16 12:23 AM.
  */
 public class Application extends JFrame {
+
 
     private JPanel mainPanel;
     //define register dashboard panel
@@ -50,8 +52,12 @@ public class Application extends JFrame {
     //trivial
     private JPanel authorPanel;
     private JButton powerButton;
-    private JLabel powerLabel;
     private JTable table1;
+
+    private void reset() {
+        Registers.resetAll();
+        MainMemory.resetAll();
+    }
 
 
     private void refresh() {
@@ -59,6 +65,9 @@ public class Application extends JFrame {
         table1.setModel(memoryModel);
         table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table1.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+        textFieldMAR.setText(Registers.memoryAddressRegister.getHexByOne());
+        textFieldMBR.setText(Registers.memoryAddressRegister.getHexByOne());
 
         //refresh 4 GPR
         GPR0.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(0));
@@ -96,6 +105,7 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
         runButton.addActionListener(e -> {
             boolean step = false;
             if (stepCheckBox.isSelected()) step = true;
@@ -110,7 +120,6 @@ public class Application extends JFrame {
             Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText(), step);
             executor.load();
             refresh();
-//            memoryStatusTable.
         });
 
         setPCbutton.addActionListener(e -> {
@@ -118,6 +127,10 @@ public class Application extends JFrame {
             refresh();
         });
 
+        powerButton.addActionListener(e -> {
+                reset();
+                refresh();
+        });
 
     }
 

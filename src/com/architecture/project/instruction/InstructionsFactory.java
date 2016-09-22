@@ -16,7 +16,10 @@ public class InstructionsFactory {
     private Instruction instruction;
 
 
-
+    /**
+     *
+     * @param instruction
+     */
     public InstructionsFactory(Instruction instruction) {
         this.instruction = instruction;
     }

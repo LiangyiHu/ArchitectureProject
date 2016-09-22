@@ -13,6 +13,7 @@ public final class MainMemory {
     private MainMemory() {
 
     }
+
     private static final int MEMORY_CAPACITY = 2048;
     static private List<MemorySegment> data = new ArrayList<>(MEMORY_CAPACITY);
 
@@ -22,10 +23,18 @@ public final class MainMemory {
         }
     }
 
+    /**
+     * @param address
+     * @return
+     */
     public static char fetch(int address) {
         return data.get(address / 2).getData();
     }
 
+    /**
+     * @param dt
+     * @param address
+     */
     public static void store(char dt, int address) {
         data.get(address / 2).setData(dt);
     }
@@ -56,7 +65,7 @@ public final class MainMemory {
             throw new MemoryAddressingOutOfBoundsException(beginIndex);
         }
         List<String[]> rtn = new ArrayList<>();
-        for (int i = beginIndex, j = 0; i <= endIndex; i += 2, ++ j) {
+        for (int i = beginIndex, j = 0; i <= endIndex; i += 2, ++j) {
             char value = MainMemory.fetch(i);
             String[] tmp = new String[3];
             tmp[0] = String.format("0x%04x", i);

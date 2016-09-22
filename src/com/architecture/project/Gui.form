@@ -191,7 +191,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="000A"/>
+                  <text value="0x000A"/>
                 </properties>
               </component>
             </children>
@@ -486,7 +486,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="000A"/>
+                  <text value="0x000A"/>
                 </properties>
               </component>
               <scrollpane id="324db">

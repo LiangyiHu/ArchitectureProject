@@ -67,7 +67,7 @@ public class Application extends JFrame {
         table1.getColumnModel().getColumn(2).setPreferredWidth(150);
 
         textFieldMAR.setText(Registers.memoryAddressRegister.getHexByOne());
-        textFieldMBR.setText(Registers.memoryAddressRegister.getHexByOne());
+        textFieldMBR.setText(Registers.memoryBufferRegister.getHexByOne());
 
         //refresh 4 GPR
         GPR0.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(0));
@@ -109,7 +109,7 @@ public class Application extends JFrame {
         runButton.addActionListener(e -> {
             boolean step = false;
             if (stepCheckBox.isSelected()) step = true;
-            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText(), step);
+            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText().substring(2), step);
             executor.start();
             refresh();
         });
@@ -117,19 +117,39 @@ public class Application extends JFrame {
         loadProgramButton.addActionListener(e -> {
             boolean step = false;
             if (stepCheckBox.isSelected()) step = true;
-            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText(), step);
+            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText().substring(2), step);
             executor.load();
             refresh();
         });
 
         setPCbutton.addActionListener(e -> {
-            Registers.programCounter.setOne((char) Integer.parseInt(textFieldPC.getText(), 16));
+            Registers.programCounter.setOne((char) Integer.parseInt(textFieldPC.getText().substring(2), 16));
             refresh();
         });
 
         powerButton.addActionListener(e -> {
                 reset();
                 refresh();
+        });
+
+        setMBRbutton.addActionListener(e -> {
+            String MBRText = textFieldMBR.getText().substring(2);
+            String MARText = textFieldMAR.getText().substring(2);
+            if ((MARText != null && !MARText.equals("")) && (MBRText != null && !MBRText.equals(""))) {
+                char data = (char) Integer.parseInt(MBRText, 16);
+                char address = (char) Integer.parseInt(MARText, 16);
+                Registers.storeMemory(data, address);
+                refresh();
+            }
+
+        });
+
+        setMARbutton.addActionListener(e -> {
+            String text = textFieldMAR.getText().substring(2);
+            if (text != null && !text.equals("")) {
+                Registers.fetchMemory((char) Integer.parseInt(text, 16));
+                refresh();
+            }
         });
 
     }

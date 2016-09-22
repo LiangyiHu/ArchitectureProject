@@ -34,10 +34,11 @@ public final class Registers {
         conditionCodeRegister.reset();
     }
 
-    public static void fetchMemory(char address) {
+    public static char fetchMemory(char address) {
         memoryAddressRegister.setOne(address);
         char data = MainMemory.fetch(address);
         memoryBufferRegister.setOne(data);
+        return data;
     }
 
     public static void storeMemory(char data, char address) {

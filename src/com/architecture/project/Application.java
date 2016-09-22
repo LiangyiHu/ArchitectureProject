@@ -31,6 +31,9 @@ public class Application extends JFrame {
     private JLabel MSR;
     private JLabel MFR;
     private JLabel CC;
+    private JLabel MAR;
+    private JLabel MBR;
+
     //define MAR MBR, setPC panel
     private JPanel operatingPanel;
     private JTextField textFieldMAR;
@@ -103,6 +106,10 @@ public class Application extends JFrame {
         MFR.setText(Registers.machineFaultRegister.fetchHexByRegister(0));
         CC.setIcon(Registers.conditionCodeRegister.fetchImageIconByRegister(0));
         CC.setText(Registers.conditionCodeRegister.fetchHexByRegister(0));
+        MAR.setIcon(Registers.memoryAddressRegister.fetchImageIconByRegister(0));
+        MAR.setText(Registers.memoryAddressRegister.fetchHexByRegister(0));
+        MBR.setIcon(Registers.memoryBufferRegister.fetchImageIconByRegister(0));
+        MBR.setText(Registers.memoryBufferRegister.fetchHexByRegister(0));
     }
 
     /**

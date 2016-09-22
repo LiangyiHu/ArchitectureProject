@@ -7,6 +7,8 @@ import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author taoranxue on 9/15/16 12:23 AM.
@@ -59,8 +61,13 @@ public class Application extends JFrame {
         MainMemory.resetAll();
     }
 
-
+    /**
+     * Refresh the GUI, display all the things it supposed to show.
+     */
     private void refresh() {
+
+        //Refresh memory table
+        //MemoryModel memoryModel = new MemoryModel(memBeginIndex, memEndIndex);
         MemoryModel memoryModel = new MemoryModel(0, 200);
         table1.setModel(memoryModel);
         table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -85,7 +92,7 @@ public class Application extends JFrame {
         IXR1.setText(Registers.indexRegisters.fetchHexByRegister(2));
         IXR2.setIcon(Registers.indexRegisters.fetchImageIconByRegister(3));
         IXR2.setText(Registers.indexRegisters.fetchHexByRegister(3));
-        //refresh PC
+        //refresh PC, IR, MSR, MFR and CC
         PC.setIcon(Registers.programCounter.fetchImageIconByRegister(0));
         PC.setText(Registers.programCounter.fetchHexByRegister(0));
         IR.setIcon(Registers.instructionRegister.fetchImageIconByRegister(0));
@@ -98,14 +105,21 @@ public class Application extends JFrame {
         CC.setText(Registers.conditionCodeRegister.fetchHexByRegister(0));
     }
 
+    /**
+     * Following code builds up the GUI for user to operate
+     */
     public Application() {
+        //Basic GUI properties setup
         setContentPane(mainPanel);
         refresh();
         setSize(1215, 450);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        setTitle("Project--Simulated CPU for CS6461");
+        int memBeginIndex=0, memEndIndex=200;
 
+        //Decide what happens if "RUN" button is been clicked
         runButton.addActionListener(e -> {
             boolean step = false;
             if (stepCheckBox.isSelected()) step = true;
@@ -114,6 +128,7 @@ public class Application extends JFrame {
             refresh();
         });
 
+        //Load the program to memory
         loadProgramButton.addActionListener(e -> {
             boolean step = false;
             if (stepCheckBox.isSelected()) step = true;
@@ -122,16 +137,19 @@ public class Application extends JFrame {
             refresh();
         });
 
+        //Build function managing SETPC button
         setPCbutton.addActionListener(e -> {
             Registers.programCounter.setOne((char) Integer.parseInt(textFieldPC.getText().substring(2), 16));
             refresh();
         });
 
+        //Reset the machine
         powerButton.addActionListener(e -> {
                 reset();
                 refresh();
         });
 
+        //Set MBR value
         setMBRbutton.addActionListener(e -> {
             String MBRText = textFieldMBR.getText().substring(2);
             String MARText = textFieldMAR.getText().substring(2);
@@ -144,6 +162,7 @@ public class Application extends JFrame {
 
         });
 
+        //Load Memory to MBR
         setMARbutton.addActionListener(e -> {
             String text = textFieldMAR.getText().substring(2);
             if (text != null && !text.equals("")) {
@@ -152,8 +171,14 @@ public class Application extends JFrame {
             }
         });
 
+        updateMemoryRangeButton.addActionListener(e -> {
+            //memBeginIndex=Integer.parseInt(textFieldPC.getText().substring(2), 16);
+            //ChangeMemBeginIndex and memEndIndex;
+            refresh();
+        });
     }
 
+    //Start the GUI
     public static void main(String args[]) {
         new Application();
     }

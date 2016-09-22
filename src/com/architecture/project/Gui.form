@@ -80,7 +80,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="000A"/>
+                  <text value="0x000A"/>
                 </properties>
               </component>
             </children>
@@ -191,7 +191,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="0x000A"/>
+                  <text value="0x0000"/>
                 </properties>
               </component>
             </children>
@@ -210,6 +210,7 @@
                 </constraints>
                 <properties>
                   <text value="Load to MBR"/>
+                  <toolTipText value="Load Memory content at address specified by MAR to MBR"/>
                 </properties>
               </component>
               <component id="fdd69" class="javax.swing.JButton" binding="setMBRbutton">
@@ -217,7 +218,8 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Load to Memory"/>
+                  <text value="Load to Mem"/>
+                  <toolTipText value="Load the content in MBR to Memory at location MAR."/>
                 </properties>
               </component>
               <component id="84c93" class="javax.swing.JButton" binding="setPCbutton">
@@ -225,7 +227,8 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Update PC"/>
+                  <text value="Set PC"/>
+                  <toolTipText value="Set the PC value, usually at the program entry point."/>
                 </properties>
               </component>
             </children>
@@ -521,6 +524,7 @@
             </constraints>
             <properties>
               <text value="RESET"/>
+              <toolTipText value="Clear all the contents in memory and register."/>
             </properties>
           </component>
           <hspacer id="18120">

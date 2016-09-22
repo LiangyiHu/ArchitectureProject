@@ -12,6 +12,7 @@ public final class Registers {
 
     }
 
+    //Initiate all the registers.
     public static GeneralProposeRegisters generalProposeRegisters = new GeneralProposeRegisters();
     public static InstructionRegister instructionRegister = new InstructionRegister();
     public static ProgramCounter programCounter = new ProgramCounter();
@@ -22,6 +23,7 @@ public final class Registers {
     public static MachineFaultRegister machineFaultRegister = new MachineFaultRegister();
     public static ConditionCodeRegister conditionCodeRegister = new ConditionCodeRegister();
 
+    //Reset all the registers.
     public static void resetAll() {
         generalProposeRegisters.reset();
         instructionRegister.reset();
@@ -34,6 +36,7 @@ public final class Registers {
         conditionCodeRegister.reset();
     }
 
+    //The process of getting memory, send address to MAR first, then get data from memory and store to MBR
     public static char fetchMemory(char address) {
         memoryAddressRegister.setOne(address);
         char data = MainMemory.fetch(address);
@@ -41,9 +44,10 @@ public final class Registers {
         return data;
     }
 
+    //The process of store memory, set MAR first, then
     public static void storeMemory(char data, char address) {
         memoryAddressRegister.setOne(address);
-        MainMemory.store(data, address);
         memoryBufferRegister.setOne(data);
+        MainMemory.store(data, address);
     }
 }

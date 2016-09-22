@@ -8,15 +8,20 @@ import java.util.List;
 
 /**
  * @author taoranxue on 9/14/16 10:56 PM.
+ *         Memory consists of 4096 bytes which equals 2048 words in our case, the the addressing unit is in byte, which means only even number value is valid.
+ *         The data type of memory in Java is char, since char in Java now is 16 bit.
  */
 public final class MainMemory {
     private MainMemory() {
 
     }
 
+    //The capacity of the memory, 4096 bytes equals 2048 words.
     private static final int MEMORY_CAPACITY = 2048;
+    //Create memory array.
     static private List<MemorySegment> data = new ArrayList<>(MEMORY_CAPACITY);
 
+    //Initialize the memory
     static {
         for (int i = 0; i < MEMORY_CAPACITY; ++i) {
             data.add(new MemorySegment());
@@ -25,7 +30,7 @@ public final class MainMemory {
 
     /**
      * @param address
-     * @return
+     * @return The value in the address
      */
     public static char fetch(int address) {
         return data.get(address / 2).getData();
@@ -46,6 +51,7 @@ public final class MainMemory {
         }
     }
 
+    //Reset memory
     public static void resetAll() {
         for (int i = 0; i < MEMORY_CAPACITY; ++i) {
             data.get(i).setData((char) 0);
@@ -60,6 +66,7 @@ public final class MainMemory {
         MainMemory.data = data;
     }
 
+    //This function get the value from memory and used to display them in GUI.
     public static List<String[]> getMemoryData(int beginIndex, int endIndex) {
         if (beginIndex < 0 || endIndex > MEMORY_CAPACITY * 2 || beginIndex > endIndex) {
             throw new MemoryAddressingOutOfBoundsException(beginIndex);

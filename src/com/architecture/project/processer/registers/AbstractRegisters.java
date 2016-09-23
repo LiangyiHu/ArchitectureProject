@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author taoranxue on 9/14/16 11:42 PM.
  * Abstracted registers, this is a general parent class for all the registers.
+ *
+ * @author taoranxue on 9/14/16 11:42 PM.
  */
 public abstract class AbstractRegisters {
     private static final int DEFAULT_NUM = 1;

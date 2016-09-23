@@ -11,10 +11,21 @@ public class Register {
     protected static final int WORD_LENGTH = 16;
     protected Character data;
 
+    /**
+     * Construct with string.
+     *
+     * @param s string.
+     */
     public Register(String s) {
         this(s, 10);
     }
 
+    /**
+     * Construct with based number.
+     *
+     * @param s    number string.
+     * @param base base number.
+     */
     public Register(String s, int base) {
         this.data = (char) Integer.parseInt(s, base);
     }
@@ -38,13 +49,15 @@ public class Register {
 
     /**
      * get Integer data
+     *
      * @return int
      */
     public int parseInt() {
-        return (int)data;
+        return (int) data;
     }
+
     /**
-     * to binary string
+     * Convert to binary string.
      *
      * @return binary String
      */
@@ -62,7 +75,7 @@ public class Register {
     }
 
     /**
-     * get data's index-th binary bit.
+     * Get data's index-th binary bit.
      *
      * @param index index
      * @return one or zero
@@ -81,7 +94,7 @@ public class Register {
     }
 
     /**
-     * set data's index-th binary bit to be one or zero
+     * Set data's index-th binary bit to be one or zero.
      *
      * @param index index
      * @param bit   set value, one or zero
@@ -100,6 +113,13 @@ public class Register {
         }
     }
 
+    /**
+     * Get the sub-data of register data.
+     *
+     * @param beginIndex begin index.
+     * @param endIndex   end index.
+     * @return sub-data of register data.
+     */
     protected Register subRegister(int beginIndex, int endIndex) {
         if (beginIndex < 0) {
             throw new RegisterIndexOutOfBoundsException(beginIndex);
@@ -112,8 +132,8 @@ public class Register {
             throw new RegisterIndexOutOfBoundsException(subLen);
         }
 
-        this.data = (char)(data << (beginIndex));
-        this.data = (char)(data >> (beginIndex + WORD_LENGTH - endIndex));
+        this.data = (char) (data << (beginIndex));
+        this.data = (char) (data >> (beginIndex + WORD_LENGTH - endIndex));
 
         return this;
     }

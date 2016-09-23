@@ -3,6 +3,8 @@ package com.architecture.project.processer.registers;
 import java.util.ArrayList;
 
 /**
+ * Condition code register.
+ *
  * @author taoranxue on 9/14/16 11:48 PM.
  */
 public class ConditionCodeRegister extends AbstractRegisters {

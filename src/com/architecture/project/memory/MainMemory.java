@@ -1,15 +1,13 @@
 package com.architecture.project.memory;
 
-import com.architecture.project.exception.MemoryAddressingOutOfBoundsException;
-import com.architecture.project.exception.RegisterIndexOutOfBoundsException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Memory consists of 4096 bytes which equals 2048 words in our case, the the addressing unit is in byte, which means only even number value is valid.
+ * The data type of memory in Java is char, since char in Java now is 16 bit.
+ *
  * @author taoranxue on 9/14/16 10:56 PM.
- *         Memory consists of 4096 bytes which equals 2048 words in our case, the the addressing unit is in byte, which means only even number value is valid.
- *         The data type of memory in Java is char, since char in Java now is 16 bit.
  */
 public final class MainMemory {
     private MainMemory() {

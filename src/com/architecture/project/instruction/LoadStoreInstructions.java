@@ -8,9 +8,9 @@ import com.architecture.project.utils.ProjectUtils;
 import java.lang.reflect.Method;
 
 /**
+ * The instruction function and methods of identifying is here
  *
  * @author taoranxue on 9/18/16 12:11 AM.
- * The instruction function and methods of identifying is here
  */
 public class LoadStoreInstructions extends Instructions {
     //the meaning of the code structure format: O for opcode, R for GeneralPurposeRegister, X for IndexRegister, I for Indirect, A for Address, Im for Immediate Number.

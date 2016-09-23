@@ -9,6 +9,8 @@ import com.architecture.project.processer.registers.Registers;
 import java.util.List;
 
 /**
+ * Abstract parent class of executor class.
+ *
  * @author taoranxue on 9/18/16 9:39 PM.
  */
 public abstract class AbstractExecutor {

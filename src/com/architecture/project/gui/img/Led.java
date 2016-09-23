@@ -18,9 +18,10 @@ public class Led {
     private static final String LED_ON_URL = "/com/architecture/project/gui/img/led_on.png";
 
     /**
-     * Construct with Register
+     * Construct with {@linkplain Register}
+     *
      * @param register register
-     * @return Image
+     * @return {@linkplain java.awt.Image}
      */
     public static Image parseImage(Register register) {
         String str = Integer.toBinaryString(register.getData());
@@ -28,9 +29,10 @@ public class Led {
     }
 
     /**
+     * Construct with integer
      *
-     * @param binaryNumber
-     * @return
+     * @param binaryNumber register data to integer
+     * @return {@linkplain java.awt.Image}
      */
     public static Image parseImage(int binaryNumber) {
         String str = Integer.toBinaryString(binaryNumber);
@@ -38,10 +40,11 @@ public class Led {
     }
 
     /**
+     * Static method used to convert integer to image.
      *
-     * @param binaryNumber
-     * @param number
-     * @return
+     * @param binaryNumber Integer data
+     * @param number       Number of led light
+     * @return {@linkplain java.awt.Image}
      */
     public static Image parseImage(int binaryNumber, int number) {
         String str = Integer.toBinaryString(binaryNumber);
@@ -49,19 +52,21 @@ public class Led {
     }
 
     /**
+     * Static method used to convert integer to image.
      *
-     * @param binaryStr
-     * @return
+     * @param binaryStr binary String
+     * @return {@linkplain java.awt.Image}
      */
     public static Image parseImage(String binaryStr) {
         return parseImage(binaryStr, LED_BIT_NUM);
     }
 
     /**
+     * Static method used to convert String to image.
      *
-     * @param binaryStr
-     * @param number
-     * @return
+     * @param binaryStr binary String
+     * @param number    Number of led light
+     * @return {@linkplain java.awt.Image}
      */
     public static Image parseImage(String binaryStr, int number) {
         Image LedOnImg = getImageByURL(LED_ON_URL);
@@ -91,13 +96,6 @@ public class Led {
         return combined;
     }
 
-    /**
-     *
-     * @param str
-     * @param w
-     * @param h
-     * @return
-     */
     private static Image getImageByURL(String str, int w, int h) {
         Image resizeImage = null;
         try {

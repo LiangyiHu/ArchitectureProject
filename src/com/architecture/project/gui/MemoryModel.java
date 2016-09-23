@@ -6,18 +6,22 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 /**
+ * Table model class used for gui {@linkplain javax.swing.JTable}.
+ *
  * @author taoranxue on 9/19/16 1:14 AM.
  */
 public class MemoryModel extends AbstractTableModel {
-    private final String[] columnNames = new String[] {"Address", "Data(Hex)", "Data(Binary)"};
+    private final String[] columnNames = new String[]{"Address", "Data(Hex)", "Data(Binary)"};
     private List data;
-    private int beginIndex;
-    private int endIndex;
 
+    /**
+     * Display memory data in giving range.
+     *
+     * @param beginIndex start index.
+     * @param endIndex   end index.
+     */
     public MemoryModel(int beginIndex, int endIndex) {
         data = MainMemory.getMemoryData(beginIndex, endIndex);
-        this.beginIndex = beginIndex;
-        this.endIndex = endIndex;
     }
 
     @Override
@@ -37,6 +41,6 @@ public class MemoryModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return ((String [])data.get(rowIndex))[columnIndex];
+        return ((String[]) data.get(rowIndex))[columnIndex];
     }
 }

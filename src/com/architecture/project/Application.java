@@ -9,6 +9,8 @@ import com.architecture.project.run.TextExecutor;
 import javax.swing.*;
 
 /**
+ * The project run from here.
+ *
  * @author taoranxue on 9/15/16 12:23 AM.
  */
 public class Application extends JFrame {

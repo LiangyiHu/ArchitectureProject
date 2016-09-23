@@ -1,6 +1,8 @@
 package com.architecture.project.exception;
 
 /**
+ * Memory addressing out of bounds exception.
+ *
  * @author taoranxue on 9/15/16 6:57 PM.
  */
 public class MemoryAddressingOutOfBoundsException extends IndexOutOfBoundsException {

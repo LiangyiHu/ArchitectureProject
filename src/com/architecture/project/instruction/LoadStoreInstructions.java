@@ -115,15 +115,15 @@ public class LoadStoreInstructions extends Instructions {
         char data;
         if (I == 0) {
             if (IX == 0) {
-                data = MainMemory.fetch(Address);
+                data = Registers.fetchMemory((char) Address);
             } else {
-                data = MainMemory.fetch(Address + IXData);
+                data = Registers.fetchMemory((char) (Address + IXData));
             }
         } else {
             if (IX == 0) {
-                data = MainMemory.fetch(MainMemory.fetch(Address));
+                data = Registers.fetchMemory(Registers.fetchMemory((char) Address));
             } else {
-                data = MainMemory.fetch(MainMemory.fetch(Address + IXData));
+                data = Registers.fetchMemory(Registers.fetchMemory((char) (Address + IXData)));
             }
         }
         return data;
@@ -148,9 +148,9 @@ public class LoadStoreInstructions extends Instructions {
             }
         } else {
             if (IX == 0) {
-                effectiveAddress = MainMemory.fetch(Address);
+                effectiveAddress = Registers.fetchMemory((char) Address);
             } else {
-                effectiveAddress = MainMemory.fetch(IXData + Address);
+                effectiveAddress = Registers.fetchMemory((char) (IXData + Address));
             }
         }
         //Save to memory
@@ -168,9 +168,9 @@ public class LoadStoreInstructions extends Instructions {
             }
         } else {
             if (IX == 0) {
-                data = MainMemory.fetch(Address);
+                data = Registers.fetchMemory((char) Address);
             } else {
-                data = MainMemory.fetch(Address + IXData);
+                data = Registers.fetchMemory((char) (Address + IXData));
             }
         }
         //load to Register
@@ -180,7 +180,7 @@ public class LoadStoreInstructions extends Instructions {
     //LDX
     private void executeLDX() {
         System.out.println(Address + " " + IX);
-        char data = MainMemory.fetch(Address);
+        char data = Registers.fetchMemory((char) Address);
         Registers.indexRegisters.storeByRegister(data, IX);
     }
 
@@ -188,7 +188,7 @@ public class LoadStoreInstructions extends Instructions {
         if (I == 0) {
             MainMemory.store((char) IXData, Address);
         } else {
-            MainMemory.store((char) IXData, MainMemory.fetch(Address));
+            MainMemory.store((char) IXData, Registers.fetchMemory((char) Address));
         }
     }
 

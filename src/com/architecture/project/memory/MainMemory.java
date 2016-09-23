@@ -68,8 +68,9 @@ public final class MainMemory {
 
     //This function get the value from memory and used to display them in GUI.
     public static List<String[]> getMemoryData(int beginIndex, int endIndex) {
+        endIndex = Math.min(MEMORY_CAPACITY * 2 - 1, endIndex);
         if (beginIndex < 0 || endIndex > MEMORY_CAPACITY * 2 || beginIndex > endIndex) {
-            throw new MemoryAddressingOutOfBoundsException(beginIndex);
+            return new ArrayList<>();
         }
         List<String[]> rtn = new ArrayList<>();
         for (int i = beginIndex, j = 0; i <= endIndex; i += 2, ++j) {

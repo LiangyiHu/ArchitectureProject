@@ -60,6 +60,11 @@ public abstract class AbstractRegisters {
         return new ImageIcon(Led.parseImage(data));
     }
 
+    public ImageIcon fetchImageIconByRegister(int ix, int number) {
+        char data = this.fetchByRegister(ix);
+        return new ImageIcon(Led.parseImage(data, number));
+    }
+
     //Send value to a particular register
     public void storeByRegister(char data, int ix) {
         if (ix >= registers.size() || ix < 0) {

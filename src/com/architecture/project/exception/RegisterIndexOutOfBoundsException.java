@@ -1,7 +1,8 @@
 package com.architecture.project.exception;
 
 /**
- * Register out of bounds
+ * Register out of bounds exception.
+ *
  * @author taoranxue on 9/15/16 3:52 PM.
  */
 public class RegisterIndexOutOfBoundsException extends IndexOutOfBoundsException {

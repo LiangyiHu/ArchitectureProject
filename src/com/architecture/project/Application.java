@@ -7,8 +7,6 @@ import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author taoranxue on 9/15/16 12:23 AM.
@@ -59,6 +57,9 @@ public class Application extends JFrame {
     private JButton powerButton;
     private JTable table1;
 
+    private int memBeginIndex = 0;
+    private final int memDisplayLength = 200;
+
     private void reset() {
         Registers.resetAll();
         MainMemory.resetAll();
@@ -70,8 +71,8 @@ public class Application extends JFrame {
     private void refresh() {
 
         //Refresh memory table
-        //MemoryModel memoryModel = new MemoryModel(memBeginIndex, memEndIndex);
-        MemoryModel memoryModel = new MemoryModel(0, 200);
+        MemoryModel memoryModel = new MemoryModel(memBeginIndex, memBeginIndex + memDisplayLength);
+        System.out.println(memBeginIndex + ",  " + (memBeginIndex + memDisplayLength));
         table1.setModel(memoryModel);
         table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table1.getColumnModel().getColumn(2).setPreferredWidth(150);
@@ -102,9 +103,9 @@ public class Application extends JFrame {
         IR.setText(Registers.instructionRegister.fetchHexByRegister(0));
         MSR.setIcon(Registers.machineStatusRegister.fetchImageIconByRegister(0));
         MSR.setText(Registers.machineStatusRegister.fetchHexByRegister(0));
-        MFR.setIcon(Registers.machineFaultRegister.fetchImageIconByRegister(0));
+        MFR.setIcon(Registers.machineFaultRegister.fetchImageIconByRegister(0, 4));
         MFR.setText(Registers.machineFaultRegister.fetchHexByRegister(0));
-        CC.setIcon(Registers.conditionCodeRegister.fetchImageIconByRegister(0));
+        CC.setIcon(Registers.conditionCodeRegister.fetchImageIconByRegister(0, 4));
         CC.setText(Registers.conditionCodeRegister.fetchHexByRegister(0));
         MAR.setIcon(Registers.memoryAddressRegister.fetchImageIconByRegister(0));
         MAR.setText(Registers.memoryAddressRegister.fetchHexByRegister(0));
@@ -124,7 +125,6 @@ public class Application extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setTitle("Project--Simulated CPU for CS6461");
-        int memBeginIndex=0, memEndIndex=200;
 
         //Decide what happens if "RUN" button is been clicked
         runButton.addActionListener(e -> {
@@ -144,7 +144,7 @@ public class Application extends JFrame {
             refresh();
         });
 
-        //Build function managing SETPC button
+        //Build function managing SetPC button
         setPCbutton.addActionListener(e -> {
             Registers.programCounter.setOne((char) Integer.parseInt(textFieldPC.getText().substring(2), 16));
             refresh();
@@ -152,8 +152,8 @@ public class Application extends JFrame {
 
         //Reset the machine
         powerButton.addActionListener(e -> {
-                reset();
-                refresh();
+            reset();
+            refresh();
         });
 
         //Set MBR value
@@ -179,10 +179,10 @@ public class Application extends JFrame {
         });
 
         updateMemoryRangeButton.addActionListener(e -> {
-            //memBeginIndex=Integer.parseInt(textFieldPC.getText().substring(2), 16);
-            //ChangeMemBeginIndex and memEndIndex;
+            memBeginIndex = Integer.parseInt(textMemoryStartField.getText().substring(2), 16);
             refresh();
         });
+
     }
 
     //Start the GUI

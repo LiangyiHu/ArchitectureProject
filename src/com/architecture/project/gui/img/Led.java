@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
+ * Processing with binary number to image.
+ *
  * @author taoranxue on 9/17/16 8:04 PM.
  */
 public class Led {
@@ -15,17 +17,53 @@ public class Led {
     private static final String LED_OFF_URL = "/com/architecture/project/gui/img/led_off.png";
     private static final String LED_ON_URL = "/com/architecture/project/gui/img/led_on.png";
 
+    /**
+     * Construct with Register
+     * @param register register
+     * @return Image
+     */
     public static Image parseImage(Register register) {
         String str = Integer.toBinaryString(register.getData());
         return parseImage(str);
     }
 
+    /**
+     *
+     * @param binaryNumber
+     * @return
+     */
     public static Image parseImage(int binaryNumber) {
         String str = Integer.toBinaryString(binaryNumber);
         return parseImage(str);
     }
 
+    /**
+     *
+     * @param binaryNumber
+     * @param number
+     * @return
+     */
+    public static Image parseImage(int binaryNumber, int number) {
+        String str = Integer.toBinaryString(binaryNumber);
+        return parseImage(str, 4);
+    }
+
+    /**
+     *
+     * @param binaryStr
+     * @return
+     */
     public static Image parseImage(String binaryStr) {
+        return parseImage(binaryStr, LED_BIT_NUM);
+    }
+
+    /**
+     *
+     * @param binaryStr
+     * @param number
+     * @return
+     */
+    public static Image parseImage(String binaryStr, int number) {
         Image LedOnImg = getImageByURL(LED_ON_URL);
         Image LedOffImg = getImageByURL(LED_OFF_URL);
 
@@ -35,8 +73,13 @@ public class Led {
         Graphics graphics = combined.getGraphics();
         int i;
         int remainLength = LED_BIT_NUM - binaryStr.length();
+
         for (i = 0; i < remainLength; ++i) {
-            graphics.drawImage(LedOffImg, i * LED_SIZE, 0, null);
+            if (i < LED_BIT_NUM - number) {
+                graphics.drawImage(null, i * LED_SIZE, 0, null);
+            } else {
+                graphics.drawImage(LedOffImg, i * LED_SIZE, 0, null);
+            }
         }
         for (; i < LED_BIT_NUM; ++i) {
             if (binaryStr.charAt(i - remainLength) == '1') {
@@ -48,6 +91,13 @@ public class Led {
         return combined;
     }
 
+    /**
+     *
+     * @param str
+     * @param w
+     * @param h
+     * @return
+     */
     private static Image getImageByURL(String str, int w, int h) {
         Image resizeImage = null;
         try {

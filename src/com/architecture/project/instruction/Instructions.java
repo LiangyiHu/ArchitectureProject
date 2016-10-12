@@ -49,7 +49,7 @@ public abstract class Instructions {
     /**
      * execute the instruction.
      */
-    public void execute() {
+    public final void execute() {
         String operateCode = INSTRUCTION_MAP.get(getOperatorCode());
         if (operateCode == null || operateCode.equals("")) {
             throw new WrongInstructionException();

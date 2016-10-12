@@ -38,7 +38,11 @@ public class CacheLine {
         blocks = new ArrayList<>(BLOCK_NUM);
         int curAddress = address;
         for (int i = 0; i < BLOCK_NUM; ++i) {
-            blocks.add(MainMemory.fetch(curAddress));
+            if (address == Character.MAX_VALUE) {
+                blocks.add((char) 0);
+            } else {
+                blocks.add(MainMemory.fetch(curAddress));
+            }
             curAddress += 2;
         }
     }
@@ -83,5 +87,17 @@ public class CacheLine {
     public boolean isLineMatch(int address) {
         int tag = (address >> 3);
         return this.valid && this.tag == tag;
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public int getTag() {
+        return tag;
+    }
+
+    public List<Character> getBlocks() {
+        return blocks;
     }
 }

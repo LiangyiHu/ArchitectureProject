@@ -1,6 +1,7 @@
 package com.architecture.project.processor.registers;
 
 import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processor.Processor;
 
 /**
  * contains all static registers
@@ -37,18 +38,32 @@ public final class Registers {
         conditionCodeRegister.reset();
     }
 
-    //The process of getting memory, send address to MAR first, then get data from memory and store to MBR
+    /**
+     * The process of getting memory, send address to MAR first, then get data from memory and store to MBR
+     * Using cache.
+     *
+     * @param address address
+     * @return data
+     */
     public static char fetchMemory(char address) {
         memoryAddressRegister.setOne(address);
-        char data = MainMemory.fetch(address);
+//        char data = MainMemory.fetch(address);
+        char data = Processor.cache.fetch(address);
         memoryBufferRegister.setOne(data);
         return data;
     }
 
-    //The process of store memory, set MAR first, then
+    /**
+     * The process of store memory, set MAR first, then get data from memory and store to MBR
+     * Using cache.
+     *
+     * @param data    data
+     * @param address address
+     */
     public static void storeMemory(char data, char address) {
         memoryAddressRegister.setOne(address);
         memoryBufferRegister.setOne(data);
-        MainMemory.store(data, address);
+//        MainMemory.store(data, address);
+        Processor.cache.store(data, address);
     }
 }

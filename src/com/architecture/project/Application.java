@@ -1,7 +1,9 @@
 package com.architecture.project;
 
+import com.architecture.project.gui.CacheModel;
 import com.architecture.project.gui.MemoryModel;
 import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processor.cache.Cache;
 import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
@@ -58,6 +60,7 @@ public class Application extends JFrame {
     private JPanel authorPanel;
     private JButton powerButton;
     private JTable table1;
+    private JTable table2;
 
     private int memBeginIndex = 0;
     private final int memDisplayLength = 200;
@@ -78,6 +81,11 @@ public class Application extends JFrame {
         table1.setModel(memoryModel);
         table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table1.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+        //Refresh cache table
+        CacheModel cacheModel = new CacheModel();
+        table2.setModel(cacheModel);
+        table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         textFieldMAR.setText(Registers.memoryAddressRegister.getHexByOne());
         textFieldMBR.setText(Registers.memoryBufferRegister.getHexByOne());
@@ -122,7 +130,7 @@ public class Application extends JFrame {
         //Basic GUI properties setup
         setContentPane(mainPanel);
         refresh();
-        setSize(1215, 450);
+        setSize(1215, 550);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

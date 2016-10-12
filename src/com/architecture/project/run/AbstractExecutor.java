@@ -39,6 +39,7 @@ public abstract class AbstractExecutor {
         Registers.instructionRegister.setOne(instruction);
         Registers.programCounter.addPC();
         if (instruction == 0) return;
+        System.out.println(Integer.toBinaryString(instruction));
         new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
         if (!isStep()) start();
     }

@@ -16,6 +16,9 @@ public class Cache {
 
     public Cache() {
         cacheLines = new ArrayList<>(LINE_NUM);
+        for (int i = 0; i < LINE_NUM; ++ i) {
+            cacheLines.add(new CacheLine(Character.MAX_VALUE));
+        }
         cursor = 0;
     }
 
@@ -52,6 +55,30 @@ public class Cache {
             cacheLines.set(getCursor(), cacheLine);
             return cacheLine.fetchData(offset);
         }
+    }
+
+    /**
+     * Store data in cache, write through.
+     *
+     * @param data    data
+     * @param address address
+     */
+    public void store(char data, int address) {
+        int ix;
+        int offset = (address & ((1 << 3) - 1));
+        if ((ix = isHit(address)) >= 0) {
+            //Hit
+            cacheLines.get(ix).storeData(offset, data);
+        } else {
+            //Miss
+            CacheLine cacheLine = new CacheLine(address);
+            cacheLines.set(getCursor(), cacheLine);
+            cacheLine.storeData(offset, data);
+        }
+    }
+
+    public List<CacheLine> getCacheLines() {
+        return cacheLines;
     }
 
     private int getCursor() {

@@ -16,6 +16,7 @@ import javax.swing.*;
  * @author taoranxue on 9/15/16 12:23 AM.
  */
 public class Application extends JFrame {
+    public static String debug = "Debug:";
 
 
     private JPanel mainPanel;
@@ -61,6 +62,7 @@ public class Application extends JFrame {
     private JButton powerButton;
     private JTable table1;
     private JTable table2;
+    private JTextArea textArea1;
 
     private int memBeginIndex = 0;
     private final int memDisplayLength = 200;
@@ -74,7 +76,7 @@ public class Application extends JFrame {
      * Refresh the GUI, display all the things it supposed to show.
      */
     private void refresh() {
-
+        textArea1.setText(this.debug);
         //Refresh memory table
         MemoryModel memoryModel = new MemoryModel(memBeginIndex, memBeginIndex + memDisplayLength);
         System.out.println(memBeginIndex + ",  " + (memBeginIndex + memDisplayLength));

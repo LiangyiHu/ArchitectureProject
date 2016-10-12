@@ -1,5 +1,6 @@
 package com.architecture.project.instruction;
 
+import com.architecture.project.Application;
 import com.architecture.project.processor.registers.Registers;
 
 /**
@@ -16,6 +17,7 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
         data = (char) (RDATA() + data);
         //add to Register
         Registers.generalProposeRegisters.storeByRegister(data, R());
+        Application.debug += "\n AMR: ";
     }
 
     private void executesSMR() {

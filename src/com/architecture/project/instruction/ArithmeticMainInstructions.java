@@ -1,10 +1,6 @@
 package com.architecture.project.instruction;
 
-import com.architecture.project.memory.MainMemory;
-import com.architecture.project.processer.registers.Register;
-import com.architecture.project.processer.registers.Registers;
-import com.sun.org.apache.bcel.internal.generic.DADD;
-import com.sun.prism.shader.Solid_ImagePattern_Loader;
+import com.architecture.project.processor.registers.Registers;
 
 /**
  * @author taoranxue on 10/11/16 11:41 PM.
@@ -17,28 +13,28 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
 
     private void executesAMR() {
         char data = Registers.fetchMemory((char) ADDRESS());
-        data=(char)(RDATA() + data);
-       //add to Register
-    Registers.generalProposeRegisters.storeByRegister(data, R());
-  }
+        data = (char) (RDATA() + data);
+        //add to Register
+        Registers.generalProposeRegisters.storeByRegister(data, R());
+    }
 
     private void executesSMR() {
         char data = Registers.fetchMemory((char) ADDRESS());
-        data=(char)(RDATA() - data);
+        data = (char) (RDATA() - data);
         //add to Register
         Registers.generalProposeRegisters.storeByRegister(data, R());
     }
 
     private void executesAIR() {
-        char data = (char)IMMEDIATE();
-        data=(char)(RDATA()+ data);
-       //add to Register
-       Registers.generalProposeRegisters.storeByRegister(data, R());
-   }
+        char data = (char) IMMEDIATE();
+        data = (char) (RDATA() + data);
+        //add to Register
+        Registers.generalProposeRegisters.storeByRegister(data, R());
+    }
 
     private void executesSIR() {
-        char data = (char)IMMEDIATE();
-        data=(char)(RDATA()- data);
+        char data = (char) IMMEDIATE();
+        data = (char) (RDATA() - data);
         //add to Register
         Registers.generalProposeRegisters.storeByRegister(data, R());
     }
@@ -46,51 +42,51 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
     private void executesMLT() {
         long xData = RXDATA();
         long yData = RYDATA();
-        long data=xData*yData;
-        char highOrder=(char)(data>>16);
-        char lowOrder=(char)(data);
+        long data = xData * yData;
+        char highOrder = (char) (data >> 16);
+        char lowOrder = (char) (data);
         //add to Register
         Registers.generalProposeRegisters.storeByRegister(highOrder, RX());
-        Registers.generalProposeRegisters.storeByRegister(lowOrder, RX()+1);
+        Registers.generalProposeRegisters.storeByRegister(lowOrder, RX() + 1);
     }
 
     private void executesDVD() {
         int xData = RXDATA();
         int yData = RYDATA();
-        char quotient,remainder;
-        if(yData==0){
-            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2,true);
-            quotient=(char)0;
-            remainder=(char)0;
-        }
-        else{
-            quotient=(char)(xData/yData);
-            remainder=(char)(xData%yData);
+        char quotient, remainder;
+        if (yData == 0) {
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2, true);
+            quotient = (char) 0;
+            remainder = (char) 0;
+        } else {
+            quotient = (char) (xData / yData);
+            remainder = (char) (xData % yData);
         }
         //add to Register
         Registers.generalProposeRegisters.storeByRegister(quotient, RX());
-        Registers.generalProposeRegisters.storeByRegister(remainder, RX()+1);
+        Registers.generalProposeRegisters.storeByRegister(remainder, RX() + 1);
     }
 
     private void executesTRR() {
         int xData = RXDATA();
         int yData = RYDATA();
-        if(xData==yData){
-            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3,true);
+        if (xData == yData) {
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, true);
+        } else {
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, false);
         }
-        else{Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3,false);}
     }
 
     private void executesAND() {
-        Registers.generalProposeRegisters.storeByRegister((char)(RXDATA()&RYDATA()), RX());
+        Registers.generalProposeRegisters.storeByRegister((char) (RXDATA() & RYDATA()), RX());
     }
 
     private void executesORR() {
-        Registers.generalProposeRegisters.storeByRegister((char)(RXDATA()|RYDATA()), RX());
+        Registers.generalProposeRegisters.storeByRegister((char) (RXDATA() | RYDATA()), RX());
     }
 
     private void executesNOT() {
-        Registers.generalProposeRegisters.storeByRegister((char)(~RXDATA()), RX());
+        Registers.generalProposeRegisters.storeByRegister((char) (~RXDATA()), RX());
     }
 
 }

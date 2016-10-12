@@ -1,6 +1,6 @@
 package com.architecture.project.instruction;
 
-import com.architecture.project.processer.registers.Registers;
+import com.architecture.project.processor.registers.Registers;
 
 /**
  * @author taoranxue on 10/12/16 12:05 AM.

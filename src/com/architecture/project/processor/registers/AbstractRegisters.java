@@ -1,4 +1,4 @@
-package com.architecture.project.processer.registers;
+package com.architecture.project.processor.registers;
 
 import com.architecture.project.exception.RegistersIndexOutOfBoundsException;
 import com.architecture.project.gui.img.Led;

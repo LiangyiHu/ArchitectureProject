@@ -1,6 +1,6 @@
 package com.architecture.project.gui.img;
 
-import com.architecture.project.processer.registers.Register;
+import com.architecture.project.processor.registers.Register;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

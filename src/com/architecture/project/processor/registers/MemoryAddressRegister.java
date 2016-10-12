@@ -1,6 +1,4 @@
-package com.architecture.project.processer.registers;
-
-import com.architecture.project.memory.MainMemory;
+package com.architecture.project.processor.registers;
 
 /**
  * @author taoranxue on 9/14/16 11:55 PM.

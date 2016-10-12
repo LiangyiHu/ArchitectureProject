@@ -1,4 +1,4 @@
-package com.architecture.project.processer;
+package com.architecture.project.processor;
 
 /**
  * ALU similator.

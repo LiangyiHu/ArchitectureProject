@@ -2,7 +2,7 @@ package com.architecture.project;
 
 import com.architecture.project.gui.MemoryModel;
 import com.architecture.project.memory.MainMemory;
-import com.architecture.project.processer.registers.Registers;
+import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
 

@@ -1,6 +1,4 @@
-package com.architecture.project.processer.registers;
-
-import java.util.ArrayList;
+package com.architecture.project.processor.registers;
 
 /**
  * Condition code register.

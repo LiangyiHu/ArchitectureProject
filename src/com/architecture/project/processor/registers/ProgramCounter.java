@@ -1,4 +1,4 @@
-package com.architecture.project.processer.registers;
+package com.architecture.project.processor.registers;
 
 /**
  * @author taoranxue on 9/15/16 3:35 PM.

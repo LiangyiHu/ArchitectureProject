@@ -5,11 +5,4 @@ package com.architecture.project.instruction;
  */
 public abstract class ShiftRotateInstructions extends Instructions {
 
-
-
-
-
-
-
-
 }

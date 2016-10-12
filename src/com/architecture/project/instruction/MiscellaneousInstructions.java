@@ -7,8 +7,4 @@ package com.architecture.project.instruction;
  */
 public class MiscellaneousInstructions extends Instructions {
 
-    @Override
-    public void execute() {
-
-    }
 }

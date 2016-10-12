@@ -1,4 +1,4 @@
-package com.architecture.project.processer.registers;
+package com.architecture.project.processor.registers;
 
 import com.architecture.project.memory.MainMemory;
 
@@ -13,15 +13,16 @@ public final class Registers {
     }
 
     //Initiate all the registers.
-    public static GeneralProposeRegisters generalProposeRegisters = new GeneralProposeRegisters();
-    public static InstructionRegister instructionRegister = new InstructionRegister();
-    public static ProgramCounter programCounter = new ProgramCounter();
-    public static IndexRegisters indexRegisters = new IndexRegisters();
-    public static MemoryAddressRegister memoryAddressRegister = new MemoryAddressRegister();
-    public static MemoryBufferRegister memoryBufferRegister = new MemoryBufferRegister();
-    public static MachineStatusRegister machineStatusRegister = new MachineStatusRegister();
-    public static MachineFaultRegister machineFaultRegister = new MachineFaultRegister();
-    public static ConditionCodeRegister conditionCodeRegister = new ConditionCodeRegister();
+    public static final GeneralProposeRegisters generalProposeRegisters = new GeneralProposeRegisters();
+    public static final InstructionRegister instructionRegister = new InstructionRegister();
+    public static final ProgramCounter programCounter = new ProgramCounter();
+    public static final IndexRegisters indexRegisters = new IndexRegisters();
+    public static final MemoryAddressRegister memoryAddressRegister = new MemoryAddressRegister();
+    public static final MemoryBufferRegister memoryBufferRegister = new MemoryBufferRegister();
+    public static final MachineStatusRegister machineStatusRegister = new MachineStatusRegister();
+    public static final MachineFaultRegister machineFaultRegister = new MachineFaultRegister();
+    public static final ConditionCodeRegister conditionCodeRegister = new ConditionCodeRegister();
+
 
     //Reset all the registers.
     public static void resetAll() {

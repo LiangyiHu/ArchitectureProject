@@ -31,6 +31,7 @@ public final class MainMemory {
      * @return The value in the address
      */
     public static char fetch(int address) {
+        if (address < 0 || address >= MEMORY_CAPACITY) throw new IllegalArgumentException();
         return data.get(address / 2).getData();
     }
 
@@ -39,6 +40,7 @@ public final class MainMemory {
      * @param address
      */
     public static void store(char dt, int address) {
+        if (address < 0 || address >= MEMORY_CAPACITY) throw new IllegalArgumentException();
         data.get(address / 2).setData(dt);
     }
 

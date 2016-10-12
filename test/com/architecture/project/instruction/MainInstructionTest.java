@@ -1,7 +1,7 @@
 package com.architecture.project.instruction;
 
 import com.architecture.project.memory.MainMemory;
-import com.architecture.project.processer.registers.Registers;
+import com.architecture.project.processor.registers.Registers;
 import org.junit.Test;
 
 /**

@@ -3,8 +3,7 @@ package com.architecture.project.run;
 import com.architecture.project.instruction.Instruction;
 import com.architecture.project.instruction.InstructionsFactory;
 import com.architecture.project.memory.MainMemory;
-import com.architecture.project.processer.registers.Register;
-import com.architecture.project.processer.registers.Registers;
+import com.architecture.project.processor.registers.Registers;
 
 import java.util.List;
 

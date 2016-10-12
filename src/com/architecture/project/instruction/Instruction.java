@@ -1,7 +1,7 @@
 package com.architecture.project.instruction;
 
 import com.architecture.project.exception.InstructionIndexOutOfBoundsException;
-import com.architecture.project.processer.registers.Register;
+import com.architecture.project.processor.registers.Register;
 
 /**
  * Instruction entity, used to save all instruction content. Subclass of {@linkplain Register}

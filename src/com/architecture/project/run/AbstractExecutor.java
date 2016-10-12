@@ -38,6 +38,7 @@ public abstract class AbstractExecutor {
         char address = Registers.programCounter.getOne();
         char instruction = MainMemory.fetch(address);
         Registers.instructionRegister.setOne(instruction);
+        Registers.programCounter.addPC();
         if (instruction == 0) return;
         new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
         if (!isStep()) start();

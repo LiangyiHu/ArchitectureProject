@@ -21,6 +21,16 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put(003, "LDA");
         INSTRUCTION_MAP.put(041, "LDX");
         INSTRUCTION_MAP.put(042, "STX");
+        INSTRUCTION_MAP.put (004, "AMR");
+        INSTRUCTION_MAP.put (005, "SMR");
+        INSTRUCTION_MAP.put (006, "AIR");
+        INSTRUCTION_MAP.put (007, "SIR");
+        INSTRUCTION_MAP.put (020, "MLT");
+        INSTRUCTION_MAP.put (021, "DVD");
+        INSTRUCTION_MAP.put (022, "TRR");
+        INSTRUCTION_MAP.put (023, "AND");
+        INSTRUCTION_MAP.put (024, "ORR");
+        INSTRUCTION_MAP.put (025, "NOT");
     }
     /**
      * Instruction operator code map to its name.
@@ -42,7 +52,6 @@ public abstract class Instructions {
             Method executeMethod = getClass().getDeclaredMethod(methodName);
             executeMethod.setAccessible(true);
             executeMethod.invoke(this);
-            Registers.programCounter.addPC();
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
         }

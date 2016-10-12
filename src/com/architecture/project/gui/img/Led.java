@@ -48,7 +48,7 @@ public class Led {
      */
     public static Image parseImage(int binaryNumber, int number) {
         String str = Integer.toBinaryString(binaryNumber);
-        return parseImage(str, 4);
+        return parseImage(str, number);
     }
 
     /**

@@ -99,7 +99,7 @@ public class Application extends JFrame {
         IXR2.setIcon(Registers.indexRegisters.fetchImageIconByRegister(3));
         IXR2.setText(Registers.indexRegisters.fetchHexByRegister(3));
         //refresh PC, IR, MSR, MFR and CC
-        PC.setIcon(Registers.programCounter.fetchImageIconByRegister(0));
+        PC.setIcon(Registers.programCounter.fetchImageIconByRegister(0,12));
         PC.setText(Registers.programCounter.fetchHexByRegister(0));
         IR.setIcon(Registers.instructionRegister.fetchImageIconByRegister(0));
         IR.setText(Registers.instructionRegister.fetchHexByRegister(0));

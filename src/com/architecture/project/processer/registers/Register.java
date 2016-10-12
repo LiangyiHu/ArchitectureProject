@@ -99,12 +99,12 @@ public class Register {
      * @param index index
      * @param bit   set value, one or zero
      */
-    public void setBitByIndex(int index, char bit) {
+    public void setBitByIndex(int index, boolean bit) {
         index = WORD_LENGTH - index - 1;
         if (index > WORD_LENGTH || index < 0) {
             throw new RegisterIndexOutOfBoundsException(index);
         }
-        if (bit == 1) {
+        if (bit) {
             char _tmp = (char) (1 << index);
             setData((char) (_tmp | getData()));
         } else {

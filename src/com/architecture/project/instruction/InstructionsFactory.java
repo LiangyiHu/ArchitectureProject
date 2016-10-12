@@ -9,6 +9,7 @@ import com.architecture.project.utils.ProjectUtils;
  */
 public class InstructionsFactory {
     private static final int[] LOAD_STORE = {001, 002, 003, 041, 042};
+    private static final int[] ARITHMETIC_MAIN = {004, 005, 006, 007, 020,021, 022,023,024,025};
 
     private Instruction instruction;
 
@@ -31,6 +32,10 @@ public class InstructionsFactory {
         if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), LOAD_STORE)) {
             System.out.println(this.instruction);
             return new LoadStoreInstructions(this.instruction);
+        }
+        else if(ProjectUtils.inArrays(this.instruction.getOperatorCode(), ARITHMETIC_MAIN)){
+            System.out.println(this.instruction);
+            return new ArithmeticMainInstructions(this.instruction);
         }
         // ... other instructions
         return null;

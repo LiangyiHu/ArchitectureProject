@@ -2,6 +2,7 @@ package com.architecture.project.instruction;
 
 import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processer.registers.Registers;
+import com.sun.prism.shader.Solid_ImagePattern_Loader;
 
 /**
  * @author taoranxue on 10/11/16 11:41 PM.
@@ -97,6 +98,7 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
     private void executeLDX() {
         System.out.println(ADDRESS() + " " + IX());
         char data = Registers.fetchMemory((char) ADDRESS());
+        System.out.println((int)data);
         Registers.indexRegisters.storeByRegister(data, IX());
     }
 

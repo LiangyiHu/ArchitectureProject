@@ -95,4 +95,8 @@ public abstract class AbstractRegisters {
         char data = this.getOne();
         return String.format("0x%04X", (int) data);
     }
+
+    public Register getRegisterByIndex(int index) {
+        return registers.get(index);
+    }
 }

@@ -81,7 +81,6 @@ public class Register {
      * @return one or zero
      */
     public int getBitByIndex(int index) {
-        index = WORD_LENGTH - index - 1;
         if (index > WORD_LENGTH || index < 0) {
             throw new RegisterIndexOutOfBoundsException(index);
         }
@@ -100,7 +99,6 @@ public class Register {
      * @param bit   set value, one or zero
      */
     public void setBitByIndex(int index, boolean bit) {
-        index = WORD_LENGTH - index - 1;
         if (index > WORD_LENGTH || index < 0) {
             throw new RegisterIndexOutOfBoundsException(index);
         }

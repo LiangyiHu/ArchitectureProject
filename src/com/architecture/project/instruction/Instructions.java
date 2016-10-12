@@ -31,6 +31,14 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put (023, "AND");
         INSTRUCTION_MAP.put (024, "ORR");
         INSTRUCTION_MAP.put (025, "NOT");
+        INSTRUCTION_MAP.put (010, "JZ");
+        INSTRUCTION_MAP.put (011, "JNE");
+        INSTRUCTION_MAP.put (012, "JCC");
+        INSTRUCTION_MAP.put (013, "JMA");
+        INSTRUCTION_MAP.put (014, "JSR");
+        INSTRUCTION_MAP.put (015, "RFS");
+        INSTRUCTION_MAP.put (016, "SOB");
+        INSTRUCTION_MAP.put (017, "JGE");
     }
     /**
      * Instruction operator code map to its name.

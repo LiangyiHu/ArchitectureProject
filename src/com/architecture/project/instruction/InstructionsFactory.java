@@ -29,6 +29,7 @@ public class InstructionsFactory {
      */
     public Instructions getInstructions() {
         if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), LOAD_STORE)) {
+            System.out.println(this.instruction);
             return new LoadStoreInstructions(this.instruction);
         }
         // ... other instructions

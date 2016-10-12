@@ -66,7 +66,15 @@ public abstract class AbstractRegisters {
         return new ImageIcon(Led.parseImage(data, number));
     }
 
-    //Send value to a particular register
+
+    /**
+     * Send value to a particular register
+     * NOTE: For IndexRegisters in this method ix = 0 is legal, the gui however doesn't display the zero element
+     * , and it starts with index 1;
+     *
+     * @param data data
+     * @param ix   register index
+     */
     public void storeByRegister(char data, int ix) {
         if (ix >= registers.size() || ix < 0) {
             throw new RegistersIndexOutOfBoundsException(ix);

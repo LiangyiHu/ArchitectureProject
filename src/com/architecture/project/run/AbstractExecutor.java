@@ -35,7 +35,6 @@ public abstract class AbstractExecutor {
     }
 
     public void start() {
-
         char address = Registers.programCounter.getOne();
         char instruction = MainMemory.fetch(address);
         Registers.instructionRegister.setOne(instruction);

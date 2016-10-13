@@ -13,38 +13,41 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
     }
 
     private void executesAMR() {
-        char data = Registers.fetchMemory((char) ADDRESS());
-        data = (char) (RDATA() + data);
+        short data = (short)Registers.fetchMemory((char) ADDRESS());
+        int sum = (int)RDATA() + (int)data;
+        setFlowConditionCode(sum);
         //add to Register
-        Registers.generalProposeRegisters.storeByRegister(data, R());
-        Application.debug += "\n AMR: ";
+
+        Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
     private void executesSMR() {
-        char data = Registers.fetchMemory((char) ADDRESS());
-        data = (char) (RDATA() - data);
+        short data = (short)Registers.fetchMemory((char) ADDRESS());
+        int sum = (int)RDATA() - (int)data;
+        setFlowConditionCode(sum);
         //add to Register
-        Registers.generalProposeRegisters.storeByRegister(data, R());
+
+        Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
     private void executesAIR() {
-        char data = (char) IMMEDIATE();
-        data = (char) (RDATA() + data);
+        int sum = (int) RDATA() + IMMEDIATE();
+        setFlowConditionCode(sum);
         //add to Register
-        Registers.generalProposeRegisters.storeByRegister(data, R());
+        Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
     private void executesSIR() {
-        char data = (char) IMMEDIATE();
-        data = (char) (RDATA() - data);
+        int sum = (int) RDATA() - IMMEDIATE();
+        setFlowConditionCode(sum);
         //add to Register
-        Registers.generalProposeRegisters.storeByRegister(data, R());
+        Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
     private void executesMLT() {
-        long xData = RXDATA();
-        long yData = RYDATA();
-        long data = xData * yData;
+        short xData = (short)((char)RXDATA());
+        short yData = (short)((char)RYDATA());
+        int data = (int)xData * (int)yData;
         char highOrder = (char) (data >> 16);
         char lowOrder = (char) (data);
         //add to Register
@@ -56,8 +59,8 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
         int xData = RXDATA();
         int yData = RYDATA();
         char quotient, remainder;
+        setDivZeroConditionCode(yData);
         if (yData == 0) {
-            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2, true);
             quotient = (char) 0;
             remainder = (char) 0;
         } else {
@@ -72,11 +75,7 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
     private void executesTRR() {
         int xData = RXDATA();
         int yData = RYDATA();
-        if (xData == yData) {
-            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, true);
-        } else {
-            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, false);
-        }
+        setEqualOrNotConditionCode(xData,yData);
     }
 
     private void executesAND() {

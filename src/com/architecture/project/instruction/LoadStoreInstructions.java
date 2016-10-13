@@ -52,8 +52,6 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         }
         //load to Register
         Registers.generalProposeRegisters.storeByRegister(data, R());
-
-        Application.debug += "\n AMR: ";
     }
 
     //STR
@@ -74,8 +72,6 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         }
         //Save to memory
         MainMemory.store((char) RDATA(), effectiveAddress);
-
-        Application.debug += "\n AMR: ";
     }
 
     //LDA
@@ -96,8 +92,6 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         }
         //load to Register
         Registers.generalProposeRegisters.storeByRegister(data, R());
-
-        Application.debug += "\n AMR: ";
     }
 
     //LDX
@@ -106,8 +100,6 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         char data = Registers.fetchMemory((char) ADDRESS());
         System.out.println((int) data);
         Registers.indexRegisters.storeByRegister(data, IX());
-
-        Application.debug += "\n AMR: ";
     }
 
     private void executeSTX() {
@@ -116,8 +108,6 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         } else {
             MainMemory.store((char) IXDATA(), Registers.fetchMemory((char) ADDRESS()));
         }
-
-        Application.debug += "\n AMR: ";
     }
 
 //    @Override

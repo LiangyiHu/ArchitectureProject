@@ -2,6 +2,7 @@ package com.architecture.project;
 
 import com.architecture.project.gui.CacheModel;
 import com.architecture.project.gui.MemoryModel;
+import com.architecture.project.instruction.Instructions;
 import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processor.cache.Cache;
 import com.architecture.project.processor.registers.Registers;
@@ -9,6 +10,8 @@ import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The project run from here.
@@ -16,7 +19,6 @@ import javax.swing.*;
  * @author taoranxue on 9/15/16 12:23 AM.
  */
 public class Application extends JFrame {
-    public static String debug = "Debug:";
 
 
     private JPanel mainPanel;
@@ -62,7 +64,10 @@ public class Application extends JFrame {
     private JButton powerButton;
     private JTable table1;
     private JTable table2;
-    private JTextArea textArea1;
+    public JTextArea debugPanel;
+    private JTextField keyBoardInput;
+    private JButton keyBoardEnter;
+    private JTextField consoleOutput;
 
     private int memBeginIndex = 0;
     private final int memDisplayLength = 200;
@@ -76,10 +81,9 @@ public class Application extends JFrame {
      * Refresh the GUI, display all the things it supposed to show.
      */
     private void refresh() {
-        textArea1.setText(this.debug);
+        debugPanel.setText(Instructions.debugInfo);
         //Refresh memory table
         MemoryModel memoryModel = new MemoryModel(memBeginIndex, memBeginIndex + memDisplayLength);
-        System.out.println(memBeginIndex + ",  " + (memBeginIndex + memDisplayLength));
         table1.setModel(memoryModel);
         table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table1.getColumnModel().getColumn(2).setPreferredWidth(150);
@@ -195,11 +199,22 @@ public class Application extends JFrame {
             refresh();
         });
 
+        keyBoardEnter.addActionListener(e -> {
+            /*
+            once hit enter, the strings on keyboard input textfield will be separated by space.
+            then converted to short type (negative number supported).
+            then append to an arrayList in keyBoardInput object.
+            IOBus will access this arrayList and return a short to Register.
+             */
+        wow...
+        });
+
     }
 
     //Start the GUI
     public static void main(String args[]) {
         new Application();
+
     }
 
 }

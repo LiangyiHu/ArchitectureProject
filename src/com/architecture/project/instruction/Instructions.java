@@ -1,6 +1,7 @@
 package com.architecture.project.instruction;
 
 import com.architecture.project.exception.WrongInstructionException;
+import com.architecture.project.processor.registers.Registers;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -38,6 +39,51 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put(015, "RFS");
         INSTRUCTION_MAP.put(016, "SOB");
         INSTRUCTION_MAP.put(017, "JGE");
+        INSTRUCTION_MAP.put(031, "SRC");
+        INSTRUCTION_MAP.put(032, "RRC");
+        INSTRUCTION_MAP.put(061, "IN");
+        INSTRUCTION_MAP.put(062, "OUT");
+        INSTRUCTION_MAP.put(063, "CHK");
+
+        INSTRUCTION_MAP.put(070, "LLD");
+        INSTRUCTION_MAP.put(071, "LLD");
+        INSTRUCTION_MAP.put(072, "LLD");
+        INSTRUCTION_MAP.put(073, "LLD");
+        INSTRUCTION_MAP.put(074, "LST");
+        INSTRUCTION_MAP.put(075, "LST");
+        INSTRUCTION_MAP.put(076, "LST");
+        INSTRUCTION_MAP.put(077, "LST");
+    }
+
+    public static String debugInfo;
+
+    public static void setFlowConditionCode(int value){
+        if(value>32767){
+            //over flow
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(0, true);
+        }
+        else if(value<-32768){
+            //under flow
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(1, true);
+        }
+        else{
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(0, false);
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(1, false);
+        }
+    }
+
+    public static void setDivZeroConditionCode(int value){
+        if(value==0){
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2, true);
+        }
+        else{Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2, false);}
+    }
+
+    public static void setEqualOrNotConditionCode(int value1, int value2){
+        if(value1==value2){
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, true);
+        }
+        else{Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, false);}
     }
 
     /**
@@ -55,7 +101,9 @@ public abstract class Instructions {
             throw new WrongInstructionException();
         }
         String methodName = "execute" + operateCode;
-        System.out.println(methodName);
+        debugInfo+="Executed instruction: ";
+        debugInfo+=operateCode;
+        debugInfo+="\n";
         try {
             Method executeMethod = getClass().getDeclaredMethod(methodName);
             executeMethod.setAccessible(true);

@@ -15,50 +15,30 @@ public class TransferInstructions extends AbstractMainInstructions {
     //Instruction LDR
     private void executeJZ() {
         if (RDATA() == 0) {
-            if (I() == 0) {
-                Registers.programCounter.setOne((char) (ADDRESS()));
-            } else {
-                Registers.programCounter.setOne(Registers.fetchMemory((char) (ADDRESS())));
+                Registers.programCounter.setOne((char)(EFFECTIVEADDRESS()));
             }
-        }
     }
 
     private void executeJNE() {
         if (RDATA() != 0) {
-            if (I() == 0) {
-                Registers.programCounter.setOne((char) (ADDRESS()));
-            } else {
-                Registers.programCounter.setOne(Registers.fetchMemory((char) (ADDRESS())));
-            }
+                Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
         }
     }
 
     private void executeJCC() {
         int ccIndex = CC();
         if (Registers.conditionCodeRegister.getRegisterByIndex(0).getBitByIndex(ccIndex) > 0) {
-            if (I() == 0) {
-                Registers.programCounter.setOne((char) (ADDRESS()));
-            } else {
-                Registers.programCounter.setOne(Registers.fetchMemory((char) (ADDRESS())));
-            }
+            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
         }
     }
 
     private void executeJMA() {
-        if (I() == 0) {
-            Registers.programCounter.setOne((char) (ADDRESS()));
-        } else {
-            Registers.programCounter.setOne(Registers.fetchMemory((char) (ADDRESS())));
-        }
+            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
     }
 
     private void executeJSR() {
         Registers.generalProposeRegisters.storeByRegister(Registers.programCounter.getOne(), 3);
-        if (I() == 0) {
-            Registers.programCounter.setOne((char) (ADDRESS()));
-        } else {
-            Registers.programCounter.setOne(Registers.fetchMemory((char) (ADDRESS())));
-        }
+        Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
     }
 
     private void executeRFS() {
@@ -71,22 +51,14 @@ public class TransferInstructions extends AbstractMainInstructions {
         char rData = (char) (RDATA() - 1);
         Registers.generalProposeRegisters.storeByRegister(rData, rIndex);
         if ((int) rData > 0) {
-            if (I() == 0) {
-                Registers.programCounter.setOne((char) (ADDRESS()));
-            } else {
-                Registers.programCounter.setOne(Registers.fetchMemory((char) (ADDRESS())));
-            }
+                Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
         }
     }
 
     private void executeJGE() {
         int rIndex = R();
         if ((int) RDATA() >= 0) {
-            if (I() == 0) {
-                Registers.programCounter.setOne((char) (ADDRESS()));
-            } else {
-                Registers.programCounter.setOne(Registers.fetchMemory((char) (ADDRESS())));
-            }
+                Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
         }
     }
 

@@ -13,7 +13,7 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
     }
 
     private void executesAMR() {
-        short data = (short)Registers.fetchMemory((char) ADDRESS());
+        short data = (short)Registers.fetchMemory((char) EFFECTIVEADDRESS());
         int sum = (int)RDATA() + (int)data;
         setFlowConditionCode(sum);
         //add to Register
@@ -22,7 +22,7 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
     }
 
     private void executesSMR() {
-        short data = (short)Registers.fetchMemory((char) ADDRESS());
+        short data = (short)Registers.fetchMemory((char) EFFECTIVEADDRESS());
         int sum = (int)RDATA() - (int)data;
         setFlowConditionCode(sum);
         //add to Register

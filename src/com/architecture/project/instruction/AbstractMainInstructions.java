@@ -1,5 +1,6 @@
 package com.architecture.project.instruction;
 
+import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processor.registers.Registers;
 
 /**
@@ -14,6 +15,8 @@ public abstract class AbstractMainInstructions extends Instructions {
     private int I = -1;
     //In the instructions that contains address field, store the value of this field.
     private int ADDRESS = -1;
+    //Effective Address
+    private int EFFECTIVEADDRESS=-1;
 
     public AbstractMainInstructions(Instruction instruction) {
         //Move operator code;
@@ -23,6 +26,12 @@ public abstract class AbstractMainInstructions extends Instructions {
         IX = instruction.subInstruction(8, 10).parseInt();
         I = instruction.subInstruction(10, 11).parseInt();
         ADDRESS = instruction.subInstruction(11, 16).parseInt();
+        if(I==0){
+                EFFECTIVEADDRESS=IXDATA()+ADDRESS;
+            }
+            else{
+                EFFECTIVEADDRESS= Registers.fetchMemory((char)(IXDATA()+ADDRESS));
+            }
     }
 
     public int R() {
@@ -48,6 +57,7 @@ public abstract class AbstractMainInstructions extends Instructions {
     public int ADDRESS() {
         return ADDRESS;
     }
+    public int EFFECTIVEADDRESS(){return EFFECTIVEADDRESS;}
 
 
     public int IMMEDIATE() {

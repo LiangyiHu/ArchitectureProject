@@ -75,8 +75,10 @@ public class Application extends JFrame {
     private final int memDisplayLength = 200;
 
     private void reset() {
+        Processor.reset();
         Registers.resetAll();
         MainMemory.resetAll();
+
     }
 
     /**
@@ -84,7 +86,7 @@ public class Application extends JFrame {
      */
     private void refresh() {
         //IOBus
-        consoleOutput.setText(Processor.ioBus.getByteStream());
+        consoleOutput.setText(Processor.ioBus.getByteOutStream());
         //Debug
         debugPanel.setText(Instructions.debugInfo);
         //Refresh memory table

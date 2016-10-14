@@ -20,6 +20,10 @@ public class TransferInstructions extends AbstractMainInstructions {
         return (char) IMMEDIATE(6, 16);
     }
 
+    private char IMMEDIATE_8_16() {
+        return (char) IMMEDIATE(8, 16);
+    }
+
 
     //Instruction LDR
     private void executeJZ() {
@@ -43,7 +47,8 @@ public class TransferInstructions extends AbstractMainInstructions {
 
     private void executeJMA() {
         //Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
-        Registers.programCounter.setOne((char) IMMEDIATE_6_16());
+        char pc = Registers.programCounter.getOne();
+        Registers.programCounter.setOne((char) (pc + IMMEDIATE_6_16()));
     }
 
     private void executeJSR() {
@@ -66,19 +71,24 @@ public class TransferInstructions extends AbstractMainInstructions {
     }
 
     private void executeJGE() {
-        if ((int) RDATA() >= 0) {
-            Registers.programCounter.setOne((char) (IMMEDIATE_6_16()));
+        System.out.println((short) RDATA());
+        if ((short) RDATA() >= 0) {
+            char pc = Registers.programCounter.getOne();
+            Registers.programCounter.setOne((char) (pc + IMMEDIATE_8_16()));
         }
     }
 
+
     private void executeJB() {
-        if (R() == 0) {
+//        if (Registers.generalProposeRegisters.fetchByRegister(3) == 0) {
+//            System.out.println("fffff");
+//        }
+        if (RDATA() != 0) {
             char pc = Registers.programCounter.getOne();
             pc -= ADDRESS_8_16();
             Registers.programCounter.setOne(pc);
         }
     }
-
 
 
 }

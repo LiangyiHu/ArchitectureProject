@@ -11,6 +11,10 @@ public final class Processor {
 
     }
 
+    public static void reset() {
+        ioBus.close();
+        cache.reset();
+    }
     //Initiate cache
     public static final Cache cache = new Cache();
 

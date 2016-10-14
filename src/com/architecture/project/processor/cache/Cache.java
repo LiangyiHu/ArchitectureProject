@@ -21,7 +21,11 @@ public class Cache {
         }
         cursor = 0;
     }
-
+    public void reset() {
+        for (int i = 0; i < cacheLines.size(); ++ i) {
+            cacheLines.set(i, new CacheLine(Character.MAX_VALUE));
+        }
+    }
     /**
      * Address hit cache or not.
      *
@@ -69,6 +73,7 @@ public class Cache {
         if ((ix = isHit(address)) >= 0) {
             //Hit
             cacheLines.get(ix).storeData(offset, data);
+
         } else {
             //Miss
             CacheLine cacheLine = new CacheLine(address);

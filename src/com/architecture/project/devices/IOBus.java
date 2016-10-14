@@ -10,6 +10,7 @@ public class IOBus {
     public static final int DEVICE_CHARACTER = 1;
 
     private String byteStream;
+    private String byteOutStream;
     private int next;
 
     public IOBus() {
@@ -26,6 +27,9 @@ public class IOBus {
         this.next = 0;
     }
 
+    public String getByteOutStream() {
+        return byteOutStream;
+    }
 
     public char getNext(int deviceId) {
         if (deviceId == DEVICE_CHARACTER) {
@@ -49,24 +53,17 @@ public class IOBus {
         return data;
     }
 
-    public void write(int deviceID, char data) {
-        //write to IO by ID goes here
-        if (deviceID == DEVICE_CHARACTER)
-            byteStream = String.valueOf(data);
-        else if (deviceID == DEVICE_NUMBER)
-            byteStream = String.valueOf((int)data);
-    }
-
     public void write(int deviceID, short data) {
         //write to IO by ID goes here
         if (deviceID == DEVICE_CHARACTER)
-            byteStream = String.valueOf((char)data);
+            byteOutStream = String.valueOf((char)data);
         else if (deviceID == DEVICE_NUMBER)
-            byteStream = String.valueOf((int)data);
+            byteOutStream = String.valueOf((int)data);
     }
 
     public void close() {
         byteStream = null;
+        byteOutStream = null;
         next = 0;
     }
 }

@@ -2,6 +2,7 @@ package com.architecture.project.instruction;
 
 import com.architecture.project.Application;
 import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processor.Processor;
 import com.architecture.project.processor.registers.Registers;
 
 /**
@@ -14,6 +15,14 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
     }
 
     //Customize
+    public int IX_10_12() {
+        return IX(10, 12);
+    }
+
+    public int IXDATA_10_12() {
+        return IXDATA(10, 12);
+    }
+
     public int R_10_12() {
         return R(10, 12);
     }
@@ -25,9 +34,11 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
 
     //Instruction LDR
     private void executeLDR() {
+
         char data;
         data = Registers.fetchMemory((char) EFFECTIVEADDRESS());
         //load to Register
+        System.out.println((int)data + "-=-=-=-=" + R());
         Registers.generalProposeRegisters.storeByRegister(data, R());
     }
 
@@ -35,6 +46,7 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
     private void executeSTR() {
         //Save to memory
         Registers.storeMemory((char) RDATA(), (char) EFFECTIVEADDRESS());
+        System.out.println(EFFECTIVEADDRESS());
     }
 
     //LDA
@@ -68,6 +80,7 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
 
     private void executeSTRR() {
         char address = (char) (IXDATA() + RDATA_10_12());
+        System.out.println((int) IXDATA() + "!!!" + RDATA_10_12());
         Registers.storeMemory(Registers.generalProposeRegisters.fetchByRegister(R()), address);
 
     }

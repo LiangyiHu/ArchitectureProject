@@ -11,11 +11,9 @@ public class InstructionTest {
     private Instruction instruction = new Instruction((char)(0b0000010011001100));
     @Test
     public void testAll() {
-        String s = "aaa bbb";
-        byte[] b = s.getBytes();
-        for (byte bb : b) {
-            System.out.println(bb);
-        }
+
+        char a = '\uFFFF';
+        System.out.println((short)a);
     }
 
 }

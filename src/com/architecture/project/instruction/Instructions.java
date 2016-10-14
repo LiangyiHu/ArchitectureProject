@@ -21,6 +21,9 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put(003, "LDA");
         INSTRUCTION_MAP.put(041, "LDX");
         INSTRUCTION_MAP.put(042, "STX");
+        INSTRUCTION_MAP.put(043, "LDIR");
+        INSTRUCTION_MAP.put(044, "STRR");
+        INSTRUCTION_MAP.put(046, "SRR");
         INSTRUCTION_MAP.put(004, "AMR");
         INSTRUCTION_MAP.put(005, "SMR");
         INSTRUCTION_MAP.put(006, "AIR");
@@ -31,6 +34,7 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put(023, "AND");
         INSTRUCTION_MAP.put(024, "ORR");
         INSTRUCTION_MAP.put(025, "NOT");
+        INSTRUCTION_MAP.put(026, "JB");
         INSTRUCTION_MAP.put(010, "JZ");
         INSTRUCTION_MAP.put(011, "JNE");
         INSTRUCTION_MAP.put(012, "JCC");

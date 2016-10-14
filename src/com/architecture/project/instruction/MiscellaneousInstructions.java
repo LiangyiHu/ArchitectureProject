@@ -1,6 +1,7 @@
 package com.architecture.project.instruction;
 
 import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processor.Processor;
 import com.architecture.project.processor.registers.Registers;
 
 /**
@@ -57,7 +58,7 @@ public class MiscellaneousInstructions extends AbstractMainInstructions {
         } else {
             effectiveAddress = IMMEDIATE_8_16() + RDATA_4_6();
         }
-        MainMemory.store(data, effectiveAddress);
+        Registers.storeMemory(data, (char) effectiveAddress);
 
     }
 

@@ -27,7 +27,7 @@ public class IOInstructions extends AbstractMainInstructions {
 
     private void executeOUT() {
         char data = Registers.generalProposeRegisters.fetchByRegister(R());
-        Processor.ioBus.write(DEVICEID(), data);
+        Processor.ioBus.write(DEVICEID(), (short) data);
     }
 
     private void executeCHK() {

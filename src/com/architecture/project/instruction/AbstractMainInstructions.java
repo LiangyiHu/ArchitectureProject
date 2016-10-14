@@ -69,7 +69,7 @@ public abstract class AbstractMainInstructions extends Instructions {
     }
 
     public int RXDATA() {
-        return Registers.indexRegisters.fetchByRegister(RX());
+        return Registers.generalProposeRegisters.fetchByRegister(RX());
     }
 
     public int RY() {
@@ -77,7 +77,7 @@ public abstract class AbstractMainInstructions extends Instructions {
     }
 
     public int RYDATA() {
-        return Registers.indexRegisters.fetchByRegister(RY());
+        return Registers.generalProposeRegisters.fetchByRegister(RY());
     }
 
     public int CC() {
@@ -91,7 +91,15 @@ public abstract class AbstractMainInstructions extends Instructions {
     }
 
     public int RDATA(int start, int end) {
-        return Registers.indexRegisters.fetchByRegister(R(start, end));
+        return Registers.generalProposeRegisters.fetchByRegister(R(start, end));
+    }
+
+    public int IX(int start, int end) {
+        return R(start, end);
+    }
+
+    public int IXDATA(int start, int end) {
+        return Registers.indexRegisters.fetchByRegister(IX(start, end));
     }
 
     public int ADDRESS(int start, int end) {

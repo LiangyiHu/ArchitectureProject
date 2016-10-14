@@ -75,6 +75,7 @@ public class CacheLine {
         int address = (tag << 3) + offset;
         offset /= 2;
         if (offset < 0 || offset >= BLOCK_NUM) throw new IllegalArgumentException();
+        blocks.set(offset, data);
         MainMemory.store(data, address);
     }
 

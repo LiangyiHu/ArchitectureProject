@@ -44,7 +44,7 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put(061, "IN");
         INSTRUCTION_MAP.put(062, "OUT");
         INSTRUCTION_MAP.put(063, "CHK");
-
+        //TODO short opcode
         INSTRUCTION_MAP.put(070, "LLD");
         INSTRUCTION_MAP.put(071, "LLD");
         INSTRUCTION_MAP.put(072, "LLD");
@@ -55,7 +55,7 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put(077, "LST");
     }
 
-    public static String debugInfo;
+    public static String debugInfo = "Debug\n";
 
     public static void setFlowConditionCode(int value) {
         if (value > 32767) {

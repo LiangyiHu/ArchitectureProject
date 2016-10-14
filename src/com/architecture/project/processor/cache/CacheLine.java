@@ -36,7 +36,7 @@ public class CacheLine {
         this.valid = valid;
         this.tag = (address >> 3);
         blocks = new ArrayList<>(BLOCK_NUM);
-        int curAddress = address;
+        int curAddress = ((address >> 3) << 3);
         for (int i = 0; i < BLOCK_NUM; ++i) {
             if (address == Character.MAX_VALUE) {
                 blocks.add((char) 0);

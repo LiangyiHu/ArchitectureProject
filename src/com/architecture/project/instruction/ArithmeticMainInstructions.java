@@ -11,7 +11,7 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
         super(instruction);
     }
 
-    private void executesAMR() {
+    private void executeAMR() {
         short data = (short)Registers.fetchMemory((char) EFFECTIVEADDRESS());
         int sum = (int)RDATA() + (int)data;
         setFlowConditionCode(sum);
@@ -20,7 +20,7 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
         Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
-    private void executesSMR() {
+    private void executeSMR() {
         short data = (short)Registers.fetchMemory((char) EFFECTIVEADDRESS());
         int sum = (int)RDATA() - (int)data;
         setFlowConditionCode(sum);
@@ -29,21 +29,21 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
         Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
-    private void executesAIR() {
+    private void executeAIR() {
         int sum = (int) RDATA() + IMMEDIATE();
         setFlowConditionCode(sum);
         //add to Register
         Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
-    private void executesSIR() {
+    private void executeSIR() {
         int sum = (int) RDATA() - IMMEDIATE();
         setFlowConditionCode(sum);
         //add to Register
         Registers.generalProposeRegisters.storeByRegister((char)sum, R());
     }
 
-    private void executesMLT() {
+    private void executeMLT() {
         short xData = (short)((char)RXDATA());
         short yData = (short)((char)RYDATA());
         int data = (int)xData * (int)yData;
@@ -54,7 +54,7 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
         Registers.generalProposeRegisters.storeByRegister(lowOrder, RX() + 1);
     }
 
-    private void executesDVD() {
+    private void executeDVD() {
         int xData = RXDATA();
         int yData = RYDATA();
         char quotient, remainder;
@@ -71,21 +71,21 @@ public class ArithmeticMainInstructions extends AbstractMainInstructions {
         Registers.generalProposeRegisters.storeByRegister(remainder, RX() + 1);
     }
 
-    private void executesTRR() {
+    private void executeTRR() {
         int xData = RXDATA();
         int yData = RYDATA();
         setEqualOrNotConditionCode(xData,yData);
     }
 
-    private void executesAND() {
+    private void executeAND() {
         Registers.generalProposeRegisters.storeByRegister((char) (RXDATA() & RYDATA()), RX());
     }
 
-    private void executesORR() {
+    private void executeORR() {
         Registers.generalProposeRegisters.storeByRegister((char) (RXDATA() | RYDATA()), RX());
     }
 
-    private void executesNOT() {
+    private void executeNOT() {
         Registers.generalProposeRegisters.storeByRegister((char) (~RXDATA()), RX());
     }
 

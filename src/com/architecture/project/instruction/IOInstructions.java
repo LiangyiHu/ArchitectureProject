@@ -1,6 +1,5 @@
 package com.architecture.project.instruction;
 
-import com.architecture.project.devices.IOBus;
 import com.architecture.project.processor.Processor;
 import com.architecture.project.processor.registers.Registers;
 

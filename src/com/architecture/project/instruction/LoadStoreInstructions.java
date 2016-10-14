@@ -74,6 +74,7 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
 
     private void executeSRR() {
         int data = RXDATA() - RYDATA();
+        setFlowConditionCode(data);
         //TODO Overflow?
         Registers.generalProposeRegisters.storeByRegister((char) data, RX());
     }

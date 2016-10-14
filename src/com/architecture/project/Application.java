@@ -1,9 +1,11 @@
 package com.architecture.project;
 
+import com.architecture.project.devices.IOBus;
 import com.architecture.project.gui.CacheModel;
 import com.architecture.project.gui.MemoryModel;
 import com.architecture.project.instruction.Instructions;
 import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processor.Processor;
 import com.architecture.project.processor.cache.Cache;
 import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.run.Executor;
@@ -81,6 +83,9 @@ public class Application extends JFrame {
      * Refresh the GUI, display all the things it supposed to show.
      */
     private void refresh() {
+        //IOBus
+        consoleOutput.setText(Processor.ioBus.getByteStream());
+        //Debug
         debugPanel.setText(Instructions.debugInfo);
         //Refresh memory table
         MemoryModel memoryModel = new MemoryModel(memBeginIndex, memBeginIndex + memDisplayLength);
@@ -200,12 +205,11 @@ public class Application extends JFrame {
         });
 
         keyBoardEnter.addActionListener(e -> {
-            /*
-            once hit enter, the strings on keyboard input textfield will be separated by space.
-            then converted to short type (negative number supported).
-            then append to an arrayList in keyBoardInput object.
-            IOBus will access this arrayList and return a short to Register.
-             */
+            //once hit enter, the strings on keyboard input textfield will be separated by space.
+            //then converted to short type (negative number supported).
+            //then append to an arrayList in keyBoardInput object.
+            //IOBus will access this arrayList and return a short to Register.
+            Processor.ioBus.setByteStream(keyBoardInput.getText());
         });
 
     }

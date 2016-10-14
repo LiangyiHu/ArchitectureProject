@@ -209,7 +209,7 @@ public class Application extends JFrame {
             //then converted to short type (negative number supported).
             //then append to an arrayList in keyBoardInput object.
             //IOBus will access this arrayList and return a short to Register.
-            Processor.ioBus.setByteStream(keyBoardInput.getText());
+            //Processor.ioBus.setByteStream(keyBoardInput.getText());
         });
 
     }
@@ -217,6 +217,11 @@ public class Application extends JFrame {
     //Start the GUI
     public static void main(String args[]) {
         new Application();
+        short a=-3,b=-4;
+        int c = (int)a-(int)b;
+        short d=(short)c;
+        System.out.println(c);
+        System.out.println(d);
 
     }
 

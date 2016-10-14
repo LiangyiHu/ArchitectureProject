@@ -206,7 +206,6 @@ public class Application extends JFrame {
             then append to an arrayList in keyBoardInput object.
             IOBus will access this arrayList and return a short to Register.
              */
-        wow...
         });
 
     }

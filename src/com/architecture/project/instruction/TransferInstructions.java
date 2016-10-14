@@ -11,17 +11,26 @@ public class TransferInstructions extends AbstractMainInstructions {
         super(instruction);
     }
 
+    //customize
+    private char ADDRESS_8_16() {
+        return (char) ADDRESS(8, 16);
+    }
+
+    private char IMMEDIATE_6_16() {
+        return (char) IMMEDIATE(6, 16);
+    }
+
 
     //Instruction LDR
     private void executeJZ() {
         if (RDATA() == 0) {
-                Registers.programCounter.setOne((char)(EFFECTIVEADDRESS()));
-            }
+            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+        }
     }
 
     private void executeJNE() {
         if (RDATA() != 0) {
-                Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
         }
     }
 
@@ -33,7 +42,8 @@ public class TransferInstructions extends AbstractMainInstructions {
     }
 
     private void executeJMA() {
-            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+        //Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+        Registers.programCounter.setOne((char) IMMEDIATE_6_16());
     }
 
     private void executeJSR() {
@@ -51,15 +61,24 @@ public class TransferInstructions extends AbstractMainInstructions {
         char rData = (char) (RDATA() - 1);
         Registers.generalProposeRegisters.storeByRegister(rData, rIndex);
         if ((int) rData > 0) {
-                Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
         }
     }
 
     private void executeJGE() {
-        int rIndex = R();
         if ((int) RDATA() >= 0) {
-                Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+            Registers.programCounter.setOne((char) (IMMEDIATE_6_16()));
         }
     }
+
+    private void executeJB() {
+        if (R() == 0) {
+            char pc = Registers.programCounter.getOne();
+            pc -= ADDRESS_8_16();
+            Registers.programCounter.setOne(pc);
+        }
+    }
+
+
 
 }

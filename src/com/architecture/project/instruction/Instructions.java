@@ -57,33 +57,33 @@ public abstract class Instructions {
 
     public static String debugInfo;
 
-    public static void setFlowConditionCode(int value){
-        if(value>32767){
+    public static void setFlowConditionCode(int value) {
+        if (value > 32767) {
             //over flow
             Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(0, true);
-        }
-        else if(value<-32768){
+        } else if (value < -32768) {
             //under flow
             Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(1, true);
-        }
-        else{
+        } else {
             Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(0, false);
             Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(1, false);
         }
     }
 
-    public static void setDivZeroConditionCode(int value){
-        if(value==0){
+    public static void setDivZeroConditionCode(int value) {
+        if (value == 0) {
             Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2, true);
+        } else {
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2, false);
         }
-        else{Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(2, false);}
     }
 
-    public static void setEqualOrNotConditionCode(int value1, int value2){
-        if(value1==value2){
+    public static void setEqualOrNotConditionCode(int value1, int value2) {
+        if (value1 == value2) {
             Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, true);
+        } else {
+            Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, false);
         }
-        else{Registers.conditionCodeRegister.getRegisterByIndex(0).setBitByIndex(3, false);}
     }
 
     /**
@@ -101,9 +101,9 @@ public abstract class Instructions {
             throw new WrongInstructionException();
         }
         String methodName = "execute" + operateCode;
-        debugInfo+="Executed instruction: ";
-        debugInfo+=operateCode;
-        debugInfo+="\n";
+        debugInfo += "Executed instruction: ";
+        debugInfo += operateCode;
+        debugInfo += "\n";
         try {
             Method executeMethod = getClass().getDeclaredMethod(methodName);
             executeMethod.setAccessible(true);

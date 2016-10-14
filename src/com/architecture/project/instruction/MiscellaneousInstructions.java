@@ -8,40 +8,59 @@ import com.architecture.project.processor.registers.Registers;
  *
  * @author taoranxue on 9/18/16 12:05 AM.
  */
-public class MiscellaneousInstructions extends Instructions {
-    private int Rcustomized = -1; //this R get 4~6th bits of an instruction, it's a customer defined, use in caution.
-    private int IX = -1;
-    private int IMMEDIATE = -1;
+public class MiscellaneousInstructions extends AbstractMainInstructions {
+    //private int Rcustomized = -1; //this R get 4~6th bits of an instruction, it's a customer defined, use in caution.
+    //private int IX = -1;
+    //private int IMMEDIATE = -1;
 
-    public MiscellaneousInstructions(Instruction instruction){
+    public MiscellaneousInstructions(Instruction instruction) {
+        super(instruction);
         //Move operator code;
         int operatorCode = instruction.getOperatorCode();
         this.setOperatorCode(operatorCode);
-        Rcustomized = instruction.subInstruction(4, 6).parseInt();
-        IX=instruction.subInstruction(6, 8).parseInt();
-        IMMEDIATE = instruction.subInstruction(8, 16).parseInt();
     }
+
+    //Customize
+    public int R_4_6() {
+        return R(4, 6);
+    }
+
+    public int RDATA_4_6() {
+        return RDATA(4, 6);
+    }
+
+    public int IX_6_8() {
+        return R(6, 8);
+    }
+
+    public int IMMEDIATE_8_16() {
+        return IMMEDIATE(8, 16);
+    }
+
     //execute LLD, long load
     private void executeLLD() {
         char data;
-        if(IX==0){
-            data = Registers.fetchMemory((char)IMMEDIATE);
+        if (IX_6_8() == 0) {
+            data = Registers.fetchMemory((char) IMMEDIATE_8_16());
+        } else {
+            data = Registers.fetchMemory((char) (IMMEDIATE_8_16() + RDATA_4_6()));
         }
-        else{data = Registers.fetchMemory((char)( IMMEDIATE + Registers.indexRegisters.fetchByRegister(IX)));}
-        Registers.generalProposeRegisters.storeByRegister(data, Rcustomized);
+        Registers.generalProposeRegisters.storeByRegister(data, R_4_6());
     }
 
     //execute LST, long store
     private void executeLST() {
         int effectiveAddress;
-        char data=Registers.generalProposeRegisters.fetchByRegister(Rcustomized);
-            if (IX== 0) {
-                effectiveAddress = IMMEDIATE;
-            } else {
-                effectiveAddress = IMMEDIATE + Registers.indexRegisters.fetchByRegister(IX);
-            }
+        char data = Registers.generalProposeRegisters.fetchByRegister(R_4_6());
+        if (IX_6_8() == 0) {
+            effectiveAddress = IMMEDIATE_8_16();
+        } else {
+            effectiveAddress = IMMEDIATE_8_16() + RDATA_4_6();
+        }
         MainMemory.store(data, effectiveAddress);
 
-        }
+    }
+
+
 
 }

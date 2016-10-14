@@ -1,12 +1,12 @@
 package com.architecture.project.instruction;
 
-import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processor.registers.Registers;
 
 /**
  * @author taoranxue on 10/12/16 12:05 AM.
  */
 public abstract class AbstractMainInstructions extends Instructions {
+    private Instruction instruction;
     //GPR register index, 0-3 is normal value, -1 used to prevent mal-use.
     private int R = -1;
     //Indes register index, 1-3 is normal value.
@@ -15,10 +15,10 @@ public abstract class AbstractMainInstructions extends Instructions {
     private int I = -1;
     //In the instructions that contains address field, store the value of this field.
     private int ADDRESS = -1;
-    //Effective Address
-    private int EFFECTIVEADDRESS=-1;
+
 
     public AbstractMainInstructions(Instruction instruction) {
+        this.instruction = instruction;
         //Move operator code;
         int operatorCode = instruction.getOperatorCode();
         this.setOperatorCode(operatorCode);
@@ -26,12 +26,6 @@ public abstract class AbstractMainInstructions extends Instructions {
         IX = instruction.subInstruction(8, 10).parseInt();
         I = instruction.subInstruction(10, 11).parseInt();
         ADDRESS = instruction.subInstruction(11, 16).parseInt();
-        if(I==0){
-                EFFECTIVEADDRESS=IXDATA()+ADDRESS;
-            }
-            else{
-                EFFECTIVEADDRESS= Registers.fetchMemory((char)(IXDATA()+ADDRESS));
-            }
     }
 
     public int R() {
@@ -57,8 +51,14 @@ public abstract class AbstractMainInstructions extends Instructions {
     public int ADDRESS() {
         return ADDRESS;
     }
-    public int EFFECTIVEADDRESS(){return EFFECTIVEADDRESS;}
 
+    public int EFFECTIVEADDRESS() {
+        if (I == 0) {
+            return IXDATA() + ADDRESS;
+        } else {
+            return Registers.fetchMemory((char) (IXDATA() + ADDRESS));
+        }
+    }
 
     public int IMMEDIATE() {
         return ADDRESS();
@@ -69,7 +69,7 @@ public abstract class AbstractMainInstructions extends Instructions {
     }
 
     public int RXDATA() {
-        return Registers.indexRegisters.fetchByRegister(IX);
+        return Registers.indexRegisters.fetchByRegister(RX());
     }
 
     public int RY() {
@@ -77,10 +77,28 @@ public abstract class AbstractMainInstructions extends Instructions {
     }
 
     public int RYDATA() {
-        return Registers.indexRegisters.fetchByRegister(IX);
+        return Registers.indexRegisters.fetchByRegister(RY());
     }
 
     public int CC() {
         return R();
+    }
+
+
+    //CUSTOMIZE
+    public int R(int start, int end) {
+        return instruction.subInstruction(start, end).parseInt();
+    }
+
+    public int RDATA(int start, int end) {
+        return Registers.indexRegisters.fetchByRegister(R(start, end));
+    }
+
+    public int ADDRESS(int start, int end) {
+        return R(start, end);
+    }
+
+    public int IMMEDIATE(int start, int end) {
+        return ADDRESS(start, end);
     }
 }

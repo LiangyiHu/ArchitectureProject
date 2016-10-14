@@ -1,5 +1,6 @@
 package com.architecture.project.processor;
 
+import com.architecture.project.devices.IOBus;
 import com.architecture.project.processor.cache.Cache;
 
 /**
@@ -12,4 +13,7 @@ public final class Processor {
 
     //Initiate cache
     public static final Cache cache = new Cache();
+
+    //IO Bus
+    public static final IOBus ioBus = new IOBus();
 }

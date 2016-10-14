@@ -11,8 +11,11 @@ public class InstructionTest {
     private Instruction instruction = new Instruction((char)(0b0000010011001100));
     @Test
     public void testAll() {
-        char c = instruction.subInstruction(11, 16).getData();
-        System.out.println(Integer.toBinaryString(c));
+        String s = "aaa bbb";
+        byte[] b = s.getBytes();
+        for (byte bb : b) {
+            System.out.println(bb);
+        }
     }
 
 }

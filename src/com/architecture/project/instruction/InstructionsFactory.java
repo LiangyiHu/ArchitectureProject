@@ -10,7 +10,7 @@ import com.architecture.project.utils.ProjectUtils;
 public class InstructionsFactory {
     private static final int[] LOAD_STORE = {001, 002, 003, 041, 042};
     private static final int[] ARITHMETIC_MAIN = {004, 005, 006, 007, 020, 021, 022, 023, 024, 025};
-    private static final int[] TRANSFER = {010, 011, 012, 013, 014, 015, 016, 017};
+    private static final int[] TRANSFER = {010, 011, 012, 013, 014, 015, 016, 017, 026};
     private static final int[] SHIFT_ROTATE = {031,032};
     private static final int[] MISCELLANEOUS={070,071,072,073,074,075,076,077};
     private static final int[] IO_INSTRUCTIONS = {061, 062, 063};

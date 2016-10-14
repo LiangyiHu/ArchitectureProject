@@ -1,6 +1,5 @@
 package com.architecture.project.instruction;
 
-import com.architecture.project.Application;
 import com.architecture.project.processor.registers.Registers;
 
 /**

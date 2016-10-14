@@ -13,7 +13,14 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         super(instruction);
     }
 
+    //Customize
+    public int R_10_12() {
+        return R(10, 12);
+    }
 
+    public int RDATA_10_12() {
+        return RDATA(10, 12);
+    }
 
 
     //Instruction LDR
@@ -27,61 +34,47 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
     //STR
     private void executeSTR() {
         //Save to memory
-        MainMemory.store((char) RDATA(), EFFECTIVEADDRESS());
+        Registers.storeMemory((char) RDATA(), (char) EFFECTIVEADDRESS());
     }
 
     //LDA
     private void executeLDA() {
         //load to Register
-        Registers.generalProposeRegisters.storeByRegister((char)EFFECTIVEADDRESS(), R());
+        Registers.generalProposeRegisters.storeByRegister((char) EFFECTIVEADDRESS(), R());
     }
 
     //LDX
     private void executeLDX() {
         char data = Registers.fetchMemory((char) ADDRESS());
-        if(I()==0){
+        if (I() == 0) {
             Registers.indexRegisters.storeByRegister(data, IX());
-        }
-        else {
+        } else {
             Registers.indexRegisters.storeByRegister(Registers.fetchMemory(data), IX());
         }
     }
 
     private void executeSTX() {
         if (I() == 0) {
-            MainMemory.store((char) IXDATA(), ADDRESS());
+            Registers.storeMemory(IXDATA(), (char) ADDRESS());
         } else {
-            MainMemory.store((char) IXDATA(), Registers.fetchMemory((char) ADDRESS()));
+            Registers.storeMemory(IXDATA(), Registers.fetchMemory((char) ADDRESS()));
         }
     }
 
-//    @Override
-//    public void execute() {
-//        doExecute();
-//    }
+    private void executeLDIR() {
+        char address = (char) (IXDATA() + RDATA_10_12());
+        Registers.generalProposeRegisters.storeByRegister(Registers.fetchMemory(address), R());
+    }
 
-//    private void executesAMR() {
-//        char data = getDataInORXIA();
-//        //add to Register
-//        Registers.generalProposeRegisters.storeByRegister((char) (RData + data), R);
-//    }
-//
-//    private void executesSMR() {
-//        char data = getDataInORXIA();
-//        //add to Register
-//        Registers.generalProposeRegisters.storeByRegister((char) (RData - data), R);
-//    }
-//
-//    private void executesAIR() {
-//        char data = (char) Immediate;
-//        //add to Register
-//        Registers.generalProposeRegisters.storeByRegister((char) (RData + data), R);
-//    }
-//
-//    private void executesSIR() {
-//        char data = (char) Immediate;
-//        //add to Register
-//        Registers.generalProposeRegisters.storeByRegister((char) (RData - data), R);
-//    }
+    private void executeSTRR() {
+        char address = (char) (IXDATA() + RDATA_10_12());
+        Registers.storeMemory(Registers.generalProposeRegisters.fetchByRegister(R()), address);
 
+    }
+
+    private void executeSRR() {
+        int data = RXDATA() - RYDATA();
+        //TODO Overflow?
+        Registers.generalProposeRegisters.storeByRegister((char) data, RX());
+    }
 }

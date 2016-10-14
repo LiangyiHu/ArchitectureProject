@@ -54,24 +54,24 @@ public class ShiftRotateInstructions extends Instructions {
     //Instruction RRC
     private void executeRRC() {
         int signBit;
-        char data= Registers.generalProposeRegisters.fetchByRegister(R);
+        char data = Registers.generalProposeRegisters.fetchByRegister(R);
         //logical rotate
         //right Rotate
         if (LR == 0) {
-            for (int i = 0; i <COUNT; i++) {
-                signBit=1&data;
-                data=(char)(data>>1);
-                data=(char)((signBit<<15)|data);
+            for (int i = 0; i < COUNT; i++) {
+                signBit = 1 & data;
+                data = (char) (data >> 1);
+                data = (char) ((signBit << 15) | data);
             }
         }
         //left Rotate
         else {
-            for (int i = 0; i <COUNT; i++) {
-                signBit=1&(data>>15);
-                data=(char)(data<<1);
-                data=(char)(signBit|data);
+            for (int i = 0; i < COUNT; i++) {
+                signBit = 1 & (data >> 15);
+                data = (char) (data << 1);
+                data = (char) (signBit | data);
             }
         }
-        Registers.generalProposeRegisters.storeByRegister(data,R);
+        Registers.generalProposeRegisters.storeByRegister(data, R);
     }
 }

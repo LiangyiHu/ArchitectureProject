@@ -219,11 +219,11 @@ public class Application extends JFrame {
     //Start the GUI
     public static void main(String args[]) {
         new Application();
-        short a=-3,b=-4;
-        int c = (int)a-(int)b;
-        short d=(short)c;
-        System.out.println(c);
-        System.out.println(d);
+
+        char a='\n';
+        int b=(int)a;
+        System.out.println("hello");
+        System.out.println(b);
 
     }
 

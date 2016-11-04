@@ -135,5 +135,6 @@ public abstract class Instructions {
      */
     public void setOperatorCode(int operatorCode) {
         this.operatorCode = operatorCode;
+
     }
 }

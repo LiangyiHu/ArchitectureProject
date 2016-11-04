@@ -28,13 +28,15 @@ public class TransferInstructions extends AbstractMainInstructions {
     //Instruction LDR
     private void executeJZ() {
         if (RDATA() == 0) {
-            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+            char pc = Registers.programCounter.getOne();
+            Registers.programCounter.setOne((char) (pc + IMMEDIATE_8_16()));
         }
     }
 
     private void executeJNE() {
         if (RDATA() != 0) {
-            Registers.programCounter.setOne((char) (EFFECTIVEADDRESS()));
+            char pc = Registers.programCounter.getOne();
+            Registers.programCounter.setOne((char) (pc + IMMEDIATE_8_16()));
         }
     }
 

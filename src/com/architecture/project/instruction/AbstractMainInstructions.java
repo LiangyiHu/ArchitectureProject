@@ -17,6 +17,7 @@ public abstract class AbstractMainInstructions extends Instructions {
     private int ADDRESS = -1;
 
 
+    //This is part of decoding process
     public AbstractMainInstructions(Instruction instruction) {
         this.instruction = instruction;
         //Move operator code;

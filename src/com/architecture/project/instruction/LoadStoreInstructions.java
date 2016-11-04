@@ -44,6 +44,7 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
 
     //STR
     private void executeSTR() {
+        System.out.println();
         //Save to memory
         Registers.storeMemory((char) RDATA(), (char) EFFECTIVEADDRESS());
         System.out.println(EFFECTIVEADDRESS());
@@ -60,6 +61,9 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         char data = Registers.fetchMemory((char) ADDRESS());
         if (I() == 0) {
             Registers.indexRegisters.storeByRegister(data, IX());
+
+            System.out.println((int)ADDRESS());
+            System.out.println((int)data);
         } else {
             Registers.indexRegisters.storeByRegister(Registers.fetchMemory(data), IX());
         }

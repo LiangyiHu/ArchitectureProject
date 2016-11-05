@@ -1,20 +1,16 @@
 package com.architecture.project;
 
-import com.architecture.project.devices.IOBus;
 import com.architecture.project.gui.CacheModel;
 import com.architecture.project.gui.MemoryModel;
 import com.architecture.project.instruction.Instructions;
 import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processor.Processor;
-import com.architecture.project.processor.cache.Cache;
 import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
 import com.architecture.project.utils.ProjectUtils;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -156,10 +152,8 @@ public class Application extends JFrame {
         //Add file
         Scanner in = null;
         try {
-            URL url = ProjectUtils.class.getResource("InputFile.txt");
-//            System.out.println(url.getPath());
+            URL url = getClass().getResource("InputFile.txt");
             File file = new File(url.getPath());
-
             in = new Scanner(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -168,7 +162,7 @@ public class Application extends JFrame {
         while (in.hasNext()) {
             str += in.nextLine();
         }
-//        System.out.println(str);
+        System.out.println(str);
         Processor.ioBus.setFileStream(str);
 
         //Decide what happens if "RUN" button is been clicked

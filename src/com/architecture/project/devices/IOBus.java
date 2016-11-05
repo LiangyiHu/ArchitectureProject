@@ -10,9 +10,14 @@ public class IOBus {
     public static final int DEVICE_NUMBER = 0;
     //Device 1 is a character reader and writer.
     public static final int DEVICE_CHARACTER = 1;
+    //Device 2 is a file reader and writer.
+    public static final int DEVICE_FILE = 2;
 
     private String byteStream;
     private String byteOutStream;
+    private String fileStream;
+
+    private int fileNext;
     private int next;
 
     public IOBus() {
@@ -30,15 +35,25 @@ public class IOBus {
         this.next = 0;
     }
 
+    public void setFileStream(String fileStream) {
+        this.fileStream = fileStream;
+    }
+
     //This method is used for IO instructions
     public String getByteOutStream() {
         return byteOutStream;
     }
 
-    //This method is used for IO instructions
+
+    /**
+     * This method is used for IO instructions
+     *
+     * @param deviceId
+     * @return
+     */
     public char getNext(int deviceId) {
         if (deviceId == DEVICE_CHARACTER) {
-            return byteStream.charAt(next++);
+            return (next == byteStream.length() - 1) ? 0 : byteStream.charAt(next++);
         } else if (deviceId == DEVICE_NUMBER) {
             StringBuffer s = new StringBuffer("");
             char c;
@@ -48,6 +63,9 @@ public class IOBus {
             if (!s.toString().equals("")) {
                 return (char) Integer.parseInt(s.toString());
             }
+        } else if (deviceId == DEVICE_FILE) {
+            System.out.println(fileStream.charAt(fileNext));
+            return (fileNext == fileStream.length() - 1) ? 0 : fileStream.charAt(fileNext++);
         }
         return Character.MAX_VALUE;
     }

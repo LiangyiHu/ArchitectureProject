@@ -10,10 +10,15 @@ import com.architecture.project.processor.cache.Cache;
 import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
+import com.architecture.project.utils.ProjectUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URL;
+import java.util.Scanner;
 
 /**
  * The project run from here.
@@ -148,6 +153,23 @@ public class Application extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setTitle("Project--Simulated CPU for CS6461");
+        //Add file
+        Scanner in = null;
+        try {
+            URL url = ProjectUtils.class.getResource("InputFile.txt");
+//            System.out.println(url.getPath());
+            File file = new File(url.getPath());
+
+            in = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String str = "";
+        while (in.hasNext()) {
+            str += in.nextLine();
+        }
+//        System.out.println(str);
+        Processor.ioBus.setFileStream(str);
 
         //Decide what happens if "RUN" button is been clicked
         runButton.addActionListener(e -> {
@@ -219,12 +241,6 @@ public class Application extends JFrame {
     //Start the GUI
     public static void main(String args[]) {
         new Application();
-
-        char a='\n';
-        int b=(int)a;
-        System.out.println("hello");
-        System.out.println(b);
-
     }
 
 }

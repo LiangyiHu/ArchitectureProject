@@ -154,11 +154,12 @@ public class Application extends JFrame {
         //Add file
         Scanner in = null;
         try {
-            URL url = getClass().getResource("InputFile.txt");
+//            URL url = getClass().getResource("InputFile.txt");
 
-            File file = Paths.get(url.toURI()).toFile();
+//            File file = Paths.get(url.toURI()).toFile();
+            File file = new File("./InputFile.txt");
             in = new Scanner(file);
-        } catch (FileNotFoundException | URISyntaxException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         String str = "";

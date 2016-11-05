@@ -630,7 +630,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="first"/>
+                  <text value="fourth"/>
                 </properties>
               </component>
             </children>

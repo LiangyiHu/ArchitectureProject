@@ -29,10 +29,12 @@ public class IOBus {
         this.byteStream = byteStream;
         this.next = 0;
     }
+
     //This method is used for IO instructions
     public String getByteOutStream() {
         return byteOutStream;
     }
+
     //This method is used for IO instructions
     public char getNext(int deviceId) {
         if (deviceId == DEVICE_CHARACTER) {
@@ -49,20 +51,23 @@ public class IOBus {
         }
         return Character.MAX_VALUE;
     }
+
     //This method is used for IO instructions
     public char ReadDeviceStatus(int deviceID) {
         char data = Character.MAX_VALUE;
         //device selections and get return value
         return data;
     }
+
     //This method is used for IO instructions
     public void write(int deviceID, short data) {
         //write to IO by ID goes here
         if (deviceID == DEVICE_CHARACTER)
-            byteOutStream = String.valueOf((char)data);
+            byteOutStream = String.valueOf((char) data);
         else if (deviceID == DEVICE_NUMBER)
-            byteOutStream = String.valueOf((int)data);
+            byteOutStream = String.valueOf((int) data);
     }
+
     //This method is used resetting and flushing.
     public void close() {
         byteStream = null;

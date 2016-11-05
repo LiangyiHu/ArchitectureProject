@@ -21,7 +21,8 @@ public class IOBus {
     private int next;
 
     public IOBus() {
-        byteStream = null;
+        byteStream = "";
+        byteOutStream = "";
         next = 0;
     }
 
@@ -53,7 +54,7 @@ public class IOBus {
      */
     public char getNext(int deviceId) {
         if (deviceId == DEVICE_CHARACTER) {
-            return (next == byteStream.length() - 1) ? 0 : byteStream.charAt(next++);
+            return (next == byteStream.length()) ? 0 : byteStream.charAt(next++);
         } else if (deviceId == DEVICE_NUMBER) {
             StringBuffer s = new StringBuffer("");
             char c;
@@ -64,8 +65,9 @@ public class IOBus {
                 return (char) Integer.parseInt(s.toString());
             }
         } else if (deviceId == DEVICE_FILE) {
+            if (fileNext >= fileStream.length()) return 0;
             System.out.println(fileStream.charAt(fileNext));
-            return (fileNext == fileStream.length() - 1) ? 0 : fileStream.charAt(fileNext++);
+            return fileStream.charAt(fileNext++);
         }
         return Character.MAX_VALUE;
     }
@@ -81,9 +83,9 @@ public class IOBus {
     public void write(int deviceID, short data) {
         //write to IO by ID goes here
         if (deviceID == DEVICE_CHARACTER)
-            byteOutStream = String.valueOf((char) data);
+            byteOutStream += String.valueOf((char) data);
         else if (deviceID == DEVICE_NUMBER)
-            byteOutStream = String.valueOf((int) data);
+            byteOutStream += String.valueOf((int) data);
     }
 
     //This method is used resetting and flushing.

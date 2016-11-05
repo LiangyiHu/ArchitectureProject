@@ -75,7 +75,7 @@ public class Application extends JFrame {
     private JTextField consoleOutput;
 
     private int memBeginIndex = 0;
-    private final int memDisplayLength = 200;
+    private final int memDisplayLength = 400;
 
     private void reset() {
         Processor.reset();

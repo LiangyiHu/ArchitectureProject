@@ -13,7 +13,9 @@ import com.architecture.project.utils.ProjectUtils;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -153,13 +155,14 @@ public class Application extends JFrame {
         Scanner in = null;
         try {
             URL url = getClass().getResource("InputFile.txt");
-            File file = new File(url.getPath());
+
+            File file = Paths.get(url.toURI()).toFile();
             in = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | URISyntaxException e) {
             e.printStackTrace();
         }
         String str = "";
-        while (in.hasNext()) {
+        while (in.hasNextLine()) {
             str += in.nextLine();
         }
         System.out.println(str);

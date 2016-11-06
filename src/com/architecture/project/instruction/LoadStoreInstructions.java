@@ -38,16 +38,16 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         char data;
         data = Registers.fetchMemory((char) EFFECTIVEADDRESS());
         //load to Register
-        System.out.println((int)data + "-=-=-=-=" + R());
+//        System.out.println((int)data + "-=-=-=-=" + R());
         Registers.generalProposeRegisters.storeByRegister(data, R());
     }
 
     //STR
     private void executeSTR() {
-        System.out.println();
+//        System.out.println();
         //Save to memory
         Registers.storeMemory((char) RDATA(), (char) EFFECTIVEADDRESS());
-        System.out.println(EFFECTIVEADDRESS());
+//        System.out.println(EFFECTIVEADDRESS());
     }
 
     //LDA
@@ -62,8 +62,8 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
         if (I() == 0) {
             Registers.indexRegisters.storeByRegister(data, IX());
 
-            System.out.println((int)ADDRESS());
-            System.out.println((int)data);
+//            System.out.println((int)ADDRESS());
+//            System.out.println((int)data);
         } else {
             Registers.indexRegisters.storeByRegister(Registers.fetchMemory(data), IX());
         }
@@ -84,7 +84,7 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
 
     private void executeSTRR() {
         char address = (char) (IXDATA() + RDATA_10_12());
-        System.out.println((int) IXDATA() + "!!!" + RDATA_10_12());
+//        System.out.println((int) IXDATA() + "!!!" + RDATA_10_12());
         Registers.storeMemory(Registers.generalProposeRegisters.fetchByRegister(R()), address);
 
     }

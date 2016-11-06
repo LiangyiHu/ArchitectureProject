@@ -24,6 +24,7 @@ public class IOBus {
         byteStream = "";
         byteOutStream = "";
         fileStream = "";
+        fileNext = 0;
         next = 0;
     }
 
@@ -67,7 +68,7 @@ public class IOBus {
             }
         } else if (deviceId == DEVICE_FILE) {
             if (fileNext >= fileStream.length()) return 0;
-            System.out.println(fileStream.charAt(fileNext));
+            System.out.println("***" + (int) fileStream.charAt(fileNext) + "***");
             return fileStream.charAt(fileNext++);
         }
         return Character.MAX_VALUE;
@@ -95,5 +96,6 @@ public class IOBus {
         byteOutStream = "";
         fileStream = "";
         next = 0;
+        fileNext = 0;
     }
 }

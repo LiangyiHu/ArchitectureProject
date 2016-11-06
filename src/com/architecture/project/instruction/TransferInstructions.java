@@ -73,7 +73,7 @@ public class TransferInstructions extends AbstractMainInstructions {
     }
 
     private void executeJGE() {
-        System.out.println((short) RDATA());
+//        System.out.println((short) RDATA());
         if ((short) RDATA() >= 0) {
             char pc = Registers.programCounter.getOne();
             Registers.programCounter.setOne((char) (pc + IMMEDIATE_8_16()));

@@ -82,6 +82,7 @@ public class Application extends JFrame {
         Processor.reset();
         Registers.resetAll();
         MainMemory.resetAll();
+        refresh();
     }
 
     /**
@@ -97,6 +98,23 @@ public class Application extends JFrame {
         table1.setModel(memoryModel);
         table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table1.getColumnModel().getColumn(2).setPreferredWidth(150);
+
+        //Add file
+        Scanner in = null;
+        try {
+//            URL url = getClass().getResource("InputFile.txt");
+//            File file = Paths.get(url.toURI()).toFile();
+            File file = new File("./InputFile.txt");
+            in = new Scanner(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String str = "";
+        while (in.hasNextLine()) {
+            str += in.nextLine();
+        }
+//        System.out.println(str);
+        Processor.ioBus.setFileStream(str);
 
         //Refresh cache table
         CacheModel cacheModel = new CacheModel();
@@ -151,23 +169,7 @@ public class Application extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setTitle("Project--Simulated CPU for CS6461");
-        //Add file
-        Scanner in = null;
-        try {
-//            URL url = getClass().getResource("InputFile.txt");
 
-//            File file = Paths.get(url.toURI()).toFile();
-            File file = new File("./InputFile.txt");
-            in = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String str = "";
-        while (in.hasNextLine()) {
-            str += in.nextLine();
-        }
-        System.out.println(str);
-        Processor.ioBus.setFileStream(str);
 
         //Decide what happens if "RUN" button is been clicked
         runButton.addActionListener(e -> {
@@ -196,7 +198,6 @@ public class Application extends JFrame {
         //Reset the machine
         powerButton.addActionListener(e -> {
             reset();
-            refresh();
         });
 
         //Set MBR value

@@ -34,16 +34,35 @@ public abstract class AbstractExecutor {
     }
 
     public void start() {
+        if (isStep()) {
+            step();
+        } else {
+            while(step()){
+
+            }
+        }
+
+//        System.out.println(Integer.toHexString((int)Registers.programCounter.getOne()));
+//        char address = Registers.programCounter.getOne();
+//        char instruction = MainMemory.fetch(address);
+//        Registers.instructionRegister.setOne(instruction);
+//        Registers.programCounter.addPC();
+//        if (instruction == 0) return;
+////        System.out.println(Integer.toBinaryString(instruction));
+//        new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
+//        if (!isStep()) start();
+    }
+    private boolean step() {
         char address = Registers.programCounter.getOne();
         char instruction = MainMemory.fetch(address);
         Registers.instructionRegister.setOne(instruction);
         Registers.programCounter.addPC();
-        if (instruction == 0) return;
-        System.out.println(Integer.toBinaryString(instruction));
+        if (instruction == 0) {
+            return false;
+        }
         new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
-        if (!isStep()) start();
+        return true;
     }
-
 
     /**
      * load to memory

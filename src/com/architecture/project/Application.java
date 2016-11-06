@@ -1,5 +1,6 @@
 package com.architecture.project;
 
+import com.architecture.project.devices.IOBus;
 import com.architecture.project.gui.CacheModel;
 import com.architecture.project.gui.MemoryModel;
 import com.architecture.project.instruction.Instructions;
@@ -81,7 +82,6 @@ public class Application extends JFrame {
         Processor.reset();
         Registers.resetAll();
         MainMemory.resetAll();
-
     }
 
     /**

@@ -23,6 +23,7 @@ public class IOBus {
     public IOBus() {
         byteStream = "";
         byteOutStream = "";
+        fileStream = "";
         next = 0;
     }
 
@@ -90,8 +91,9 @@ public class IOBus {
 
     //This method is used resetting and flushing.
     public void close() {
-        byteStream = null;
-        byteOutStream = null;
+        byteStream = "";
+        byteOutStream = "";
+        fileStream = "";
         next = 0;
     }
 }

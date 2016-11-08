@@ -34,7 +34,7 @@ Make sure all instructions (as specified below) execute on your simulator
 
 Demonstrate 2nd program running on your simulator
 
-## Part 4 (TODO)
+## Part 4 (current)
 
 Design and implement the modules for floating point and vector operations and simple pipelining; extend the user interface
 

@@ -3,12 +3,12 @@
 
 ## Instruction
 
-[CSCI 6461](http://home.gwu.edu/~mlancast/CSCI6461Section10Fall2016/) programmed computer simulation of a small processor with performance improvements with Java
+[CSCI 6461](http://home.gwu.edu/~mlancast/CSCI6461Section10Fall2016/) programmed computer simulation of a small processor with performance improvements with Java.
 
 
 ## Part 1 (finished)
 
-Design and implement the basic machine architecture.
+Design and implement the basic machine architecture
 
 Implement a simple memory
 
@@ -24,9 +24,9 @@ Implement all instructions except for MSR, CHK, and
 
 Floating Point/Vector operations
 
-Extend the user interface.
+Extend the user interface
 
-Demonstrate 1st program running on your simulator.
+Demonstrate 1st program running on your simulator
 
 ## Part 3 (finished)
 
@@ -38,7 +38,7 @@ Demonstrate 2nd program running on your simulator
 
 Design and implement the modules for floating point and vector operations and simple pipelining; extend the user interface
 
-Design and implement simple branch prediction and speculative execution, trap if an error occurs to an error handling routine.
+Design and implement simple branch prediction and speculative execution, trap if an error occurs to an error handling routine
 
 
 

@@ -41,16 +41,6 @@ public abstract class AbstractExecutor {
 
             }
         }
-
-//        System.out.println(Integer.toHexString((int)Registers.programCounter.getOne()));
-//        char address = Registers.programCounter.getOne();
-//        char instruction = MainMemory.fetch(address);
-//        Registers.instructionRegister.setOne(instruction);
-//        Registers.programCounter.addPC();
-//        if (instruction == 0) return;
-////        System.out.println(Integer.toBinaryString(instruction));
-//        new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
-//        if (!isStep()) start();
     }
     private boolean step() {
         char address = Registers.programCounter.getOne();

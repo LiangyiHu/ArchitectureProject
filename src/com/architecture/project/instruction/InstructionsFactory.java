@@ -34,22 +34,16 @@ public class InstructionsFactory {
      */
     public Instructions getInstructions() {
         if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), LOAD_STORE)) {
-//            System.out.println(this.instruction);
             return new LoadStoreInstructions(this.instruction);
         } else if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), ARITHMETIC_MAIN)) {
-//            System.out.println(this.instruction);
             return new ArithmeticMainInstructions(this.instruction);
         } else if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), TRANSFER)) {
-//            System.out.println(this.instruction);
             return new TransferInstructions(this.instruction);
         } else if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), SHIFT_ROTATE)) {
-//            System.out.println(this.instruction);
             return new ShiftRotateInstructions(this.instruction);
         } else if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), MISCELLANEOUS)) {
-//            System.out.println(this.instruction);
             return new MiscellaneousInstructions(this.instruction);
         } else if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), IO_INSTRUCTIONS)) {
-//            System.out.println(this.instruction);
             return new IOInstructions(this.instruction);
         }
 

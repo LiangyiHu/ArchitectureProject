@@ -9,6 +9,16 @@ import com.architecture.project.processor.Processor;
  * @author taoranxue on 9/15/16 8:00 PM.
  */
 public final class Registers {
+    // 4 GPRs
+    public static final int EAX = 0x01;
+    public static final int EBX = 0x02;
+    public static final int ECX = 0x03;
+    public static final int EDX = 0x04;
+    // 3 IXRs
+    public static final int IX1 = 0x11;
+    public static final int IX2 = 0x12;
+    public static final int IX3 = 0x13;
+
     private Registers() {
 
     }

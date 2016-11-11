@@ -1,5 +1,8 @@
 package com.architecture.project.gui;
 
+import com.architecture.project.processor.registers.GeneralProposeRegisters;
+import com.architecture.project.processor.registers.IndexRegisters;
+import com.architecture.project.processor.registers.Register;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,23 +12,10 @@ import static org.junit.Assert.*;
  */
 public class MemoryModelTest {
     @Test
-    public void getColumnName() throws Exception {
-
-    }
-
-    @Test
-    public void getRowCount() throws Exception {
-
-    }
-
-    @Test
-    public void getColumnCount() throws Exception {
-
-    }
-
-    @Test
-    public void getValueAt() throws Exception {
-
+    public void mainTest() throws Exception {
+        Class c = Register.class;
+        IndexRegisters ix = new IndexRegisters();
+        System.out.println(ix.getClass() == c);
     }
 
 }

@@ -30,6 +30,7 @@ public class TransferInstructions extends AbstractMainInstructions {
         if (RDATA() == 0) {
             char pc = Registers.programCounter.getOne();
             Registers.programCounter.setOne((char) (pc + IMMEDIATE_8_16()));
+            // TODO judge value of I!!!
         }
     }
 
@@ -73,7 +74,6 @@ public class TransferInstructions extends AbstractMainInstructions {
     }
 
     private void executeJGE() {
-//        System.out.println((short) RDATA());
         if ((short) RDATA() >= 0) {
             char pc = Registers.programCounter.getOne();
             Registers.programCounter.setOne((char) (pc + IMMEDIATE_8_16()));
@@ -82,9 +82,6 @@ public class TransferInstructions extends AbstractMainInstructions {
 
 
     private void executeJB() {
-//        if (Registers.generalProposeRegisters.fetchByRegister(3) == 0) {
-//            System.out.println("fffff");
-//        }
         if (RDATA() != 0) {
             char pc = Registers.programCounter.getOne();
             pc -= ADDRESS_8_16();

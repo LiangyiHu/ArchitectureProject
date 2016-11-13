@@ -5,8 +5,8 @@ package com.architecture.project.processor;
  *
  * @author taoranxue on 9/14/16 11:28 PM.
  */
-public final class Arithmetic {
-    private Arithmetic() {
+public final class ALU {
+    private ALU() {
 
     }
 

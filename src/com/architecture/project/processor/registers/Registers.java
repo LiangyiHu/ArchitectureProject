@@ -1,7 +1,7 @@
 package com.architecture.project.processor.registers;
 
-import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processor.Processor;
+import com.architecture.project.utils.Constants;
 
 /**
  * contains all static registers
@@ -9,15 +9,6 @@ import com.architecture.project.processor.Processor;
  * @author taoranxue on 9/15/16 8:00 PM.
  */
 public final class Registers {
-    // 4 GPRs
-    public static final int EAX = 0x01;
-    public static final int EBX = 0x02;
-    public static final int ECX = 0x03;
-    public static final int EDX = 0x04;
-    // 3 IXRs
-    public static final int IX1 = 0x11;
-    public static final int IX2 = 0x12;
-    public static final int IX3 = 0x13;
 
     private Registers() {
 
@@ -73,7 +64,37 @@ public final class Registers {
     public static void storeMemory(char data, char address) {
         memoryAddressRegister.setOne(address);
         memoryBufferRegister.setOne(data);
-//        MainMemory.store(data, address);
         Processor.cache.store(data, address);
     }
+
+    /**
+     * Unified method by register Id
+     *
+     * @param regId   register Id
+     * @param regData register data
+     */
+    public static void writeReg(int regId, int regData) {
+        if (regId == Constants.R_EAX) {
+            Registers.generalProposeRegisters.storeByRegister((char) regData, 0);
+        }
+        if (regId == Constants.R_EBX) {
+            Registers.generalProposeRegisters.storeByRegister((char) regData, 1);
+        }
+        if (regId == Constants.R_ECX) {
+            Registers.generalProposeRegisters.storeByRegister((char) regData, 2);
+        }
+        if (regId == Constants.R_EDX) {
+            Registers.generalProposeRegisters.storeByRegister((char) regData, 3);
+        }
+        if (regId == Constants.R_IX1) {
+            Registers.indexRegisters.storeByRegister((char) regData, 1);
+        }
+        if (regId == Constants.R_IX2) {
+            Registers.indexRegisters.storeByRegister((char) regData, 2);
+        }
+        if (regId == Constants.R_IX3) {
+            Registers.indexRegisters.storeByRegister((char) regData, 3);
+        }
+    }
+
 }

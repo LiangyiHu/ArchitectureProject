@@ -53,30 +53,30 @@ public class SeqRegisterFile {
         this.change = true;
     }
 
-    private char regRead(char regId) {
-        if (regId == Registers.EAX) {
-            return Registers.generalProposeRegisters.fetchByRegister(0);
-        }
-        if (regId == Registers.EBX) {
-            return Registers.generalProposeRegisters.fetchByRegister(1);
-        }
-        if (regId == Registers.ECX) {
-            return Registers.generalProposeRegisters.fetchByRegister(2);
-        }
-        if (regId == Registers.EDX) {
-            return Registers.generalProposeRegisters.fetchByRegister(3);
-        }
-        if (regId == Registers.IX1) {
-            return Registers.indexRegisters.fetchByRegister(1);
-        }
-        if (regId == Registers.IX2) {
-            return Registers.indexRegisters.fetchByRegister(2);
-        }
-        if (regId == Registers.IX3) {
-            return Registers.indexRegisters.fetchByRegister(3);
-        }
-        return 0;
-    }
+//    private char regRead(char regId) {
+//        if (regId == Registers.EAX) {
+//            return Registers.generalProposeRegisters.fetchByRegister(0);
+//        }
+//        if (regId == Registers.EBX) {
+//            return Registers.generalProposeRegisters.fetchByRegister(1);
+//        }
+//        if (regId == Registers.ECX) {
+//            return Registers.generalProposeRegisters.fetchByRegister(2);
+//        }
+//        if (regId == Registers.EDX) {
+//            return Registers.generalProposeRegisters.fetchByRegister(3);
+//        }
+//        if (regId == Registers.IX1) {
+//            return Registers.indexRegisters.fetchByRegister(1);
+//        }
+//        if (regId == Registers.IX2) {
+//            return Registers.indexRegisters.fetchByRegister(2);
+//        }
+//        if (regId == Registers.IX3) {
+//            return Registers.indexRegisters.fetchByRegister(3);
+//        }
+//        return 0;
+//    }
 
 //    private void reg(char regId, char regData, boolean regWrite) {
 //        if (regWrite) {

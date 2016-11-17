@@ -40,7 +40,7 @@ Design and implement the modules for floating point and vector operations and si
 
 Design and implement simple branch prediction and speculative execution, trap if an error occurs to an error handling routine
 
-## 6-level Pipeline Design of Y16
+## 5-level Pipeline Design of Y16
 
 ### Introduction
 
@@ -153,11 +153,10 @@ int D_dstM = [
 ];
 ```
 
-
-### Effective Addressing Stage
+`D_valC`
 
 ```python
-int EA_valC = [
+int D_valC = [
 	ea_icode in {I_LDR, I_STR, I_LDA, I_LDX, I_STX} : ea_valEA;
 	1: valC;
 ];
@@ -233,3 +232,4 @@ Save `w_valE` to `w_dstE` and `w_valW` to `w_dstW` except instruction which writ
 
 
 
+ 

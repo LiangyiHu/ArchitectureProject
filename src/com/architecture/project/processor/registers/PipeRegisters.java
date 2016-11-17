@@ -14,22 +14,11 @@ public class PipeRegisters {
     public int D_icode = Constants.I_NOP;
     public int D_rA = Constants.R_NONE;
     public int D_rB = Constants.R_NONE;
+    public int D_i = 0;
     public int D_valC = 0;
     public int D_valP = 0;
     public int D_carryPC = -1;
     public int D_stat = Constants.STAT_BUB;
-
-    // Effective Addressing
-    public int EA_icode = Constants.I_NOP;
-    public int EA_valC = 0;
-    public int EA_valA = 0;
-    public int EA_valB = 0;
-    public int EA_i = 0;
-    public int EA_dstE = Constants.R_NONE;
-    public int EA_dstM = Constants.R_NONE;
-    public int EA_srcA = Constants.R_NONE;
-    public int EA_srcB = Constants.R_NONE;
-    public int EA_stat = Constants.STAT_BUB;
 
 
     // Execute

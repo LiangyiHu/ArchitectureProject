@@ -30,29 +30,32 @@ public class PipeProcessor {
     }
 
     public void decodeStage() {
-        output.EA_icode = input.D_icode;
-        output.EA_valC  = input.D_valC;
-        output.EA_stat  = input.D_stat;
+        output.E_icode = input.D_icode;
+        output.E_valC  = input.D_valC;
+        output.E_stat  = input.D_stat;
 
 
-    }
 
-    public void effectiveAddressStage() {
-        output.E_icode = input.EA_icode;
-        output.E_stat  = input.EA_stat;
+
         // Need indirect addressing
-        int address  = input.EA_valC;
-        if (ProjectUtils.inArrays(input.EA_icode, new int[]{Constants.I_LDR, Constants.I_STR,
+        int address  = input.D_valC;
+        if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_LDR, Constants.I_STR,
                 Constants.I_LDA, Constants.I_LDX, Constants.I_STX})) {
-            if (input.EA_i == 0) {
-                int a = input.EA_valB + input.EA_valC;
+            if (input.D_i == 0) {
+                address = output.E_valB + input.D_valC;
             } else {
-                int a = Registers.fetchMemory((char) (input.EA_valB + input.EA_valC));
+                address = Registers.fetchMemory((char) (output.E_valB + input.D_valC));
             }
         }
         output.E_valC = address;
 
+
     }
+
+//    public void effectiveAddressStage() {
+
+//
+//    }
 
     public void executeStage() {
         output.M_icode = input.E_icode;

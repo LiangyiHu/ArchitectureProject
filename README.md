@@ -76,11 +76,11 @@ The index registers and indirect bit are used to calculate the effective address
 ```python
 int ea_valEA = [
 	# no indirect addressing
-	E_i == 0 && !E_hasIX : valC;
-	E_i == 0 && E_hasIX : valC + valB;
+	E_i == 0 & ~E_hasIX : valC;
+	E_i == 0 & E_hasIX : valC + valB;
 	# indirect addressing
-	E_i == 1 && !E_hasIX : C(valC);
-	E_i == 1 && E_hasIX : C(valC + valB);
+	E_i == 1 & ~E_hasIX : C(valC);
+	E_i == 1 & E_hasIX : C(valC + valB);
 ];
 ```
 The instructions of load/store operations.

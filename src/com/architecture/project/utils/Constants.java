@@ -17,6 +17,8 @@ public class Constants {
     public static final int I_SMR = 005;
     public static final int I_AIR = 006;
     public static final int I_SIR = 007;
+    public static final int I_LDX = 041;
+    public static final int I_STX = 042;
     public static final int I_NOP = 010;
 
     public static final int A_ADD = 0;
@@ -57,4 +59,11 @@ public class Constants {
     public static final int R_NONE = 0xf;
 
     public static final int DEF_CC = 4;
+
+    //Operators
+    public static final int O_ADD = 0;
+    public static final int O_SUB = 1;
+
+    public static final int[] NEED_ADD = new int[]{I_AMR, I_AIR};
+    public static final int[] NEED_SUB = new int[]{I_AMR, I_SIR};
 }

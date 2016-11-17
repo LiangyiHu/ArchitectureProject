@@ -32,7 +32,7 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
     }
 
 
-    //Instruction LDR
+    //LDR
     private void executeLDR() {
 
         char data;

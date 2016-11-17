@@ -11,6 +11,7 @@ import com.architecture.project.utils.ProjectUtils;
 public class PipeProcessor {
     PipeRegisters input;
     PipeRegisters output;
+    ALU alu;
 
     int state;
     boolean halt;
@@ -18,8 +19,38 @@ public class PipeProcessor {
     public PipeProcessor() {
         input = new PipeRegisters();
         output = new PipeRegisters();
+        alu = new ALU();
+
         state = Constants.STAT_AOK;
         halt = false;
+    }
+
+    public void fetchStage() {
+
+    }
+
+    public void decodeStage() {
+        output.EA_icode = input.D_icode;
+        output.EA_valC  = input.D_valC;
+        output.EA_stat  = input.D_stat;
+
+
+    }
+
+    public void effectiveAddressStage() {
+        output.E_icode = input.EA_icode;
+        output.E_stat  = input.EA_stat;
+        // Need indirect addressing
+        int address  = input.EA_valC;
+        if (ProjectUtils.inArrays(input.EA_icode, new int[]{Constants.I_LDR, Constants.I_STR,
+                Constants.I_LDA, Constants.I_LDX, Constants.I_STX})) {
+            if (input.EA_i == 0) {
+                int a = input.EA_valB + input.EA_valC;
+            } else {
+                int a = Registers.fetchMemory((char) (input.EA_valB + input.EA_valC));
+            }
+        }
+        output.E_valC = address;
 
     }
 
@@ -33,6 +64,16 @@ public class PipeProcessor {
             this.halt = true;
             output.M_stat = Constants.STAT_HLT;
         }
+
+        alu.init(input.E_icode, input.E_valC, input.E_valA, input.E_valB);
+        output.M_valE = alu.execute();
+        output.M_valA = input.E_valA;
+
+//        if (input.E_icode == Constants.I_RRMOVL && !output.M_Cnd) {
+//            output.M_dstE = Constants.R_NONE;
+//        } else {
+//            output.M_dstE = input.E_dstE;
+//        }
     }
 
     public void memoryStage() {
@@ -46,7 +87,8 @@ public class PipeProcessor {
         output.W_dstE = input.M_dstE;
         output.W_dstM = input.M_dstM;
 
-        if (ProjectUtils.inArrays(input.M_icode, new int[]{Constants.I_LDR, Constants.I_STR, Constants.I_AMR, Constants.I_SMR})) {
+        if (ProjectUtils.inArrays(input.M_icode, new int[]{Constants.I_LDR, Constants.I_STR,
+                Constants.I_AMR, Constants.I_SMR})) {
             //Memory address is the result of execute stage
             memoryAddress = input.M_valE;
         } else if (ProjectUtils.inArrays(input.M_icode, new int[]{})) {
@@ -54,7 +96,8 @@ public class PipeProcessor {
         }
 
         //instruction read memory
-        readMemory = ProjectUtils.inArrays(input.M_icode, new int[]{Constants.I_LDR, Constants.I_AMR, Constants.I_SMR});
+        readMemory = ProjectUtils.inArrays(input.M_icode, new int[]{Constants.I_LDR,
+                Constants.I_AMR, Constants.I_SMR});
         writeMemory = ProjectUtils.inArrays(input.M_icode, new int[]{Constants.I_STR});
 
         if (readMemory) {

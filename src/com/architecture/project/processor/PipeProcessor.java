@@ -1,5 +1,7 @@
 package com.architecture.project.processor;
 
+import com.architecture.project.instruction.Instruction;
+import com.architecture.project.memory.MainMemory;
 import com.architecture.project.processor.registers.PipeRegisters;
 import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.utils.Constants;
@@ -7,7 +9,6 @@ import com.architecture.project.utils.ProjectUtils;
 
 /**
  * @author taoranxue on 11/13/16 3:14 AM.
- *
  */
 public class PipeProcessor {
     PipeRegisters input;
@@ -27,13 +28,51 @@ public class PipeProcessor {
     }
 
     public void fetchStage() {
+        if (this.halt) return;
+
+        int next;
+
+//        if (input.M_icode == Constants.I_JXX && !input.M_Cnd) {
+//            next = input.M_valA;
+//        } else if (input.W_icode == Constants.I_RET) {
+//            next = input.W_valM;
+//        } else {
+        next = input.F_predPC;
+//        }
+        int ins = MainMemory.fetch(next++);
+        Instruction instruction = new Instruction((char) ins);
+        Registers.instructionRegister.setOne((char) ins);
+//        Registers.programCounter.addPC();
+        output.D_icode = instruction.subInstruction(0, 6).parseInt();
+
+        if (ProjectUtils.inArrays(output.D_icode, new int[]{Constants.I_HALT, Constants.I_LDR,
+                Constants.I_STR, Constants.I_LDA, Constants.I_AMR, Constants.I_SMR, Constants.I_AIR,
+                Constants.I_SIR, Constants.I_LDX, Constants.I_STX, Constants.I_NOP})) {
+            output.F_stat = output.D_stat = Constants.STAT_INS;
+            return;
+        } else if (ProjectUtils.inArrays(output.D_icode, new int[]{Constants.I_HALT})) {
+            output.F_stat = output.D_stat = Constants.STAT_HLT;
+            return;
+        } else {
+            output.F_stat = output.D_stat = Constants.STAT_AOK;
+        }
+//
+        if (ProjectUtils.inArrays(output.D_icode, new int[]{Constants.I_LDR, Constants.I_STR,
+                Constants.I_LDA, Constants.I_AMR, Constants.I_SMR, Constants.I_AIR, Constants.I_SIR,
+                Constants.I_LDX, Constants.I_STX,})) {
+            output.D_rA = instruction.subInstruction(6, 8).parseInt();
+            output.D_rB = instruction.subInstruction(8, 10).parseInt();
+        } else {
+
+        }
+
 
     }
 
     public void decodeStage() {
         output.E_icode = input.D_icode;
-        output.E_valC  = input.D_valC;
-        output.E_stat  = input.D_stat;
+        output.E_valC = input.D_valC;
+        output.E_stat = input.D_stat;
 
         if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_STR, Constants.I_LDA,
                 Constants.I_AMR, Constants.I_SMR, Constants.I_AIR, Constants.I_SIR})) {
@@ -93,7 +132,7 @@ public class PipeProcessor {
         }
 
         // Need indirect addressing
-        int address  = input.D_valC;
+        int address = input.D_valC;
         if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_LDR, Constants.I_STR,
                 Constants.I_LDA, Constants.I_LDX, Constants.I_STX})) {
             if (input.D_i == 0) {
@@ -106,7 +145,6 @@ public class PipeProcessor {
 
 
     }
-
 
 
     public void executeStage() {

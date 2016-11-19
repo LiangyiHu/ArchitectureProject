@@ -97,4 +97,36 @@ public final class Registers {
         }
     }
 
+
+    /**
+     * Unified method by register Id
+     *
+     * @param regId register Id
+     * @return register data
+     */
+    public static int readReg(int regId) {
+        if (regId == Constants.R_EAX) {
+            return Registers.generalProposeRegisters.fetchByRegister(0);
+        }
+        if (regId == Constants.R_EBX) {
+            return Registers.generalProposeRegisters.fetchByRegister(1);
+        }
+        if (regId == Constants.R_ECX) {
+            return Registers.generalProposeRegisters.fetchByRegister(2);
+        }
+        if (regId == Constants.R_EDX) {
+            return Registers.generalProposeRegisters.fetchByRegister(3);
+        }
+        if (regId == Constants.R_IX1) {
+            return Registers.indexRegisters.fetchByRegister(1);
+        }
+        if (regId == Constants.R_IX2) {
+            return Registers.indexRegisters.fetchByRegister(2);
+        }
+        if (regId == Constants.R_IX3) {
+            return Registers.indexRegisters.fetchByRegister(3);
+        }
+        return 0;
+    }
+
 }

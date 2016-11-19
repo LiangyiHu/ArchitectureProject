@@ -35,8 +35,62 @@ public class PipeProcessor {
         output.E_valC  = input.D_valC;
         output.E_stat  = input.D_stat;
 
+        if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_STR, Constants.I_LDA,
+                Constants.I_AMR, Constants.I_SMR, Constants.I_AIR, Constants.I_SIR})) {
+            output.E_srcA = input.D_rA;
+        } else {
+            output.E_srcA = Constants.R_NONE;
+        }
 
+        if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_LDR, Constants.I_STR,
+                Constants.I_LDA, Constants.I_LDX, Constants.I_STX})) {
+            output.E_srcB = input.D_rB;
+        } else {
+            output.E_srcB = Constants.R_NONE;
+        }
 
+        if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_LDA, Constants.I_AMR,
+                Constants.I_SMR, Constants.I_AIR, Constants.I_SIR})) {
+            output.E_dstE = input.D_rB;
+        } else {
+            output.E_dstE = Constants.R_NONE;
+        }
+
+        if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_LDR})) {
+            output.E_dstM = input.D_rA;
+        } else if (ProjectUtils.inArrays(input.D_icode, new int[]{Constants.I_LDX})) {
+            output.E_dstM = input.D_rB;
+        } else {
+            output.E_dstM = Constants.R_NONE;
+        }
+
+        if (output.E_srcA == output.M_dstE) {
+            output.E_valA = output.M_valE;
+        } else if (output.E_srcA == input.M_dstM) {
+            output.E_valA = output.W_valM;
+        } else if (output.E_srcA == input.M_dstE) {
+            output.E_valA = input.M_valE;
+        } else if (output.E_srcA == input.W_dstM) {
+            output.E_valA = input.W_valM;
+        } else if (output.E_srcA == input.W_dstE) {
+            output.E_valA = input.W_valE;
+        } else {
+            output.E_valA = Registers.readReg(output.E_srcA);
+        }
+
+        if (output.E_srcB == output.M_dstE) {
+            output.E_valB = output.M_valE;
+        } else if (output.E_srcB == input.M_dstM) {
+            output.E_valB = output.W_valM;
+        } else if (output.E_srcB == input.M_dstE) {
+            output.E_valB = input.M_valE;
+        } else if (output.E_srcB == input.W_dstM) {
+            output.E_valB = input.W_valM;
+        } else if (output.E_srcB == input.W_dstE) {
+            output.E_valB = input.W_valE;
+        } else {
+            output.E_valB = Registers.readReg(output.E_srcB);
+        }
 
         // Need indirect addressing
         int address  = input.D_valC;
@@ -53,10 +107,7 @@ public class PipeProcessor {
 
     }
 
-//    public void effectiveAddressStage() {
 
-//
-//    }
 
     public void executeStage() {
         output.M_icode = input.E_icode;

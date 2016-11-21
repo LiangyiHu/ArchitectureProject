@@ -5,7 +5,7 @@ import com.architecture.project.utils.Constants;
 /**
  * @author taoranxue on 11/13/16 3:04 AM.
  */
-public class PipeRegisters {
+public class PipeRegisters implements Cloneable {
     public int F_predPC = 0;
     public int F_carryPC = -1;
     public int F_stat = Constants.STAT_AOK;
@@ -51,5 +51,8 @@ public class PipeRegisters {
     public int W_dstM = Constants.R_NONE;
     public int W_stat = Constants.STAT_BUB;
 
-    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

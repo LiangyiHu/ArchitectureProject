@@ -10,6 +10,7 @@ public class Constants {
     public static final int P_ERROR = 3;
 
     public static final int I_HALT = 000;
+    public static final int I_NOP = 010;
     public static final int I_LDR = 001;
     public static final int I_STR = 002;
     public static final int I_LDA = 003;
@@ -19,8 +20,14 @@ public class Constants {
     public static final int I_SIR = 007;
     public static final int I_LDX = 041;
     public static final int I_STX = 042;
-    public static final int I_NOP = 010;
+    public static final int I_MLT = 020;
+    public static final int I_DVD = 021;
+    public static final int I_TRR = 022;
+    public static final int I_AND = 023;
+    public static final int I_ORR = 024;
+    public static final int I_NOT = 025;
 
+    //Operators
     public static final int A_ADD = 0;
     public static final int A_SUB = 1;
     public static final int A_AND = 2;
@@ -60,10 +67,8 @@ public class Constants {
 
     public static final int DEF_CC = 4;
 
-    //Operators
-    public static final int O_ADD = 0;
-    public static final int O_SUB = 1;
 
     public static final int[] NEED_ADD = new int[]{I_AMR, I_AIR};
     public static final int[] NEED_SUB = new int[]{I_AMR, I_SIR};
+    public static final int[] NEED_AND = new int[]{I_AND};
 }

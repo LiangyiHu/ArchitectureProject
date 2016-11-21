@@ -1,6 +1,5 @@
 package com.architecture.project;
 
-import com.architecture.project.devices.IOBus;
 import com.architecture.project.gui.CacheModel;
 import com.architecture.project.gui.MemoryModel;
 import com.architecture.project.instruction.Instructions;
@@ -9,12 +8,9 @@ import com.architecture.project.processor.Processor;
 import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.run.Executor;
 import com.architecture.project.run.TextExecutor;
-import com.architecture.project.utils.ProjectUtils;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -74,6 +70,8 @@ public class Application extends JFrame {
     private JTextField keyBoardInput;
     private JButton keyBoardEnter;
     private JTextField consoleOutput;
+    private JCheckBox pipeCheckBox;
+    private JComboBox comboBox1;
 
     private int memBeginIndex = 0;
     private final int memDisplayLength = 400;
@@ -102,9 +100,9 @@ public class Application extends JFrame {
         //Add file
         Scanner in = null;
         try {
-//            URL url = getClass().getResource("InputFile.txt");
-//            File file = Paths.get(url.toURI()).toFile();
-            File file = new File("./InputFile.txt");
+            URL url = getClass().getResource("InputFile.txt");
+            File file = Paths.get(url.toURI()).toFile();
+//            File file = new File("./InputFile.txt");
             in = new Scanner(file);
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,8 +172,10 @@ public class Application extends JFrame {
         //Decide what happens if "RUN" button is been clicked
         runButton.addActionListener(e -> {
             boolean step = false;
+            boolean pipe = false;
             if (stepCheckBox.isSelected()) step = true;
-            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText().substring(2), step);
+            if (pipeCheckBox.isSelected()) pipe = true;
+            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText().substring(2), step, pipe);
             executor.start();
             refresh();
         });
@@ -183,8 +183,10 @@ public class Application extends JFrame {
         //Load the program to memory
         loadProgramButton.addActionListener(e -> {
             boolean step = false;
+            boolean pipe = false;
             if (stepCheckBox.isSelected()) step = true;
-            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText().substring(2), step);
+            if (pipeCheckBox.isSelected()) pipe = true;
+            Executor executor = new TextExecutor(textProgramInput.getText(), loadAddressInput.getText().substring(2), step, pipe);
             executor.load();
             refresh();
         });
@@ -192,6 +194,7 @@ public class Application extends JFrame {
         //Build function managing SetPC button
         setPCbutton.addActionListener(e -> {
             Registers.programCounter.setOne((char) Integer.parseInt(textFieldPC.getText().substring(2), 16));
+            Processor.pipeProcessor.setPipelinePC(Integer.parseInt(textFieldPC.getText().substring(2), 16));
             refresh();
         });
 

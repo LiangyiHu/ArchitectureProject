@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="14fd0" layout-manager="GridLayoutManager" row-count="3" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="14fd0" layout-manager="GridLayoutManager" row-count="3" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -18,7 +18,7 @@
         <children>
           <component id="5675e" class="javax.swing.JButton" binding="runButton">
             <constraints>
-              <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Run !"/>
@@ -26,7 +26,7 @@
           </component>
           <component id="cd039" class="javax.swing.JCheckBox" binding="stepCheckBox" default-binding="true">
             <constraints>
-              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <selected value="true"/>
@@ -35,13 +35,13 @@
           </component>
           <hspacer id="184cf">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="6" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
           <grid id="2496c" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="6" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none" title="Update memory (hex input)"/>
@@ -88,7 +88,7 @@
           <grid id="c180c" binding="authorPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="2" column="1" row-span="1" col-span="6" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="1" row-span="1" col-span="8" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -109,6 +109,15 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
+          <component id="63946" class="javax.swing.JCheckBox" binding="pipeCheckBox">
+            <constraints>
+              <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <hideActionText value="true"/>
+              <text value="Pipeline"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="a9be6" binding="operatingPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -191,7 +200,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="0x004A"/>
+                  <text value="0x000A"/>
                 </properties>
               </component>
             </children>
@@ -535,7 +544,7 @@
                     <constraints/>
                     <properties>
                       <font size="14"/>
-                      <text value="0000000000010000&#10;0000000000100010&#10;0000000011100010&#10;0000000000000000&#10;0000000000000000&#10;0000000000000001&#10;0000000000000001&#10;0000000000000001&#10;0000000000000000&#10;0000000000000000&#10;0000000000100000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;0000000000000000&#10;1000010001001010&#10;1000010010001100&#10;1000010011001110&#10;1100010000000001&#10;1001000010010000&#10;0001100100000010&#10;0101100000001000&#10;0000010101001010&#10;1100010000000010&#10;1001000011010000&#10;0001100100000010&#10;0101100000001000&#10;0000010101000010&#10;1000111010010000&#10;0001111000000001&#10;0011111000011100&#10;0000010101001010&#10;1000110010010000&#10;1100100000000001&#10;0001100100000010&#10;0101100000001000&#10;0001100000000001&#10;0110010011000101&#10;1100100000000001&#10;0000010101000100&#10;1100100100000000&#10;1100100000000001&#10;0000010101000110&#10;1100100100000000&#10;0000000000000000&#10;0001101000000001&#10;0000010001000000&#10;1000111111000000&#10;1001101011000000&#10;0010011000000100&#10;0001100100000010&#10;0010110000000010&#10;0000010101001010&#10;0001100000000010&#10;0000100001000000&#10;0000100101000010&#10;0000101101001100&#10;0000011001001100&#10;0110011010000110&#10;0010001000010010&#10;0000010101001000&#10;0010010100000110&#10;0000010001000110&#10;0001100000000001&#10;0000100001000110&#10;0110010110000001&#10;0001100100000001&#10;0000100101001000&#10;0010110000011010&#10;0000010101001000&#10;0110010110000001&#10;0000100101001000&#10;0000011001001110&#10;0000101101001100&#10;0000010001001100&#10;1001100010000000&#10;0010000000001010&#10;0000010101000100&#10;0001100100000001&#10;0000100101000100&#10;0000010101001010&#10;0000100101000110&#10;0010011100001010&#10;1100101100000000&#10;1100101100000000&#10;1100101100000000&#10;1100101100000000&#10;0000000000000000&#10;0001101100000001&#10;0101101101111110"/>
+                      <text value="0000110000001010&#10;0000110100000011&#10;0100110001000000&#10;0000000000000000"/>
                     </properties>
                   </component>
                 </children>
@@ -571,7 +580,7 @@
           </hspacer>
         </children>
       </grid>
-      <grid id="9b835" binding="memoryStatusPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="9b835" binding="memoryStatusPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="3" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -581,7 +590,7 @@
         <children>
           <scrollpane id="2c162">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -594,6 +603,12 @@
               </component>
             </children>
           </scrollpane>
+          <component id="e356b" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+          </component>
         </children>
       </grid>
       <grid id="8b8b3" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

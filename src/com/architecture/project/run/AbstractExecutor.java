@@ -3,6 +3,7 @@ package com.architecture.project.run;
 import com.architecture.project.instruction.Instruction;
 import com.architecture.project.instruction.InstructionsFactory;
 import com.architecture.project.memory.MainMemory;
+import com.architecture.project.processor.Processor;
 import com.architecture.project.processor.registers.Registers;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public abstract class AbstractExecutor {
     private List<Character> instructionList;
     private int startAddress;
     private boolean step = false;
+    private boolean pipeline = false;
 
     public boolean isStep() {
         return step;
@@ -23,6 +25,14 @@ public abstract class AbstractExecutor {
 
     public void setStep(boolean step) {
         this.step = step;
+    }
+
+    public boolean isPipeline() {
+        return pipeline;
+    }
+
+    public void setPipeline(boolean pipeline) {
+        this.pipeline = pipeline;
     }
 
     public void setStartAddress(int startAddress) {
@@ -43,15 +53,26 @@ public abstract class AbstractExecutor {
         }
     }
     private boolean step() {
-        char address = Registers.programCounter.getOne();
-        char instruction = MainMemory.fetch(address);
-        Registers.instructionRegister.setOne(instruction);
-        Registers.programCounter.addPC();
-        if (instruction == 0) {
-            return false;
+        if (isPipeline()) {
+            System.out.println("pipe");
+            try {
+                Processor.pipeProcessor.next();
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("step");
+            char address = Registers.programCounter.getOne();
+            char instruction = MainMemory.fetch(address);
+            Registers.instructionRegister.setOne(instruction);
+            Registers.programCounter.addPC();
+            if (instruction == 0) {
+                return false;
+            }
+            new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
+            return true;
         }
-        new InstructionsFactory(new Instruction(instruction)).getInstructions().execute();
-        return true;
+        return false;
     }
 
     /**

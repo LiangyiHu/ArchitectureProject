@@ -21,5 +21,8 @@ public final class Processor {
     //IO Bus
     public static final IOBus ioBus = new IOBus();
 
+    //Pipeline
+    public static final PipeProcessor pipeProcessor = new PipeProcessor();
+
 
 }

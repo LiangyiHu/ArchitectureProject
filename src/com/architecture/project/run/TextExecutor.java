@@ -9,7 +9,7 @@ import java.util.List;
  * @author taoranxue on 9/18/16 9:42 PM.
  */
 public class TextExecutor extends AbstractExecutor implements Executor {
-    public TextExecutor(String text, String startAddress, boolean step) {
+    public TextExecutor(String text, String startAddress, boolean step, boolean pipe) {
         List<Character> instructionList = new ArrayList<>();
         String[] instructions = text.split("\n");
         for (String instruction : instructions)
@@ -19,6 +19,7 @@ public class TextExecutor extends AbstractExecutor implements Executor {
         setInstructionList(instructionList);
         setStartAddress(Integer.parseInt(startAddress, 16));
         if (step) setStep(true);
+        if (pipe) setPipeline(true);
     }
 
 }

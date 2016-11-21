@@ -112,11 +112,40 @@ Y16 also defines machine status register to display the health of machine. So we
 
 <center>Table 4. Machine Status in Y16</center>
 
-### Fetch Stage
+### Arithmetic Instruction
+
+The arithmetic instructions have one or two operands and the result always write back to register of first operand.
+
+|icode|Instruction|Number of Operands|Y16 Function|
+|---|----|---|---|
+|020|MLT|Rx, Ry| Rx * Ry -> Rx, Rx+1|
+|021|DVD|Rx, Ry| Rx / Ry -> Rx, Rx+1|
+|022|TRR|Rx, Ry| If Rx == Ry, cc(4) = 1; else cc(4) = 0|
+|023|AND|Rx, Ry| Rx & Ry -> Rx|
+|024|ORR|Rx, Ry| Rx | Ry -> Rx|
+|025|NOT|Rx| ~Rx -> Rx|
+
+<center>Table 5. Instructions of Arithmetic</center>
+
+> It's weird there isn't ADD or SUB instruction :(
 
 
 
-### Decode Stage
+### 5 Stages of Pipelining
+
+This project involves 5-level pipeline which contains fetch stage, decode stage, execute stage, memory stage, and write back stage.
+
+
+#### 1. Fetch Stage
+
+Instructions which needs `rA` and `rB`/`rX`:
+
+
+Instructions which needs `valC`:
+
+
+
+#### 2. Decode Stage
 
 `D_srcA` means the value of `D_valA` will fetch from which register:
 
@@ -162,7 +191,7 @@ int D_valC = [
 ];
 ```
 
-### Execute Stage
+#### 3. Execute Stage
 
 We design ALU to calculate two number from `aluA` and `aluB`.
 
@@ -183,7 +212,7 @@ int e_aluB = [
 ];
 ```
 
-### Memory Stage
+#### 4. Memory Stage
 
 The addresses can be divided into two types:
 
@@ -220,11 +249,37 @@ Read or write memory of the address.
 
 <center>Table 7. Instructions Writing Memory</center>
 
-### Write Back
+#### 5. Write Back
 
 Save `w_valE` to `w_dstE` and `w_valW` to `w_dstW` except instruction which writes data to memory, like `STR`.
 
 
+#### 6. Pipeline Examples
+
+We give some programs to test the function of our pipeline which contains bubbling, stalling, and forwarding. These programs are adapted from [CSAPP](http://csapp.cs.cmu.edu/3e/courses.html).
+
+### Avoid Data Hazards by Fowarding 
+
+```c
+# prog 1
+LDA R0, 0, 0, $10 //mov $10 -> R0
+LDA R1, 0, 0, $3  //mov $3 -> R1
+AND r0, r1        //and r0, r1 -> r0
+HALT
+
+//Assembly
+//0000110000001010
+//0000110100000011
+//0100110001000000
+//0000000000000000
+```
+
+|Cycle|1|2|3|4|5|6|7|8|
+|---|---|---|---|---|---|---|---|---|
+|Instruction 1|F|D|E|**M**|W|
+|Instruction 2||F|D|**E**|M|W|
+|Instruction 3|||F|**D**|E|M|W|
+|Instruction 4||||**F**|D|E|M|W|
 
 
 

@@ -225,7 +225,7 @@ The addresses can be divided into two types:
 |004|AMR|R+M -> R|
 |005|SMR|R-M -> R|
 
-<center>Table 5. Instructions Using Memory Address from Execute Stage</center>
+<center>Table 6. Instructions Using Memory Address from Execute Stage</center>
 
  - Memory addresses are stored in registers:
 
@@ -239,7 +239,7 @@ Read or write memory of the address.
 |004|AMR|R+M -> R|
 |005|SMR|R-M -> R|
 
-<center>Table 6. Instructions Reading Memory</center>
+<center>Table 7. Instructions Reading Memory</center>
 
 - Write memory:
 
@@ -247,7 +247,7 @@ Read or write memory of the address.
 |---|---|---|
 |002|STR|R -> M|
 
-<center>Table 7. Instructions Writing Memory</center>
+<center>Table 8. Instructions Writing Memory</center>
 
 #### 5. Write Back
 
@@ -258,7 +258,9 @@ Save `w_valE` to `w_dstE` and `w_valW` to `w_dstW` except instruction which writ
 
 We give some programs to test the function of our pipeline which contains bubbling, stalling, and forwarding. These programs are adapted from [CSAPP](http://csapp.cs.cmu.edu/3e/courses.html).
 
-### Avoid Data Hazards by Fowarding 
+### Avoid Data Hazards by Forwarding 
+
+Here is the first example code 1:
 
 ```c
 # prog 1
@@ -273,6 +275,7 @@ HALT
 //0100110001000000
 //0000000000000000
 ```
+In cycle 4, the decode stage logic detects a pending write to register `R0` in the memory stage. It also detects that a new value is being computed for register `R1` in the execute stage. It uses these as the values for `valA` and `valB` rather than the values read from the register file.
 
 |Cycle|1|2|3|4|5|6|7|8|
 |---|---|---|---|---|---|---|---|---|
@@ -280,6 +283,20 @@ HALT
 |Instruction 2||F|D|**E**|M|W|
 |Instruction 3|||F|**D**|E|M|W|
 |Instruction 4||||**F**|D|E|M|W|
+
+|Cycle 4|
+|---|
+|**Memory Stage**|
+|`M_dstE = R1, M_valE = 10`|
+|**Execute Stage**|
+|`E_dstE = R0, e_valE = 3`|
+|**Decode Stage**|
+|`D_srcA = R0, D_valA = M_valE = 10`|
+|`D_srcB = R1, D_valB = e_valE = 3`|
+
+<center>Table 7. Pipelined Execution of `prog1` Using Forwarding</center>
+
+
 
 
 

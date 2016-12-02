@@ -35,10 +35,14 @@ public class Floating {
                 decBits += "0";
             }
         }
+
+        System.out.println(intBits);
+        System.out.println(decBits);
+
         int exponent = 0;
         String mantissaStr = "";
         if (intBits.length() + decBits.length() > 8) {
-            int offset = 8 - (intBits.length() + decBits.length());
+            int offset = intBits.length() + decBits.length() - 8;
             if (intBits.length() < 8) {
                 exponent = -decBits.length();
                 decBits = decBits.substring(0, decBits.length() - offset);
@@ -50,16 +54,19 @@ public class Floating {
         }
         int sign = 0;
         if (data < 0.0) sign = 1;
-        int mantissa = Integer.parseInt(mantissaStr);
+        int mantissa = Integer.parseInt(mantissaStr, 2);
+        System.out.println("man: " + mantissa);
         this.mantissa = mantissa;
-        this.exponent = exponent;
+        this.exponent = exponent + 63;
         this.sign = sign;
         this.result = data;
     }
 
     public char toBinary() {
-        String binaryStr = Integer.toBinaryString(sign) + Integer.toBinaryString(exponent) + Integer.toBinaryString(mantissa);
-        return (char) Integer.parseInt(binaryStr);
+        System.out.println(exponent);
+        System.out.println(mantissa);
+        String binaryStr = (sign == 1) ? Integer.toBinaryString(sign) : "" + Integer.toBinaryString(exponent) + Integer.toBinaryString(mantissa);
+        return (char) Integer.parseInt(binaryStr, 2);
     }
 
     public double toDouble() {
@@ -73,12 +80,18 @@ public class Floating {
     }
 
     public Floating add(double other) {
-        return null;
+        Floating f = new Floating(other);
+        return this.add(f);
     }
 
     public Floating sub(Floating other) {
         double d = other.toDouble();
         double res = this.result - d;
         return new Floating(res);
+    }
+
+    public Floating sub(double other) {
+        Floating f = new Floating(other);
+        return this.sub(f);
     }
 }

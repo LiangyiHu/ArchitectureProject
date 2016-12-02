@@ -24,6 +24,7 @@ public final class Registers {
     public static final MachineStatusRegister machineStatusRegister = new MachineStatusRegister();
     public static final MachineFaultRegister machineFaultRegister = new MachineFaultRegister();
     public static final ConditionCodeRegister conditionCodeRegister = new ConditionCodeRegister();
+    public static final FloatingPointRegisters floatingPointRegisters = new FloatingPointRegisters();
 
 
     //Reset all the registers.
@@ -37,6 +38,7 @@ public final class Registers {
         machineStatusRegister.reset();
         machineFaultRegister.reset();
         conditionCodeRegister.reset();
+        floatingPointRegisters.reset();
     }
 
     /**

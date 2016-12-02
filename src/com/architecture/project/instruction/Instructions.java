@@ -45,6 +45,13 @@ public abstract class Instructions {
         INSTRUCTION_MAP.put(017, "JGE");
         INSTRUCTION_MAP.put(031, "SRC");
         INSTRUCTION_MAP.put(032, "RRC");
+        INSTRUCTION_MAP.put(033, "FADD");
+        INSTRUCTION_MAP.put(034, "FSUB");
+        INSTRUCTION_MAP.put(035, "VADD");
+        INSTRUCTION_MAP.put(036, "VSUB");
+        INSTRUCTION_MAP.put(037, "CNVRT");
+        INSTRUCTION_MAP.put(050, "LDFR");
+        INSTRUCTION_MAP.put(051, "STFR");
         INSTRUCTION_MAP.put(061, "IN");
         INSTRUCTION_MAP.put(062, "OUT");
         INSTRUCTION_MAP.put(063, "CHK");

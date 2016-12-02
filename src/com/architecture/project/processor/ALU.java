@@ -2,7 +2,6 @@ package com.architecture.project.processor;
 
 import com.architecture.project.utils.Constants;
 import com.architecture.project.utils.ProjectUtils;
-import com.sun.tools.internal.jxc.ap.Const;
 
 /**
  * ALU simulator.

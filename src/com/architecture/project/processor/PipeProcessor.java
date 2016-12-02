@@ -40,7 +40,7 @@ public class PipeProcessor {
         executeStage();
         decodeStage();
         fetchStage();
-
+        System.out.println(print(output));
         nextPipeRegister();
     }
 

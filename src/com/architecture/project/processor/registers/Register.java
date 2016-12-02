@@ -118,7 +118,7 @@ public class Register {
      * @param endIndex   end index.
      * @return sub-data of register data.
      */
-    protected Register subRegister(int beginIndex, int endIndex) {
+    public Register subRegister(int beginIndex, int endIndex) {
         if (beginIndex < 0) {
             throw new RegisterIndexOutOfBoundsException(beginIndex);
         }

@@ -266,7 +266,7 @@ Here is the first example code 1:
 # prog 1
 LDA R0, 0, 0, $10 //mov $10 -> R0
 LDA R1, 0, 0, $3  //mov $3 -> R1
-AND r0, r1        //and r0, r1 -> r0
+AND r0, r1        //and r0, r1 -> r0
 HALT
 
 //Assembly

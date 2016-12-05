@@ -245,6 +245,10 @@ public class Application extends JFrame {
             Processor.ioBus.setByteStream(keyBoardInput.getText());
         });
 
+        pipeCheckBox.addActionListener(e -> {
+            JFrame pipeWindow = new PipelineWindow();
+        });
+
     }
 
     //Start the GUI

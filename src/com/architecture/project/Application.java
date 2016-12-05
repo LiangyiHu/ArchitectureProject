@@ -23,6 +23,7 @@ import java.util.Scanner;
 public class Application extends JFrame {
 
 
+
     private JPanel mainPanel;
     //define register dashboard panel
     private JPanel registerDashboard;
@@ -74,6 +75,11 @@ public class Application extends JFrame {
     private JComboBox comboBox1;
     private JLabel FR0;
     private JLabel FR1;
+    private JLabel fetch;
+    private JLabel decode;
+    private JLabel execute;
+    private JLabel memory;
+    private JLabel writeback;
 
     private int memBeginIndex = 0;
     private final int memDisplayLength = 400;
@@ -146,7 +152,7 @@ public class Application extends JFrame {
         IXR2.setIcon(Registers.indexRegisters.fetchImageIconByRegister(3));
         IXR2.setText(Registers.indexRegisters.fetchHexByRegister(3));
         //refresh PC, IR, MSR, MFR and CC
-        PC.setIcon(Registers.programCounter.fetchImageIconByRegister(0,12));
+        PC.setIcon(Registers.programCounter.fetchImageIconByRegister(0, 12));
         PC.setText(Registers.programCounter.fetchHexByRegister(0));
         IR.setIcon(Registers.instructionRegister.fetchImageIconByRegister(0));
         IR.setText(Registers.instructionRegister.fetchHexByRegister(0));
@@ -160,6 +166,15 @@ public class Application extends JFrame {
         MAR.setText(Registers.memoryAddressRegister.fetchHexByRegister(0));
         MBR.setIcon(Registers.memoryBufferRegister.fetchImageIconByRegister(0));
         MBR.setText(Registers.memoryBufferRegister.fetchHexByRegister(0));
+
+        if (pipeCheckBox.isSelected()) {
+            String[] log = Processor.pipeProcessor.print();
+            fetch.setText(log[0]);
+            decode.setText(log[1]);
+            execute.setText(log[2]);
+            memory.setText(log[3]);
+            writeback.setText(log[4]);
+        }
     }
 
     /**
@@ -169,7 +184,7 @@ public class Application extends JFrame {
         //Basic GUI properties setup
         setContentPane(mainPanel);
         refresh();
-        setSize(1215, 550);
+        setSize(1215, 750);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -245,9 +260,7 @@ public class Application extends JFrame {
             Processor.ioBus.setByteStream(keyBoardInput.getText());
         });
 
-        pipeCheckBox.addActionListener(e -> {
-            JFrame pipeWindow = new PipelineWindow();
-        });
+
 
     }
 

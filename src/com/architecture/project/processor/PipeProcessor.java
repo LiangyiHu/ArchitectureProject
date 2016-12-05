@@ -7,6 +7,8 @@ import com.architecture.project.processor.registers.Registers;
 import com.architecture.project.utils.Constants;
 import com.architecture.project.utils.ProjectUtils;
 
+import java.util.HashMap;
+
 /**
  * @author taoranxue on 11/13/16 3:14 AM.
  */
@@ -15,6 +17,9 @@ public class PipeProcessor {
     private PipeRegisters output;
     private ALU alu;
     private int cycle;
+    private HashMap<Integer, String> stateMap;
+    private HashMap<Integer, String> insMap;
+    private HashMap<Integer, String> regMap;
 
     private int state;
     private boolean halt;
@@ -31,6 +36,47 @@ public class PipeProcessor {
 
         state = Constants.STAT_AOK;
         halt = false;
+        
+        stateMap = new HashMap<>();
+        insMap = new HashMap<>();
+        regMap = new HashMap<>();
+
+        
+        insMap.put(000, "I_HALT");
+        insMap.put(010, "I_NOP");
+        insMap.put(001, "I_LDR");
+        insMap.put(002, "I_STR");
+        insMap.put(003, "I_LDA");
+        insMap.put(004, "I_AMR");
+        insMap.put(005, "I_SMR");
+        insMap.put(006, "I_AIR");
+        insMap.put(007, "I_SIR");
+        insMap.put(041, "I_LDX");
+        insMap.put(042, "I_STX");
+        insMap.put(020, "I_MLT");
+        insMap.put(021, "I_DVD");
+        insMap.put(022, "I_TRR");
+        insMap.put(023, "I_AND");
+        insMap.put(024, "I_ORR");
+        insMap.put(025, "I_NOT");
+
+        stateMap.put(0, "STAT_BUB");
+        stateMap.put(1, "STAT_AOK");
+        stateMap.put(2, "STAT_HLT");
+        stateMap.put(3, "STAT_ADR");
+        stateMap.put(4, "STAT_INS");
+        stateMap.put(5, "STAT_PIP");
+
+        regMap.put(0x00, "GPR0");
+        regMap.put(0x01, "GPR1");
+        regMap.put(0x02, "GPR2");
+        regMap.put(0x03, "GPR3");
+        regMap.put(0x11, "IX1");
+        regMap.put(0x12, "IX2");
+        regMap.put(0x13, "IX3");
+        regMap.put(0x0f, "RNONE");
+
+
     }
 
     public void next() throws CloneNotSupportedException {
@@ -40,23 +86,25 @@ public class PipeProcessor {
         executeStage();
         decodeStage();
         fetchStage();
-        System.out.println(print(output));
         nextPipeRegister();
     }
 
-    private String print(PipeRegisters reg) {
-        String fetchStr = String.format("FETCH \t prePc: %d \t instructions: %d\n",
+    public String[] print() {
+        PipeRegisters reg = output;
+        String fetchStr = String.format("FETCH \t prePc: 0x%04x \t instructions number: %d\n",
                 reg.F_predPC, cycle);
-        String decodeStr = String.format("DECODE \t stat: %d \t icode: %d \t rA: %d \t rB: %d \t I: %d \t valC: %d \t valP: %d\n",
-                reg.D_stat, reg.D_icode, reg.D_rA, reg.D_rB, reg.D_i, reg.D_valC, reg.D_valP);
-        String executeStr = String.format("EXECUTE \t stat: %d \t icode: %d \t valC: %d \t valA: %d \t valB: %d \t dstE: %d \t dstM: %d \t srcA : %d \t srcB: %d\n",
-                reg.E_stat, reg.E_icode, reg.E_valC, reg.E_valA, reg.E_valB, reg.E_dstE, reg.E_dstM, reg.E_srcA, reg.E_srcB);
-        String memoryStr = String.format("MEMORY \t stat: %d \t icode: %d \t valE: %d \t valA: %d \t dstE: %d \t dstM: %d\n",
-                reg.M_stat, reg.M_icode, reg.M_valE, reg.M_valA, reg.M_dstE, reg.M_dstM);
-        String writeBackStr = String.format("WRITE BACK \t stat: %d \t icode %d \t valE: %d \t valM: %d \t dstE: %d \t dstM: %d \n",
-                reg.W_stat, reg.W_icode, reg.W_valE, reg.W_valM, reg.W_dstE, reg.W_dstM);
+        String decodeStr = String.format("DECODE \t stat: %s \t icode: %s \t rA: %s \t rB: %s \t I: 0x%04x \t valC: 0x%04x \t valP: 0x%04x\n",
+                stateMap.get(reg.D_stat), insMap.get(reg.D_icode), regMap.get(reg.D_rA), regMap.get(reg.D_rB),
+                reg.D_i, reg.D_valC, reg.D_valP);
+        String executeStr = String.format("EXECUTE \t stat: %s \t icode: %s \t valC: 0x%04x \t valA: 0x%04x \t valB: 0x%04x \t dstE: %s \t dstM: %s \t srcA : %s\t srcB: %s\n",
+                stateMap.get(reg.E_stat), insMap.get(reg.E_icode), reg.E_valC, reg.E_valA, reg.E_valB,
+                regMap.get(reg.E_dstE), regMap.get(reg.E_dstM), regMap.get(reg.E_srcA), regMap.get(reg.E_srcB));
+        String memoryStr = String.format("MEMORY \t stat: %s \t icode: %s \t valE: %d \t valA: %d \t dstE: %s \t dstM: %s\n",
+                stateMap.get(reg.M_stat), insMap.get(reg.M_icode), reg.M_valE, reg.M_valA, regMap.get(reg.M_dstE), regMap.get(reg.M_dstM));
+        String writeBackStr = String.format("WRITE BACK \t stat: %s \t icode %s \t valE: %d \t valM: %d \t dstE: %s \t dstM: %s \n",
+                stateMap.get(reg.W_stat), insMap.get(reg.W_icode), reg.W_valE, reg.W_valM, regMap.get(reg.W_dstE), regMap.get(reg.W_dstM));
 
-        return (fetchStr + decodeStr + executeStr + memoryStr + writeBackStr);
+        return new String[]{fetchStr, decodeStr, executeStr, memoryStr, writeBackStr};
 
 
     }

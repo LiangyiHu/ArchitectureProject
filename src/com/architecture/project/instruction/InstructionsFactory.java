@@ -14,7 +14,7 @@ public class InstructionsFactory {
     private static final int[] SHIFT_ROTATE = {031, 032};
     private static final int[] MISCELLANEOUS = {070, 071, 072, 073, 074, 075, 076, 077};
     private static final int[] IO_INSTRUCTIONS = {061, 062, 063};
-    private static final int[] FLOATING_VECTOR_INSTRUCTIONS = {033, 034, 035,036,037,050,051};
+    private static final int[] FLOATING_VECTOR_INSTRUCTIONS = {033, 034, 035, 036, 037, 050, 051};
 
     private Instruction instruction;
 
@@ -46,6 +46,8 @@ public class InstructionsFactory {
             return new MiscellaneousInstructions(this.instruction);
         } else if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), IO_INSTRUCTIONS)) {
             return new IOInstructions(this.instruction);
+        } else if (ProjectUtils.inArrays(this.instruction.getOperatorCode(), FLOATING_VECTOR_INSTRUCTIONS)) {
+            return new FloatingVectorInstructions(this.instruction);
         }
 
         // ... other instructions

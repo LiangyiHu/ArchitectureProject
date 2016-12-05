@@ -200,7 +200,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="0x000A"/>
+                  <text value="0x000E"/>
                 </properties>
               </component>
             </children>

@@ -34,16 +34,17 @@ public class FloatingVectorInstructions extends AbstractMainInstructions {
 
     //VADD
     private void executeVADD() {
-        char addressStart1 = (char) EFFECTIVEADDRESS();
-        char addressStart2 = (char) EFFECTIVEADDRESS();
+        char addressStart1 = Registers.fetchMemory((char) EFFECTIVEADDRESS());
+        char addressStart2 = Registers.fetchMemory((char) (EFFECTIVEADDRESS() + 2));
         char len = RDATA();
-        System.out.println((int)len);
-        System.out.println((int)addressStart1);
-        System.out.println((int)addressStart2);
-        for (int i = 0; i <= len; ++i) {
+        System.out.println((int) len);
+        System.out.println((int) addressStart1);
+        System.out.println((int) addressStart2);
+        for (int i = 0; i < len; ++i) {
             char data1 = Registers.fetchMemory((char) addressStart2);
             char data2 = Registers.fetchMemory((char) addressStart1);
             Registers.storeMemory((char) (data1 + data2), addressStart1);
+            System.out.println((int) data1 + " + " + (int) data2);
             addressStart1 += 2;
             addressStart2 += 2;
         }

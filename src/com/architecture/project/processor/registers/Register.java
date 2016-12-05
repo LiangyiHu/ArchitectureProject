@@ -130,9 +130,10 @@ public class Register {
             throw new RegisterIndexOutOfBoundsException(subLen);
         }
 
-        this.data = (char) (data << (beginIndex));
-        this.data = (char) (data >> (beginIndex + WORD_LENGTH - endIndex));
+        char _data = this.data;
+        _data = (char) (_data << (beginIndex));
+        _data = (char) (_data >> (beginIndex + WORD_LENGTH - endIndex));
 
-        return this;
+        return new Register(_data);
     }
 }

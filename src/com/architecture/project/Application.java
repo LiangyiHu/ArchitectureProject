@@ -72,6 +72,8 @@ public class Application extends JFrame {
     private JTextField consoleOutput;
     private JCheckBox pipeCheckBox;
     private JComboBox comboBox1;
+    private JLabel FR0;
+    private JLabel FR1;
 
     private int memBeginIndex = 0;
     private final int memDisplayLength = 400;
@@ -131,6 +133,11 @@ public class Application extends JFrame {
         GPR2.setText(Registers.generalProposeRegisters.fetchHexByRegister(2));
         GPR3.setIcon(Registers.generalProposeRegisters.fetchImageIconByRegister(3));
         GPR3.setText(Registers.generalProposeRegisters.fetchHexByRegister(3));
+        //refresh 2 FR
+        FR0.setIcon(Registers.floatingPointRegisters.fetchImageIconByRegister(0));
+        FR0.setText(Registers.floatingPointRegisters.fetchHexByRegister(0));
+        FR1.setIcon(Registers.floatingPointRegisters.fetchImageIconByRegister(1));
+        FR1.setText(Registers.floatingPointRegisters.fetchHexByRegister(1));
         //refresh 3 IXR
         IXR0.setIcon(Registers.indexRegisters.fetchImageIconByRegister(1));
         IXR0.setText(Registers.indexRegisters.fetchHexByRegister(1));

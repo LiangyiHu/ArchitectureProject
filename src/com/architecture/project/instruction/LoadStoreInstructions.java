@@ -1,8 +1,5 @@
 package com.architecture.project.instruction;
 
-import com.architecture.project.Application;
-import com.architecture.project.memory.MainMemory;
-import com.architecture.project.processor.Processor;
 import com.architecture.project.processor.registers.Registers;
 
 /**
@@ -34,20 +31,14 @@ public class LoadStoreInstructions extends AbstractMainInstructions {
 
     //LDR
     private void executeLDR() {
-
         char data;
         data = Registers.fetchMemory((char) EFFECTIVEADDRESS());
-        //load to Register
-//        System.out.println((int)data + "-=-=-=-=" + R());
         Registers.generalProposeRegisters.storeByRegister(data, R());
     }
 
     //STR
     private void executeSTR() {
-//        System.out.println();
-        //Save to memory
         Registers.storeMemory((char) RDATA(), (char) EFFECTIVEADDRESS());
-//        System.out.println(EFFECTIVEADDRESS());
     }
 
     //LDA

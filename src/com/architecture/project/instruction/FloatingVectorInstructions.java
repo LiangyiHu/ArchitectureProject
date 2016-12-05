@@ -80,11 +80,14 @@ public class FloatingVectorInstructions extends AbstractMainInstructions {
 
     //LDFR
     private void executeLDFR() {
-
+        char data;
+        data = Registers.fetchMemory((char) EFFECTIVEADDRESS());
+        Registers.floatingPointRegisters.storeByRegister(data, R());
     }
 
     //STFR
     private void executeSTFR() {
-
+        char data = Registers.floatingPointRegisters.fetchByRegister(R());
+        Registers.storeMemory(data, (char) EFFECTIVEADDRESS());
     }
 }

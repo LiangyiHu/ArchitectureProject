@@ -5,6 +5,8 @@
 
 [CSCI 6461](http://home.gwu.edu/~mlancast/CSCI6461Section10Fall2016/) programmed computer simulation of a small processor with performance improvements with Java.
 
+![preview](/1.png)
+
 
 ## Part 1 (finished)
 

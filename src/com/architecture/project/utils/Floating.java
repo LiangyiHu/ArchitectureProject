@@ -36,8 +36,6 @@ public class Floating {
             }
         }
 
-        System.out.println(intBits);
-        System.out.println(decBits);
 
         int exponent = 0;
         String mantissaStr = "";
@@ -51,11 +49,13 @@ public class Floating {
                 exponent = intBits.length() - 8;
                 mantissaStr = intBits.substring(0, 8);
             }
+        } else {
+            mantissaStr = intBits + decBits;
         }
+
         int sign = 0;
         if (data < 0.0) sign = 1;
         int mantissa = Integer.parseInt(mantissaStr, 2);
-        System.out.println("man: " + mantissa);
         this.mantissa = mantissa;
         this.exponent = exponent + 63;
         this.sign = sign;
@@ -63,9 +63,9 @@ public class Floating {
     }
 
     public char toBinary() {
-        System.out.println(exponent);
-        System.out.println(mantissa);
-        String binaryStr = (sign == 1) ? Integer.toBinaryString(sign) : "" + Integer.toBinaryString(exponent) + Integer.toBinaryString(mantissa);
+        String binaryStr = (sign == 1) ? Integer.toBinaryString(sign) : ""
+                + String.format("%7s", Integer.toBinaryString(exponent)).replace(' ', '0')
+                + String.format("%8s", Integer.toBinaryString(mantissa)).replace(' ', '0');
         return (char) Integer.parseInt(binaryStr, 2);
     }
 

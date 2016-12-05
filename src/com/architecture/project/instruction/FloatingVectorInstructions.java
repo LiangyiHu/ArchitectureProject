@@ -37,6 +37,9 @@ public class FloatingVectorInstructions extends AbstractMainInstructions {
         char addressStart1 = (char) EFFECTIVEADDRESS();
         char addressStart2 = (char) EFFECTIVEADDRESS();
         char len = RDATA();
+        System.out.println((int)len);
+        System.out.println((int)addressStart1);
+        System.out.println((int)addressStart2);
         for (int i = 0; i <= len; ++i) {
             char data1 = Registers.fetchMemory((char) addressStart2);
             char data2 = Registers.fetchMemory((char) addressStart1);
